@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Bundesliga Standings</title>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
+</head>
+<body>
+  <h1>Bundesliga Standings 2022</h1>
+  <table id="standings" class="display"></table>
+
+  <script>
+    const csvUrl = "https://soccer-data-bucket-nav.s3.amazonaws.com/data/bundesliga_standings_2022.csv";
+
+    Papa.parse(csvUrl, {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const data = results.data;
+        const columns = Object.keys(data[0]).map(key => ({ title: key, data: key }));
+
+        $('#standings').DataTable({
+          data: data,
+          columns: columns
+        });
+      }
+    });
+  </script>
+</body>
+</html>
