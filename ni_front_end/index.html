@@ -9,14 +9,10 @@
     .dropdown {
       position: relative;
       display: inline-block;
-      margin: 1rem;
-    }
-    .dropdown button {
+      padding: 1rem;
       background-color: #1e1e1e;
       color: white;
-      padding: 1rem;
-      font-size: 1rem;
-      border: none;
+      font-weight: bold;
       cursor: pointer;
     }
     .dropdown-content {
@@ -24,8 +20,8 @@
       position: absolute;
       background-color: #f9f9f9;
       min-width: 200px;
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
       z-index: 1;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     }
     .dropdown-content a {
       color: black;
@@ -33,12 +29,8 @@
       text-decoration: none;
       display: block;
     }
-    .dropdown-content a:hover {
-      background-color: #f1f1f1;
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+    .dropdown-content a:hover { background-color: #f1f1f1; }
+    .dropdown:hover .dropdown-content { display: block; }
     .content { padding: 1rem; }
     .tab { display: none; }
     .tab.active { display: block; }
@@ -48,8 +40,9 @@
 </head>
 <body>
   <div class="dropdown">
-    <button>☰ Menu</button>
+    ☰ Menu
     <div class="dropdown-content">
+      <a href="#" onclick="showTab('home')">Home</a>
       <a href="#" onclick="showTab('goldcup')">Gold Cup</a>
       <a href="#" onclick="showTab('libertadores')">Copa Libertadores</a>
       <a href="#" onclick="showTab('worldcup')">World Cup</a>
@@ -60,15 +53,46 @@
   </div>
 
   <div class="content">
-    <!-- TAB CONTENT REMAINS UNCHANGED -->
-    <!-- Existing .tab divs for each tournament and About section -->
+    <div id="home" class="tab active">
+      <h2>Welcome to the Soccer Odds Dashboard</h2>
+      <p>Select a competition from the menu to view the latest odds visualized in Tableau.</p>
+    </div>
+
+    <div id="goldcup" class="tab">
+      <div class='tableauPlaceholder' id='viz1750018292648' style='position: relative'><noscript><a href='#'><img alt='Concaf ' src='https://public.tableau.com/static/images/Sp/SportsBetting_17495216300660/Concaf/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='SportsBetting_17495216300660/Concaf' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Sp/SportsBetting_17495216300660/Concaf/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+    </div>
+
+    <div id="libertadores" class="tab">
+      <div class='tableauPlaceholder' id='viz1750018942802' style='position: relative'><noscript><a href='#'><img alt='World Cup Odds ' src='https://public.tableau.com/static/images/Wo/WorldCupOdds/WorldCupOdds/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='WorldCupOdds/WorldCupOdds' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Wo/WorldCupOdds/WorldCupOdds/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+    </div>
+
+    <div id="worldcup" class="tab">
+      <div class='tableauPlaceholder' id='viz1750018942802' style='position: relative'><noscript><a href='#'><img alt='World Cup Odds ' src='https://public.tableau.com/static/images/Wo/WorldCupOdds/WorldCupOdds/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='WorldCupOdds/WorldCupOdds' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Wo/WorldCupOdds/WorldCupOdds/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+    </div>
+
+    <div id="qualifiers" class="tab">
+      <div class='tableauPlaceholder' id='viz1750018275291' style='position: relative'><noscript><a href='#'><img alt='Qualifiers Europe ' src='https://public.tableau.com/static/images/Qu/QualifiersEurope/QualifiersEurope/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='QualifiersEurope/QualifiersEurope' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Qu/QualifiersEurope/QualifiersEurope/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+    </div>
+
+    <div id="clubworldcup" class="tab">
+      <div class='tableauPlaceholder' id='viz1750018785110' style='position: relative'><noscript><a href='#'><img alt='Qualifiers Europe ' src='https://public.tableau.com/static/images/Qu/QualifiersEurope/QualifiersEurope/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='QualifiersEurope/QualifiersEurope' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Qu/QualifiersEurope/QualifiersEurope/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+    </div>
+
+    <button class="accordion" onclick="togglePanel('about')">About This Website</button>
+    <div id="about" class="panel">
+      <h3>Cloud Architecture</h3>
+      <p>Diagram coming soon. Architecture includes S3 for storage, EC2 for hosting, GitHub for version control, and Tableau Public for dashboards.</p>
+      <h3>How It Works</h3>
+      <p>Data is stored in S3 and updated via Python scripts. Tableau connects to this data and updates dashboards. GitHub hosts the HTML files, which are served via EC2. Updates are synced automatically or manually.</p>
+    </div>
   </div>
 
   <script>
     function showTab(id) {
       const tabs = document.querySelectorAll('.tab');
       tabs.forEach(t => t.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      const target = document.getElementById(id);
+      if (target) target.classList.add('active');
     }
 
     function togglePanel(id) {
