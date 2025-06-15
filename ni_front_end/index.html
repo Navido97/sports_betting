@@ -76,15 +76,26 @@
     function showTab(id) {
       const tabs = document.querySelectorAll('.tab');
       tabs.forEach(tab => tab.classList.remove('active'));
-      
+  
       const selectedTab = document.getElementById(id);
       if (selectedTab) {
         selectedTab.classList.add('active');
+  
+        // 🔁 Re-initialize Tableau dashboard in the selected tab
+        const tableauObjects = selectedTab.querySelectorAll('.tableauViz');
+        tableauObjects.forEach(obj => {
+          const existingScript = obj.parentNode.querySelector("script[src='https://public.tableau.com/javascripts/api/viz_v1.js']");
+          if (!existingScript) {
+            const script = document.createElement('script');
+            script.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            obj.parentNode.insertBefore(script, obj);
+          }
+        });
       }
     }
   
-    // Optional: Show "home" tab by default on page load
     document.addEventListener("DOMContentLoaded", () => {
       showTab('home');
     });
   </script>
+  
