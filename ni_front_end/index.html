@@ -76,8 +76,15 @@
     function showTab(id) {
       const tabs = document.querySelectorAll('.tab');
       tabs.forEach(tab => tab.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      
+      const selectedTab = document.getElementById(id);
+      if (selectedTab) {
+        selectedTab.classList.add('active');
+      }
     }
+  
+    // Optional: Show "home" tab by default on page load
+    document.addEventListener("DOMContentLoaded", () => {
+      showTab('home');
+    });
   </script>
-</body>
-</html>
