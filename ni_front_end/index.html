@@ -107,9 +107,47 @@
       <p style="text-align: center;">Select a competition from the menu to view Tableau dashboards with up-to-date betting odds.</p>
     </div>
 
-    <!-- Include embedded Tableau dashboards below this line -->
-    <!-- Repeatable divs with IDs: worldcup, goldcup, qualifiers -->
+    <div id="worldcup" class="tab">
+      <h2>World Cup Winners</h2>
+      <div class='tableauPlaceholder' id='vizWorldCup' style='position: relative'>
+        <noscript><a href='#'><img alt='World Cup Odds' src='https://public.tableau.com/static/images/Wo/WorldCupOdds/1_rss.png' style='border: none' /></a></noscript>
+        <object class='tableauViz' style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='name' value='WorldCupOdds/WorldCupOdds' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+        </object>
+      </div>
+    </div>
 
+    <div id="goldcup" class="tab">
+      <h2>Concacaf Gold Cup</h2>
+      <div class='tableauPlaceholder' id='vizGoldCup' style='position: relative'>
+        <noscript><a href='#'><img alt='Concaf' src='https://public.tableau.com/static/images/Sp/SportsBetting_17495216300660/Concaf/1_rss.png' style='border: none' /></a></noscript>
+        <object class='tableauViz' style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='name' value='SportsBetting_17495216300660/Concaf' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+        </object>
+      </div>
+    </div>
+
+    <div id="qualifiers" class="tab">
+      <h2>World Cup Qualifiers</h2>
+      <div class='tableauPlaceholder' id='vizQualifiers' style='position: relative'>
+        <noscript><a href='#'><img alt='Qualifiers Europe' src='https://public.tableau.com/static/images/Qu/QualifiersEurope/QualifiersEurope/1_rss.png' style='border: none' /></a></noscript>
+        <object class='tableauViz' style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='name' value='QualifiersEurope/QualifiersEurope' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+        </object>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -124,6 +162,9 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       showTab('home');
+      const script = document.createElement('script');
+      script.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+      document.body.appendChild(script);
     });
   </script>
 
