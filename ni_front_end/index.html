@@ -5,13 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Odds Maker</title>
   <style>
-    body {
+    html, body {
       font-family: Arial, sans-serif;
       margin: 0;
       background-color: #f4f4f4;
       color: #333;
+      height: 100%;
+    }
+
+    body {
       display: flex;
       height: 100vh;
+      overflow: hidden;
     }
 
     aside {
@@ -59,13 +64,18 @@
 
     .content {
       flex: 1;
-      padding: 2rem;
+      padding: 0;
       margin: 0;
       max-width: none;
+      height: 100vh;
+      overflow-y: auto;
     }
 
     .tab {
       display: none;
+      padding: 2rem;
+      height: 100%;
+      box-sizing: border-box;
     }
 
     .tab.active {
@@ -86,6 +96,7 @@
     .tableauPlaceholder object {
       width: 100% !important;
       height: 100% !important;
+      display: block !important;
     }
 
     @media (max-width: 768px) {
@@ -122,7 +133,7 @@
 
     <div id="worldcup" class="tab">
       <h2>World Cup Winners</h2>
-      <div class='tableauPlaceholder' id='viz1750449731695' style='position: relative'>
+      <div class='tableauPlaceholder' id='viz1750449731695'>
         <object class='tableauViz'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
           <param name='embed_code_version' value='3' />
@@ -135,7 +146,7 @@
 
     <div id="goldcup" class="tab">
       <h2>Concacaf Gold Cup</h2>
-      <div class='tableauPlaceholder' id='viz1750449630123' style='position: relative'>
+      <div class='tableauPlaceholder' id='viz1750449630123'>
         <object class='tableauViz'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
           <param name='embed_code_version' value='3' />
@@ -148,7 +159,7 @@
 
     <div id="clubworldcup" class="tab">
       <h2>Club World Cup</h2>
-      <div class='tableauPlaceholder' id='viz1750449771152' style='position: relative'>
+      <div class='tableauPlaceholder' id='viz1750449771152'>
         <object class='tableauViz'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
           <param name='embed_code_version' value='3' />
@@ -179,12 +190,6 @@
       const script = document.createElement('script');
       script.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
       document.body.appendChild(script);
-
-      setTimeout(() => {
-        document.querySelectorAll('.tableauViz').forEach(viz => {
-          viz.style.height = "1000px";
-        });
-      }, 2000);
     });
   </script>
 </body>
