@@ -93,6 +93,12 @@
       min-height: 1000px;
     }
 
+    .tableauPlaceholder object {
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+    }
+
     @media (max-width: 768px) {
       body {
         flex-direction: column;
@@ -129,51 +135,50 @@
     <div id="worldcup" class="tab">
       <h2>World Cup Winners</h2>
       <p>This dashboard displays outright winner odds for the FIFA World Cup. You can compare which countries are favored to win the tournament, with odds pulled from multiple betting platforms. Use it to track line movement and identify longshot opportunities.</p>
-      <div class='tableauPlaceholder' id='vizWorldCup'></div>
+      <div class='tableauPlaceholder' id='vizWorldCup'>
+        <object class='tableauViz'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='name' value='WorldCupOdds/Dashboard1' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+        </object>
+      </div>
     </div>
 
     <div id="goldcup" class="tab">
       <h2>Concacaf Gold Cup</h2>
       <p>This dashboard shows match-by-match betting odds for the Concacaf Gold Cup. Each matchup includes odds from multiple sportsbooks, enabling you to find the best line for moneyline bets across North American teams.</p>
-      <div class='tableauPlaceholder' id='vizGoldCup'></div>
+      <div class='tableauPlaceholder' id='vizGoldCup'>
+        <object class='tableauViz'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='name' value='ConcacafGoldCup/Dashboard1' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+        </object>
+      </div>
     </div>
 
     <div id="clubworldcup" class="tab">
       <h2>Club World Cup</h2>
       <p>This dashboard provides odds for the FIFA Club World Cup matches, showing bookmaker spreads and predictions for games between top clubs from each continent. Useful for comparing teams that don't typically meet in domestic leagues.</p>
-      <div class='tableauPlaceholder' id='vizClubWorldCup'></div>
+      <div class='tableauPlaceholder' id='vizClubWorldCup'>
+        <object class='tableauViz'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='name' value='ClubWorldCup/Dashboard1' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+        </object>
+      </div>
     </div>
   </div>
 
   <script>
-    const vizInitialized = {};
-
-    function loadTableauViz(id, urlName) {
-      const container = document.getElementById(id);
-      const options = {
-        width: '100%',
-        height: '1000px',
-        hideTabs: true,
-        hideToolbar: false
-      };
-      new tableau.Viz(container, `https://public.tableau.com/views/${urlName}`, options);
-    }
-
     function showTab(id) {
       document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-      const tab = document.getElementById(id);
-      tab.classList.add('active');
-
-      if (!vizInitialized[id]) {
-        if (id === 'worldcup') {
-          loadTableauViz('vizWorldCup', 'WorldCupOdds/Dashboard1');
-        } else if (id === 'goldcup') {
-          loadTableauViz('vizGoldCup', 'ConcacafGoldCup/Dashboard1');
-        } else if (id === 'clubworldcup') {
-          loadTableauViz('vizClubWorldCup', 'ClubWorldCup/Dashboard1');
-        }
-        vizInitialized[id] = true;
-      }
+      document.getElementById(id).classList.add('active');
     }
 
     function toggleSubmenu(button) {
