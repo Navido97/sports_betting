@@ -69,6 +69,29 @@
       max-width: none;
       height: 100vh;
       overflow-y: auto;
+      position: relative;
+    }
+
+    .feedback-wrapper {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    .feedback-button {
+      background-color: #1e1e1e;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    .feedback-button:hover {
+      background-color: #333;
     }
 
     .tab {
@@ -106,7 +129,6 @@
   </style>
 </head>
 <body>
-  <a href="https://forms.gle/st4WrF57QNMYykBeA" target="_blank" class="feedback-button">Click here to provide Feedback</a>
   <aside>
     <h1>Odds Maker</h1>
     <div class="menu">
@@ -121,6 +143,10 @@
   </aside>
 
   <div class="content">
+    <div class="feedback-wrapper">
+      <a href="https://forms.gle/st4WrF57QNMYykBeA" target="_blank" class="feedback-button">Feedback</a>
+    </div>
+
     <div id="home" class="tab active">
       <h2>Welcome to the Odds Maker Dashboard</h2>
       <p>This dashboard helps everyday sports fans and bettors stay up to date with betting odds for international soccer competitions. Simply select a tournament from the left-hand menu to view odds from major sportsbooks for upcoming and past matches. Use this tool to compare values across platforms and make informed betting or viewing decisions.</p>
