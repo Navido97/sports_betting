@@ -28,17 +28,34 @@
       margin-bottom: 2rem;
     }
 
-    .menu a {
+    .menu button {
+      background: none;
+      border: none;
+      color: white;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .menu .submenu {
+      display: none;
+      margin-left: 1rem;
+    }
+
+    .menu .submenu a {
       display: block;
       color: white;
       text-decoration: none;
-      padding: 0.75rem 1rem;
-      border-radius: 4px;
-      margin-bottom: 0.5rem;
+      padding: 0.5rem 0;
     }
 
-    .menu a:hover {
+    .menu .submenu a:hover {
       background-color: #333;
+    }
+
+    .menu .active + .submenu {
+      display: block;
     }
 
     .content {
@@ -81,36 +98,33 @@
         width: 100%;
         text-align: center;
       }
-
-      .menu a {
-        display: inline-block;
-        margin: 0.5rem;
-      }
     }
   </style>
 </head>
 <body>
-
   <aside>
     <h1>Odds Maker</h1>
     <div class="menu">
-      <a href="#" onclick="showTab('home')">Home</a>
-      <a href="#" onclick="showTab('worldcup')">World Cup Winners</a>
-      <a href="#" onclick="showTab('goldcup')">Concacaf Gold Cup</a>
-      <a href="#" onclick="showTab('qualifiers')">World Cup Qualifiers</a>
+      <button onclick="toggleSubmenu(this)">Competitions</button>
+      <div class="submenu">
+        <a href="#" onclick="showTab('home')">Home</a>
+        <a href="#" onclick="showTab('worldcup')">World Cup Winners</a>
+        <a href="#" onclick="showTab('goldcup')">Concacaf Gold Cup</a>
+        <a href="#" onclick="showTab('qualifiers')">World Cup Qualifiers</a>
+      </div>
     </div>
   </aside>
 
   <div class="content">
     <div id="home" class="tab active">
-      <h2>Welcome to the Odds Maker Dashboard123aasfaa</h2>
-      <p style="text-align: center;">Select a competition from the menu to view Tableau dashboards with up-to-date betting odds.</p>
+      <h2>Welcome to the Odds Maker Dashboard</h2>
+      <p style="text-align: center;">Select a competition from the expandable menu to view Tableau dashboards with up-to-date betting odds.</p>
     </div>
 
     <div id="worldcup" class="tab">
       <h2>World Cup Winners</h2>
       <div class='tableauPlaceholder' id='vizWorldCup'>
-        <object class='tableauViz' style="height: 1200px;" type="text/html">
+        <object class='tableauViz'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
           <param name='embed_code_version' value='3' />
           <param name='name' value='WorldCupOdds/WorldCupOdds' />
@@ -123,10 +137,10 @@
     <div id="goldcup" class="tab">
       <h2>Concacaf Gold Cup</h2>
       <div class='tableauPlaceholder' id='vizGoldCup'>
-        <object class='tableauViz' style="height: 1200px;" type="text/html">
+        <object class='tableauViz'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
           <param name='embed_code_version' value='3' />
-          <param name='name' value='SportsBetting_17495216300660/Concaf' />
+          <param name='name' value='ConcacafGoldCup/Dashboard1' />
           <param name='tabs' value='no' />
           <param name='toolbar' value='yes' />
         </object>
@@ -136,7 +150,7 @@
     <div id="qualifiers" class="tab">
       <h2>World Cup Qualifiers</h2>
       <div class='tableauPlaceholder' id='vizQualifiers'>
-        <object class='tableauViz' style="height: 1200px;" type="text/html">
+        <object class='tableauViz'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
           <param name='embed_code_version' value='3' />
           <param name='name' value='QualifiersEurope/QualifiersEurope' />
@@ -149,11 +163,15 @@
 
   <script>
     function showTab(id) {
-      const tabs = document.querySelectorAll('.tab');
-      tabs.forEach(tab => tab.classList.remove('active'));
-      const selectedTab = document.getElementById(id);
-      if (selectedTab) {
-        selectedTab.classList.add('active');
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function toggleSubmenu(button) {
+      const isActive = button.classList.contains('active');
+      document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
+      if (!isActive) {
+        button.classList.add('active');
       }
     }
 
@@ -163,7 +181,6 @@
       script.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
       document.body.appendChild(script);
 
-      // Optional fix to force height after Tableau initializes
       setTimeout(() => {
         document.querySelectorAll('.tableauViz').forEach(viz => {
           viz.style.height = "1200px";
@@ -171,6 +188,5 @@
       }, 2000);
     });
   </script>
-
 </body>
 </html>
