@@ -83,9 +83,10 @@
       min-height: 1000px;
     }
 
-    .tableauPlaceholder object {
+    .tableauViz {
       width: 100% !important;
-      height: 100% !important;
+      height: 1000px !important;
+      display: block !important;
     }
 
     @media (max-width: 768px) {
@@ -122,40 +123,22 @@
 
     <div id="worldcup" class="tab">
       <h2>World Cup Winners</h2>
-      <div class='tableauPlaceholder' id='viz1750449731695' style='position: relative'>
-        <object class='tableauViz'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='name' value='WorldCupOdds/Dashboard1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-        </object>
+      <div class='tableauPlaceholder' id='viz1750449731695'>
+        <object class='tableauViz'></object>
       </div>
     </div>
 
     <div id="goldcup" class="tab">
       <h2>Concacaf Gold Cup</h2>
-      <div class='tableauPlaceholder' id='viz1750449630123' style='position: relative'>
-        <object class='tableauViz'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='name' value='ConcacafGoldCup/Dashboard1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-        </object>
+      <div class='tableauPlaceholder' id='viz1750449630123'>
+        <object class='tableauViz'></object>
       </div>
     </div>
 
     <div id="clubworldcup" class="tab">
       <h2>Club World Cup</h2>
-      <div class='tableauPlaceholder' id='viz1750449771152' style='position: relative'>
-        <object class='tableauViz'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='name' value='ClubWorldCup/Dashboard1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-        </object>
+      <div class='tableauPlaceholder' id='viz1750449771152'>
+        <object class='tableauViz'></object>
       </div>
     </div>
   </div>
@@ -179,12 +162,6 @@
       const script = document.createElement('script');
       script.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
       document.body.appendChild(script);
-
-      setTimeout(() => {
-        document.querySelectorAll('.tableauViz').forEach(viz => {
-          viz.style.height = "1000px";
-        });
-      }, 2000);
     });
   </script>
 </body>
