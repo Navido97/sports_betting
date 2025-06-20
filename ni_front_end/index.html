@@ -104,6 +104,7 @@
       }
     }
   </style>
+  <script type="text/javascript" src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
 </head>
 <body>
   <aside>
@@ -147,32 +148,31 @@
   <script>
     const vizInitialized = {};
 
+    function loadTableauViz(id, urlName) {
+      const container = document.getElementById(id);
+      const options = {
+        width: '100%',
+        height: '1000px',
+        hideTabs: true,
+        hideToolbar: false
+      };
+      new tableau.Viz(container, `https://public.tableau.com/views/${urlName}`, options);
+    }
+
     function showTab(id) {
       document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
       const tab = document.getElementById(id);
       tab.classList.add('active');
 
       if (!vizInitialized[id]) {
-        let placeholder = tab.querySelector('.tableauPlaceholder');
-        if (placeholder) {
-          let vizName = {
-            worldcup: 'WorldCupOdds/Dashboard1',
-            goldcup: 'ConcacafGoldCup/Dashboard1',
-            clubworldcup: 'ClubWorldCup/Dashboard1'
-          }[id];
-
-          placeholder.innerHTML = `
-            <object class='tableauViz' width='100%' height='1000px'>
-              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-              <param name='embed_code_version' value='3' />
-              <param name='name' value='${vizName}' />
-              <param name='tabs' value='no' />
-              <param name='toolbar' value='yes' />
-            </object>
-          `;
-
-          vizInitialized[id] = true;
+        if (id === 'worldcup') {
+          loadTableauViz('vizWorldCup', 'WorldCupOdds/Dashboard1');
+        } else if (id === 'goldcup') {
+          loadTableauViz('vizGoldCup', 'ConcacafGoldCup/Dashboard1');
+        } else if (id === 'clubworldcup') {
+          loadTableauViz('vizClubWorldCup', 'ClubWorldCup/Dashboard1');
         }
+        vizInitialized[id] = true;
       }
     }
 
@@ -186,9 +186,6 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       showTab('home');
-      const script = document.createElement('script');
-      script.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-      document.body.appendChild(script);
     });
   </script>
 </body>
