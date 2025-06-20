@@ -93,12 +93,6 @@
       min-height: 1000px;
     }
 
-    .tableauPlaceholder object {
-      width: 100% !important;
-      height: 100% !important;
-      display: block !important;
-    }
-
     @media (max-width: 768px) {
       body {
         flex-direction: column;
@@ -110,7 +104,6 @@
       }
     }
   </style>
-  <script type="text/javascript" src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
 </head>
 <body>
   <aside>
@@ -135,10 +128,12 @@
     <div id="worldcup" class="tab">
       <h2>World Cup Winners</h2>
       <p>This dashboard displays outright winner odds for the FIFA World Cup. You can compare which countries are favored to win the tournament, with odds pulled from multiple betting platforms. Use it to track line movement and identify longshot opportunities.</p>
-      <div class='tableauPlaceholder' id='vizWorldCup'>
-        <object class='tableauViz'>
+      <div class='tableauPlaceholder' id='vizWorldCup' style='position: relative'>
+        <noscript><a href='#'><img alt='World Cup Odds' src='https://public.tableau.com/static/images/Wo/WorldCupOdds/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
+        <object class='tableauViz' style='display:none;'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
           <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' />
           <param name='name' value='WorldCupOdds/Dashboard1' />
           <param name='tabs' value='no' />
           <param name='toolbar' value='yes' />
@@ -149,10 +144,12 @@
     <div id="goldcup" class="tab">
       <h2>Concacaf Gold Cup</h2>
       <p>This dashboard shows match-by-match betting odds for the Concacaf Gold Cup. Each matchup includes odds from multiple sportsbooks, enabling you to find the best line for moneyline bets across North American teams.</p>
-      <div class='tableauPlaceholder' id='vizGoldCup'>
-        <object class='tableauViz'>
+      <div class='tableauPlaceholder' id='vizGoldCup' style='position: relative'>
+        <noscript><a href='#'><img alt='Gold Cup Odds' src='https://public.tableau.com/static/images/Co/ConcacafGoldCup/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
+        <object class='tableauViz' style='display:none;'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
           <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' />
           <param name='name' value='ConcacafGoldCup/Dashboard1' />
           <param name='tabs' value='no' />
           <param name='toolbar' value='yes' />
@@ -163,10 +160,12 @@
     <div id="clubworldcup" class="tab">
       <h2>Club World Cup</h2>
       <p>This dashboard provides odds for the FIFA Club World Cup matches, showing bookmaker spreads and predictions for games between top clubs from each continent. Useful for comparing teams that don't typically meet in domestic leagues.</p>
-      <div class='tableauPlaceholder' id='vizClubWorldCup'>
-        <object class='tableauViz'>
+      <div class='tableauPlaceholder' id='vizClubWorldCup' style='position: relative'>
+        <noscript><a href='#'><img alt='Club World Cup Odds' src='https://public.tableau.com/static/images/Cl/ClubWorldCup/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
+        <object class='tableauViz' style='display:none;'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
           <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' />
           <param name='name' value='ClubWorldCup/Dashboard1' />
           <param name='tabs' value='no' />
           <param name='toolbar' value='yes' />
@@ -175,7 +174,7 @@
     </div>
   </div>
 
-  <script>
+  <script type='text/javascript'>
     function showTab(id) {
       document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
       document.getElementById(id).classList.add('active');
@@ -191,6 +190,17 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       showTab('home');
+
+      const ids = ['vizWorldCup', 'vizGoldCup', 'vizClubWorldCup'];
+      ids.forEach(id => {
+        const divElement = document.getElementById(id);
+        const vizElement = divElement.getElementsByTagName('object')[0];
+        vizElement.style.width = '100%';
+        vizElement.style.height = '1000px';
+        const scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+      });
     });
   </script>
 </body>
