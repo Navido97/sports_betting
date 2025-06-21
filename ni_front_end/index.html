@@ -215,14 +215,16 @@
     function toggleSubmenu(button) {
   const isActive = button.classList.contains('active');
 
-  // Remove 'active' from all buttons
-  document.querySelectorAll('.accordion-toggle').forEach(btn => btn.classList.remove('active'));
+  // Remove active from all accordion buttons
+  document.querySelectorAll('.accordion-toggle').forEach(btn => {
+    btn.classList.remove('active');
+  });
 
-  // Toggle active class on this one
   if (!isActive) {
     button.classList.add('active');
   }
 }
+
 
 
     document.addEventListener('DOMContentLoaded', () => {
