@@ -16,8 +16,6 @@ function toggleSubmenu(button) {
   // If not active, activate this one
   if (!isActive) {
     button.classList.add('active');
-    const arrow = button.querySelector('.arrow');
-    if (arrow) arrow.style.transform = 'rotate(90deg)';
     if (submenu && submenu.classList.contains('submenu')) {
       submenu.style.display = 'block';
     }
