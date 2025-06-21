@@ -133,7 +133,10 @@
     <h1>Odds Maker</h1>
     <div class="menu">
       <a href="#" onclick="showTab('home')">Home</a>
-      <button onclick="toggleSubmenu(this)">Competitions</button>
+      <button class="accordion-toggle" onclick="toggleSubmenu(this)">
+        Competitions <span class="arrow">▶</span>
+      </button>
+      
       <div class="submenu">
         <a href="#" onclick="showTab('worldcup')">World Cup Winners</a>
         <a href="#" onclick="showTab('goldcup')">Concacaf Gold Cup</a>
