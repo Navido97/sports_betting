@@ -2,13 +2,84 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   margin: 0;
-  padding: 20px;
+  padding: 0;
   text-align: center;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  color: #333;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
+aside {
+  width: 220px;
+  background-color: #1e1e1e;
+  color: white;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+aside h1 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.menu a, .menu button {
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+}
+
+.menu .submenu {
+  display: none;
+  margin-left: 1rem;
+}
+
+.menu .submenu a {
+  padding: 0.5rem 0;
+}
+
+.menu .submenu a:hover,
+.menu a:hover {
+  background-color: #555;
+}
+
+.menu .active + .submenu {
+  display: block;
+}
+
+.accordion-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.accordion-toggle .arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  margin-left: auto;
+}
+
+.accordion-toggle.active .arrow {
+  transform: rotate(90deg);
+}
+
+.content {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  text-align: left;
 }
 
 .feedback-wrapper {
@@ -33,19 +104,35 @@ button {
   background-color: #333;
 }
 
-.accordion-toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
+.tab {
+  display: none;
+  padding: 2rem;
+  height: 100%;
+  box-sizing: border-box;
 }
 
-.accordion-toggle .arrow {
-  display: inline-block;
-  transition: transform 0.3s ease;
-  margin-left: auto; /* pushes arrow to the right */
+.tab.active {
+  display: block;
 }
 
-.accordion-toggle.active .arrow {
-  transform: rotate(90deg);
+.tab h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.tableauPlaceholder {
+  width: 100%;
+  height: 1000px;
+  min-height: 1000px;
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  aside {
+    width: 100%;
+    text-align: center;
+  }
 }
