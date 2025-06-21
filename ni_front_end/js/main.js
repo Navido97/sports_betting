@@ -6,7 +6,7 @@ function toggleSubmenu(button) {
   document.querySelectorAll('.accordion-toggle').forEach(btn => {
     btn.classList.remove('active');
     const arrow = btn.querySelector('.arrow');
-    if (arrow) arrow.style.transform = 'rotate(0deg)';
+    if (arrow) arrow.style.transform = 'rotate(90deg)';
     const sub = btn.nextElementSibling;
     if (sub && sub.classList.contains('submenu')) {
       sub.style.display = 'none';
