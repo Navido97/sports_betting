@@ -17,3 +17,31 @@ function toggleSubmenu(button) {
     }
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Existing code...
+  showTab('home');
+
+  const ids = ['vizWorldCup', 'vizGoldCup', 'vizClubWorldCup'];
+  ids.forEach(id => {
+    const divElement = document.getElementById(id);
+    const vizElement = divElement.getElementsByTagName('object')[0];
+    vizElement.style.width = '100%';
+    vizElement.style.height = '1000px';
+    const scriptElement = document.createElement('script');
+    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+  });
+
+  // 👇 Scroll animation
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // animate only once
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
+});
