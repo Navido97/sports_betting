@@ -37,15 +37,15 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: bold;
 }
 
 .accordion-toggle .arrow {
   display: inline-block;
   transition: transform 0.3s ease;
-  margin-left: auto; /* pushes arrow to the right */
+  margin-left: auto;
 }
 
 .accordion-toggle.active .arrow {
   transform: rotate(90deg);
 }
+
