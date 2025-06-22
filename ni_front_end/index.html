@@ -158,69 +158,48 @@
       <p>This dashboard helps everyday sports fans and bettors stay up to date with betting odds for international soccer competitions. Simply select a tournament from the left-hand menu to view odds from major sportsbooks for upcoming and past matches. Use this tool to compare values across platforms and make informed betting or viewing decisions.</p>
     </div>
 
-<div id="documentation" class="tab">
-  <h2>Website Build Process</h2>
-  <p>This section outlines each step of the pipeline used to build this dashboard, optimized entirely around free-tier tools.</p>
-
-  <div style="display: flex; flex-direction: column; gap: 2rem; margin: 2rem auto; max-width: 1000px;">
+    <div id="documentation" class="tab">
+      <h2>Website Build Process</h2>
+      <p>This section documents all the steps taken to build this dashboard.</p>
     
-    <!-- Step 1 -->
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-radius: 10px; font-weight: bold;">
-        1. Python Script (API Call to the-odds-api.com)
+      <img src="images/Overview.png" alt="Documentation Slide" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px; margin-top: 1rem;" />
+    
+      <h3 style="margin-top: 2rem;">Visual Flowchart</h3>
+      <div style="display: flex; flex-direction: column; align-items: center; margin: 2rem 0;">
+        <div style="background-color: #e0e0e0; padding: 1rem 2rem; border-radius: 10px;">Python Script (API Call to the-odds-api.com)</div>
+        <div style="font-size: 2rem; margin: 0.5rem 0;">↓</div>
+        <div style="background-color: #e0e0e0; padding: 1rem 2rem; border-radius: 10px;">Save CSV to AWS S3 (Free Tier)</div>
+        <div style="font-size: 2rem; margin: 0.5rem 0;">↓</div>
+        <div style="background-color: #e0e0e0; padding: 1rem 2rem; border-radius: 10px;">Push CSV to Google Sheets (via API)</div>
+        <div style="font-size: 2rem; margin: 0.5rem 0;">↓</div>
+        <div style="background-color: #e0e0e0; padding: 1rem 2rem; border-radius: 10px;">Connect Tableau Public to Google Sheet</div>
+        <div style="font-size: 2rem; margin: 0.5rem 0;">↓</div>
+        <div style="background-color: #e0e0e0; padding: 1rem 2rem; border-radius: 10px;">Embed Dashboards on Website</div>
       </div>
-      <div>
-        <p>Python scripts were written to fetch betting odds from <code>the-odds-api.com</code>, chosen for its generous free-tier access and real-time market coverage for global soccer competitions.</p>
-      </div>
+    
+      <h3>Step-by-Step Breakdown</h3>
+      <ol style="text-align: left; max-width: 900px; margin: auto;">
+        <li><strong>Define Project Scope:</strong> The goal was to create a free, automated dashboard showing real-time soccer betting odds from multiple competitions.</li>
+    
+        <li><strong>Fetch Odds via API:</strong> Used <code>the-odds-api.com</code> for its free-tier access to sports betting data. Python scripts fetch odds for World Cup, Club World Cup, and Gold Cup daily.</li>
+    
+        <li><strong>Store Data in AWS S3:</strong> Chose S3 due to its free-tier 5GB storage and ease of integration with Python via Boto3. Each dataset was saved as a CSV to the S3 bucket.</li>
+    
+        <li><strong>Bridge to Tableau via Google Sheets:</strong> Since Tableau Public cannot pull from S3 directly, I used the Google Sheets API to push each CSV to a unique tab in one Google Sheet. This allowed live access to the data.</li>
+    
+        <li><strong>Build Dashboards in Tableau Public:</strong> Tableau Public is free and powerful. Each sheet is linked to a Google Sheets tab and visualized with relevant filters, team names, and odds spread metrics.</li>
+    
+        <li><strong>Design a Lightweight Front-End:</strong> I built the front-end using plain HTML, CSS, and JS with tab navigation and sidebar menu. Each tab contains a Tableau dashboard embed and associated context.</li>
+    
+        <li><strong>Automate on EC2 (Free Tier):</strong> The Python pipeline runs daily on a t2.micro EC2 instance. This instance also serves the front-end files using a basic static HTTP server.</li>
+    
+        <li><strong>Document the Project:</strong> Finally, I created a high-level chart and added this section to document the steps, tools, and decisions — all designed to stay within the free-tier ecosystem.</li>
+      </ol>
+    
+      <p style="text-align: center; margin-top: 2rem;">
+        <em>This project showcases how a fully automated, data-driven website can be built and hosted end-to-end using only free-tier tools — without sacrificing quality or automation.</em>
+      </p>
     </div>
-
-    <!-- Step 2 -->
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-radius: 10px; font-weight: bold;">
-        2. Save CSV to AWS S3 (Free Tier)
-      </div>
-      <div>
-        <p>Odds data was saved as CSV files to an AWS S3 bucket. S3’s free tier (5GB storage and 1M requests/month) makes it ideal for storing lightweight tabular data with high availability.</p>
-      </div>
-    </div>
-
-    <!-- Step 3 -->
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-radius: 10px; font-weight: bold;">
-        3. Push CSV to Google Sheets (via API)
-      </div>
-      <div>
-        <p>Each CSV was parsed and uploaded to a Google Sheet using the Sheets API. This created a live data bridge that Tableau Public could access. This was a critical workaround since Tableau doesn’t natively connect to S3.</p>
-      </div>
-    </div>
-
-    <!-- Step 4 -->
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-radius: 10px; font-weight: bold;">
-        4. Connect Tableau Public to Google Sheet
-      </div>
-      <div>
-        <p>Google Sheets were used as data sources in Tableau Public dashboards. Tableau Public is free and supports regular auto-refreshing of embedded dashboards connected to Google Sheets.</p>
-      </div>
-    </div>
-
-    <!-- Step 5 -->
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-radius: 10px; font-weight: bold;">
-        5. Embed Dashboards on Website
-      </div>
-      <div>
-        <p>Each Tableau dashboard was embedded directly into this site using the Tableau JavaScript API. This ensures users always see the latest data while maintaining a lightweight and responsive layout.</p>
-      </div>
-    </div>
-
-  </div>
-
-  <p style="text-align: center; margin-top: 2rem;">
-    <em>This entire pipeline was designed with cost-efficiency in mind, using only free-tier tools across AWS, Google, and Tableau.</em>
-  </p>
-</div>
-
     
     
     
