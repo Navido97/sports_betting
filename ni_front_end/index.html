@@ -129,7 +129,8 @@
   </style>
 </head>
 <body>
-  <aside>
+  <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+  <aside id="sidebar">
     <h1>Odds Maker</h1>
     <div class="menu">
       <a href="#" onclick="showTab('home')">Home</a>
@@ -338,5 +339,21 @@
       });
     });
   </script>
+  <script>
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('open');
+    }
+  
+    // Optional: Close menu when clicking outside
+    document.addEventListener('click', function (event) {
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.querySelector('.menu-toggle');
+      if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+        sidebar.classList.remove('open');
+      }
+    });
+  </script>
+  
 </body>
 </html>
