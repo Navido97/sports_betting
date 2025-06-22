@@ -459,24 +459,14 @@
       </div>
     </div>
 
-    <!-- World Cup Tab - KEEPING ORIGINAL STRUCTURE FOR NOW -->
+    <!-- World Cup Tab - UPDATED WITH NEW EMBED CODE -->
     <div id="worldcup" class="tab">
       <h2>World Cup Winners</h2>
       <p>This dashboard displays outright winner odds for the FIFA World Cup. You can compare which countries are favored to win the tournament, with odds pulled from multiple betting platforms. Use it to track line movement and identify longshot opportunities.</p>
-      <div class='tableauPlaceholder' id='vizWorldCup' style='position: relative'>
-        <noscript><a href='#'><img alt='World Cup Odds' src='https://public.tableau.com/static/images/Wo/WorldCupOdds/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
-        <object class='tableauViz' style='display: none;'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='site_root' value='' />
-          <param name='name' value='WorldCupOdds/Dashboard1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-        </object>
-      </div>
+      <div class='tableauPlaceholder' id='viz1750564604834' style='position: relative'><noscript><a href='#'><img alt='Sheet 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wo&#47;WorldCupOdds&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='WorldCupOdds&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wo&#47;WorldCupOdds&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
     </div>
 
-    <!-- Gold Cup Tab - KEEPING ORIGINAL STRUCTURE FOR NOW -->
+    <!-- Gold Cup Tab - KEEPING ORIGINAL FOR NOW -->
     <div id="goldcup" class="tab">
       <h2>Concacaf Gold Cup</h2>
       <p>This dashboard shows match-by-match betting odds for the Concacaf Gold Cup. Each matchup includes odds from multiple sportsbooks, enabling you to find the best line for moneyline bets across North American teams.</p>
@@ -493,21 +483,11 @@
       </div>
     </div>
 
-    <!-- Club World Cup Tab - KEEPING ORIGINAL STRUCTURE FOR NOW -->
+    <!-- Club World Cup Tab - UPDATED WITH NEW EMBED CODE -->
     <div id="clubworldcup" class="tab">
       <h2>Club World Cup</h2>
       <p>This dashboard provides odds for the FIFA Club World Cup matches, showing bookmaker spreads and predictions for games between top clubs from each continent. Useful for comparing teams that don't typically meet in domestic leagues.</p>
-      <div class='tableauPlaceholder' id='vizClubWorldCup' style='position: relative'>
-        <noscript><a href='#'><img alt='Club World Cup Odds' src='https://public.tableau.com/static/images/Cl/ClubWorldCup/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
-        <object class='tableauViz' style='display: none;'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='site_root' value='' />
-          <param name='name' value='ClubWorldCup/Dashboard1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-        </object>
-      </div>
+      <div class='tableauPlaceholder' id='viz1750564806849' style='position: relative'><noscript><a href='#'><img alt='Sheet 2 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cl&#47;ClubWorldCup&#47;Sheet2&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='ClubWorldCup&#47;Sheet2' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cl&#47;ClubWorldCup&#47;Sheet2&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
     </div>
   </div>
 
@@ -577,7 +557,7 @@
       }
     }
 
-    // Event listeners - KEEPING YOUR ORIGINAL TABLEAU INITIALIZATION LOGIC
+    // Event listeners - UPDATED TO HANDLE NEW EMBED CODES
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize page
       showTab('home');
@@ -601,24 +581,48 @@
         }
       });
 
-      // YOUR ORIGINAL WORKING TABLEAU INITIALIZATION - EXACTLY AS YOU HAD IT
-      const tableauIds = ['vizWorldCup', 'vizGoldCup', 'vizClubWorldCup'];
-      tableauIds.forEach(id => {
-        const divElement = document.getElementById(id);
-        if (divElement) {
-          const vizElement = divElement.getElementsByTagName('object')[0];
-          if (vizElement) {
-            vizElement.style.width = '100%';
-            vizElement.style.height = '1000px';
-            
-            // Load Tableau script
-            const scriptElement = document.createElement('script');
-            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-            scriptElement.async = true;
-            vizElement.parentNode.insertBefore(scriptElement, vizElement);
-          }
+      // UPDATED: Handle the new Tableau embed codes with their own scripts
+      // World Cup Winners - has its own script in the embed code
+      var divElement1 = document.getElementById('viz1750564604834');
+      if (divElement1) {
+        var vizElement1 = divElement1.getElementsByTagName('object')[0];
+        if (vizElement1) {
+          vizElement1.style.width='100%';
+          vizElement1.style.height=(divElement1.offsetWidth*0.75)+'px';
+          var scriptElement1 = document.createElement('script');
+          scriptElement1.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement1.parentNode.insertBefore(scriptElement1, vizElement1);
         }
-      });
+      }
+
+      // Club World Cup - has its own script in the embed code
+      var divElement2 = document.getElementById('viz1750564806849');
+      if (divElement2) {
+        var vizElement2 = divElement2.getElementsByTagName('object')[0];
+        if (vizElement2) {
+          vizElement2.style.width='100%';
+          vizElement2.style.height=(divElement2.offsetWidth*0.75)+'px';
+          var scriptElement2 = document.createElement('script');
+          scriptElement2.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement2.parentNode.insertBefore(scriptElement2, vizElement2);
+        }
+      }
+
+      // Gold Cup - keeping original approach for now
+      const divElement = document.getElementById('vizGoldCup');
+      if (divElement) {
+        const vizElement = divElement.getElementsByTagName('object')[0];
+        if (vizElement) {
+          vizElement.style.width = '100%';
+          vizElement.style.height = '1000px';
+          
+          // Load Tableau script
+          const scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          scriptElement.async = true;
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        }
+      }
     });
 
     // Prevent menu from closing when clicking inside sidebar
