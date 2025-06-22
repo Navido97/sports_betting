@@ -1,4 +1,3 @@
-/* Base styles */
 html, body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -7,15 +6,13 @@ html, body {
   height: 100%;
 }
 
-/* Layout */
 body {
   display: flex;
   height: 100vh;
   overflow: hidden;
 }
 
-/* Sidebar styles */
-aside#sidebar {
+aside {
   width: 220px;
   background-color: #1e1e1e;
   color: white;
@@ -23,23 +20,15 @@ aside#sidebar {
   box-sizing: border-box;
   transition: transform 0.3s ease;
   transform: translateX(0);
-  z-index: 1000;
-  position: fixed;
-  height: 100%;
 }
 
-#sidebar.collapsed {
-  transform: translateX(-250px);
-}
-
-.menu h2 {
+aside h1 {
   font-size: 1.5rem;
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.menu a,
-.menu button {
+.menu a, .menu button {
   background: none;
   border: none;
   color: white;
@@ -51,11 +40,6 @@ aside#sidebar {
   text-decoration: none;
 }
 
-.menu a:hover,
-.menu .submenu a:hover {
-  background-color: #555;
-}
-
 .menu .submenu {
   display: none;
   margin-left: 1rem;
@@ -65,26 +49,36 @@ aside#sidebar {
   padding: 0.5rem 0;
 }
 
+.menu .submenu a:hover, .menu a:hover {
+  background-color: #555;
+}
+
 .menu .active + .submenu {
   display: block;
 }
 
-/* Content styles */
+.accordion-toggle.active + .submenu {
+  display: block;
+}
+
+.arrow {
+  float: right;
+  transition: transform 0.3s ease;
+}
+
+.accordion-toggle.active .arrow {
+  transform: rotate(90deg);
+}
+
 .content {
   flex: 1;
-  margin-left: 220px;
   padding: 0;
+  margin: 0;
   height: 100vh;
   overflow-y: auto;
   position: relative;
-  transition: margin-left 0.3s ease;
 }
 
-#sidebar.collapsed + .content {
-  margin-left: 0;
-}
-
-/* Feedback button */
 .feedback-wrapper {
   position: absolute;
   top: 20px;
@@ -107,7 +101,6 @@ aside#sidebar {
   background-color: #333;
 }
 
-/* Tab content */
 .tab {
   display: none;
   padding: 2rem;
@@ -119,66 +112,58 @@ aside#sidebar {
   display: block;
 }
 
-/* Menu toggle icon */
-.menu-toggle {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 1001;
-  color: #1e1e1e;
-}
-
-/* Tableau embeds */
 .tableauPlaceholder {
   width: 100%;
   height: 1000px;
   min-height: 1000px;
 }
 
-/* Responsive behavior */
+/* Hamburger Menu Styling */
+.menu-toggle {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  body {
-    flex-direction: column;
-  }
-
-  .content {
-    margin-left: 0;
-  }
-
-  aside#sidebar {
-    transform: translateX(-250px);
+  .menu-toggle {
+    display: block;
     position: fixed;
-    width: 220px;
-    top: 0;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1100;
+    background-color: #1e1e1e;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #sidebar {
+    position: fixed;
     left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
     z-index: 1000;
   }
 
   #sidebar.open {
     transform: translateX(0);
   }
+
+  body {
+    flex-direction: column;
+    overflow-x: hidden;
+  }
 }
 
-.feedback-wrapper {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 2000; /* higher than sidebar/menu */
-}
+@media (min-width: 769px) {
+  #sidebar {
+    position: relative;
+    transform: translateX(0) !important;
+  }
 
-.feedback-button {
-  background-color: #1e1e1e;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 8px;
-  font-weight: bold;
-  text-decoration: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-}
-
-.feedback-button:hover {
-  background-color: #333;
+  .menu-toggle {
+    display: none;
+  }
 }
