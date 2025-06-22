@@ -5,347 +5,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Odds Maker</title>
-  <style>
-    html, body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f4f4f4;
-      color: #333;
-      height: 100%;
-    }
-
-    body {
-      display: flex;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    aside {
-      width: 220px;
-      background-color: #1e1e1e;
-      color: white;
-      padding: 2rem 1rem;
-      box-sizing: border-box;
-    }
-
-    aside h1 {
-      font-size: 1.5rem;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .menu a, .menu button {
-      background: none;
-      border: none;
-      color: white;
-      text-align: left;
-      padding: 0.75rem 1rem;
-      width: 100%;
-      cursor: pointer;
-      display: block;
-      text-decoration: none;
-    }
-
-    .menu .submenu {
-      display: none;
-      margin-left: 1rem;
-    }
-
-    .menu .submenu a {
-      padding: 0.5rem 0;
-    }
-
-    .menu .submenu a:hover, .menu a:hover {
-      background-color: #555;
-    }
-
-    .menu .active + .submenu {
-      display: block;
-    }
-
-    .content {
-      flex: 1;
-      padding: 0;
-      margin: 0;
-      max-width: none;
-      height: 100vh;
-      overflow-y: auto;
-      position: relative;
-    }
-
-    .feedback-wrapper {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 9999;
-    }
-
-    .feedback-button {
-      background-color: #1e1e1e;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s ease;
-    }
-
-    .feedback-button:hover {
-      background-color: #333;
-    }
-
-    .tab {
-      display: none;
-      padding: 2rem;
-      height: 100%;
-      box-sizing: border-box;
-    }
-
-    .tab.active {
-      display: block;
-    }
-
-    .tab h2 {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    .tableauPlaceholder {
-      width: 100%;
-      height: 1000px;
-      min-height: 1000px;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-
-      aside {
-        width: 100%;
-        text-align: center;
-      }
-    }
-  </style>
 </head>
 <body>
   <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
 
-  <aside id="sidebar" onclick="event.stopPropagation()">
-    <h1>Odds Maker</h1>
+  <aside id="sidebar" class="collapsed" onclick="event.stopPropagation()">
     <div class="menu">
-      <a href="#" onclick="showTab('home')">Home</a>
-      <a href="#" onclick="showTab('documentation')">Documentation</a>
-      <button class="accordion-toggle" onclick="toggleSubmenu(this)">
-        Competitions <span class="arrow">▶</span>
-      </button>
-      <div class="submenu">
-        <a href="#" onclick="showTab('worldcup')">World Cup Winners</a>
-        <a href="#" onclick="showTab('goldcup')">Concacaf Gold Cup</a>
-        <a href="#" onclick="showTab('clubworldcup')">Club World Cup</a>
-      </div>
+      <h2>Odds Maker</h2>
+      <nav>
+        <ul>
+          <li><a href="#" onclick="showTab('home')">Home</a></li>
+          <li><a href="#" onclick="showTab('documentation')">Documentation</a></li>
+          <li><a href="#" onclick="toggleSubMenu()">Competitions ▶</a></li>
+          <ul class="submenu">
+            <li><a href="#" onclick="showTab('goldcup')">Concacaf Gold Cup</a></li>
+            <li><a href="#" onclick="showTab('clubworldcup')">Club World Cup</a></li>
+          </ul>
+        </ul>
+      </nav>
     </div>
   </aside>
-  
 
-  <div class="content">
-    <div class="feedback-wrapper">
-      <a href="https://forms.gle/st4WrF57QNMYykBeA" target="_blank" class="feedback-button">Feedback</a>
-    </div>
-
-<!-- Updated Home Tab Text -->
-<div id="home" class="tab active">
-  <h2>Welcome to the Odds Maker Dashboard</h2>
-  <p>This dashboard helps everyday sports fans and bettors stay up to date with betting odds for international soccer competitions. Simply select a tournament from the left-hand menu to view odds from major sportsbooks for upcoming and past matches. Use this tool to compare values across platforms and make informed betting or viewing decisions.</p>
-
-  <ul style="max-width: 900px; margin: 2rem auto; list-style: none; padding: 0;">
-    <li style="margin-bottom: 1rem; background-color: #f0f0f0; padding: 1rem; border-left: 6px solid #1976d2; border-radius: 8px;">
-      ⚽ Access odds for top tournaments like the World Cup, Club World Cup, and Gold Cup.
-    </li>
-    <li style="margin-bottom: 1rem; background-color: #f0f0f0; padding: 1rem; border-left: 6px solid #388e3c; border-radius: 8px;">
-      📊 See live odds from multiple major sportsbooks, refreshed daily.
-    </li>
-    <li style="margin-bottom: 1rem; background-color: #f0f0f0; padding: 1rem; border-left: 6px solid #fbc02d; border-radius: 8px;">
-      📈 Use this dashboard to find the best odds across platforms and identify market value.
-    </li>
-    <li style="margin-bottom: 1rem; background-color: #f0f0f0; padding: 1rem; border-left: 6px solid #d32f2f; border-radius: 8px;">
-      💬 Have thoughts or feedback? Click the "Feedback" button in the top-right corner to let me know!
-    </li>
-  </ul>
-</div>
-
-<!-- Updated Documentation Tab Content -->
-<div id="documentation" class="tab">
-  <h2>Website Build Process</h2>
-  <p>This section documents all the steps taken to build this dashboard.</p>
-
-  <img src="images/Overview.png" alt="Documentation Slide" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px; margin-top: 1rem;" />
-
-  <p style="text-align: center; margin-top: 1rem; font-style: italic;">
-    This entire pipeline was designed with cost-efficiency in mind, using only free-tier tools across AWS, Google, and Tableau.
-  </p>
-
-  <div style="display: flex; flex-direction: column; gap: 2rem; margin: 2rem auto; max-width: 1000px;">
-
-    <!-- Step 1 -->
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid green; border-radius: 10px; font-weight: bold;">
-        1. Write Python Script and Save to GitHub
-      </div>
-      <div>
-        <p>I started by developing Python scripts that use <code>the-odds-api.com</code> to pull real-time soccer odds. The API covers many global competitions and provides generous free-tier access. To manage and version my scripts, I uploaded them to a GitHub repository, ensuring accessibility and ease of updates.</p>
-      </div>
-    </div>
-
-    <!-- Step 2 -->
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid dodgerblue; border-radius: 10px; font-weight: bold;">
-        2. Upload CSV to AWS S3
-      </div>
-      <div>
-        <p>After fetching the data, the script saves the results as CSV files and uploads them to an AWS S3 bucket. I chose S3 because it’s free for small-scale use. Integration with Python via <code>boto3</code> made it easy to automate the storage process.</p>
-      </div>
-    </div>
-
-    <!-- Step 3 -->
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid orange; border-radius: 10px; font-weight: bold;">
-        3. Push CSV to Google Sheets (via API)
-      </div>
-      <div>
-        <p>Since Tableau Public doesn’t connect directly to S3, I used the Google Sheets API to act as a middleman. Each CSV is uploaded to a designated tab within a single Sheet, allowing Tableau to reference updated live data.</p>
-      </div>
-    </div>
-
-    <!-- Step 4 -->
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid purple; border-radius: 10px; font-weight: bold;">
-        4. Launch EC2 Instance
-      </div>
-      <div>
-        <p>I spun up a t2.micro EC2 instance on AWS using the free tier to host my HTML website. I configured the security groups to allow HTTP/HTTPS traffic and uploaded the site via SFTP. The website is built with lightweight HTML, CSS, and JavaScript.</p>
-      </div>
-    </div>
-
-    <!-- Step 5 -->
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid teal; border-radius: 10px; font-weight: bold;">
-        5. Automate Everything on EC2
-      </div>
-      <div>
-        <p>To eliminate manual updates, I set up cron jobs on my EC2 instance. These jobs run the Python scripts once daily, ensuring the data is always fresh. This makes the system self-sustaining with no daily intervention needed. </p>
-      </div>
-    </div>
-
-    <!-- Step 6 -->
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid crimson; border-radius: 10px; font-weight: bold;">
-        6. Connect Tableau to Google Sheets
-      </div>
-      <div>
-        <p>Finally, I used Tableau Public to create dashboards that pull data directly from the Google Sheet. Using Tableau’s embed options, I published each dashboard and integrated it into the site using their JavaScript embed code. This keeps the visualizations synced with the latest data and provides users with an interactive experience right from the browser.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    
-        
-
-    <div id="worldcup" class="tab">
-      <h2>World Cup Winners</h2>
-      <p>This dashboard displays outright winner odds for the FIFA World Cup. You can compare which countries are favored to win the tournament, with odds pulled from multiple betting platforms. Use it to track line movement and identify longshot opportunities.</p>
-      <div class='tableauPlaceholder' id='vizWorldCup' style='position: relative'>
-        <noscript><a href='#'><img alt='World Cup Odds' src='https://public.tableau.com/static/images/Wo/WorldCupOdds/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
-        <object class='tableauViz' style='display: none;'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='site_root' value='' />
-          <param name='name' value='WorldCupOdds/Dashboard1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-        </object>
-      </div>
-    </div>
-
-    <div id="goldcup" class="tab">
-      <h2>Concacaf Gold Cup</h2>
-      <p>This dashboard shows match-by-match betting odds for the Concacaf Gold Cup. Each matchup includes odds from multiple sportsbooks, enabling you to find the best line for moneyline bets across North American teams.</p>
-      <div class='tableauPlaceholder' id='vizGoldCup' style='position: relative'>
-        <noscript><a href='#'><img alt='Gold Cup Odds' src='https://public.tableau.com/static/images/Co/ConcacafGoldCup/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
-        <object class='tableauViz' style='display: none;'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='site_root' value='' />
-          <param name='name' value='ConcacafGoldCup/Dashboard1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-        </object>
-      </div>
-    </div>
-
-    <div id="clubworldcup" class="tab">
-      <h2>Club World Cup</h2>
-      <p>This dashboard provides odds for the FIFA Club World Cup matches, showing bookmaker spreads and predictions for games between top clubs from each continent. Useful for comparing teams that don't typically meet in domestic leagues.</p>
-      <div class='tableauPlaceholder' id='vizClubWorldCup' style='position: relative'>
-        <noscript><a href='#'><img alt='Club World Cup Odds' src='https://public.tableau.com/static/images/Cl/ClubWorldCup/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
-        <object class='tableauViz' style='display: none;'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='site_root' value='' />
-          <param name='name' value='ClubWorldCup/Dashboard1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-        </object>
-      </div>
-    </div>
+  <div class="feedback-wrapper">
+    <a href="https://forms.gle/st4WrF57QNMYykBeA" target="_blank" class="feedback-button">Feedback</a>
   </div>
 
-  <script type='text/javascript'>
-    function showTab(id) {
-      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
+  <div id="home" class="tab active">
+    <h2>Welcome to the Odds Maker Dashboard</h2>
+    <p>This dashboard helps everyday sports fans and bettors stay up to date with betting odds for international soccer competitions. Simply select a tournament from the left-hand menu to view odds from major sportsbooks for upcoming and past matches. Use this tool to compare values across platforms and make informed betting or viewing decisions.</p>
 
-    function toggleSubmenu(button) {
-  const isActive = button.classList.contains('active');
+    <ul style="max-width: 900px; margin: 2rem auto; list-style: none; padding: 0;">
+      <li style="margin-bottom: 1rem; background-color: #f0f0f0; padding: 1rem; border-left: 6px solid #1976d2; border-radius: 8px;">
+        ⚽ Access odds for top tournaments like the World Cup, Club World Cup, and Gold Cup.
+      </li>
+      <li style="margin-bottom: 1rem; background-color: #f0f0f0; padding: 1rem; border-left: 6px solid #388e3c; border-radius: 8px;">
+        📊 See live odds from multiple major sportsbooks, refreshed daily.
+      </li>
+      <li style="margin-bottom: 1rem; background-color: #f0f0f0; padding: 1rem; border-left: 6px solid #fbc02d; border-radius: 8px;">
+        📈 Use this dashboard to find the best odds across platforms and identify market value.
+      </li>
+      <li style="margin-bottom: 1rem; background-color: #f0f0f0; padding: 1rem; border-left: 6px solid #d32f2f; border-radius: 8px;">
+        💬 Have thoughts or feedback? Click the "Feedback" button in the top-right corner to let me know!
+      </li>
+    </ul>
+  </div>
 
-  // Remove active from all accordion buttons
-  document.querySelectorAll('.accordion-toggle').forEach(btn => {
-    btn.classList.remove('active');
-  });
+  <!-- Your other tabs like documentation, goldcup, clubworldcup would go here -->
 
-  if (!isActive) {
-    button.classList.add('active');
-  }
-}
-
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-      showTab('home');
-
-      const ids = ['vizWorldCup', 'vizGoldCup', 'vizClubWorldCup'];
-      ids.forEach(id => {
-        const divElement = document.getElementById(id);
-        const vizElement = divElement.getElementsByTagName('object')[0];
-        vizElement.style.width = '100%';
-        vizElement.style.height = '1000px';
-        const scriptElement = document.createElement('script');
-        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-        vizElement.parentNode.insertBefore(scriptElement, vizElement);
-      });
-    });
-  </script>
   <script>
     function toggleMenu() {
       const sidebar = document.getElementById('sidebar');
       sidebar.classList.toggle('open');
     }
-  
-    // Optional: Close menu when clicking outside
+
+    function showTab(tabId) {
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Close sidebar when clicking outside
     document.addEventListener('click', function (event) {
       const sidebar = document.getElementById('sidebar');
       const toggle = document.querySelector('.menu-toggle');
@@ -354,6 +74,5 @@
       }
     });
   </script>
-  
 </body>
 </html>
