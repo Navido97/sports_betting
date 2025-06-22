@@ -215,6 +215,115 @@
         top: 70px;
         right: 10px;
       }
+      
+      .tab {
+        padding: 1rem;
+      }
+      
+      .tab h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    /* Documentation page specific styles */
+    .documentation-image {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 1rem 0;
+      display: block;
+    }
+
+    .build-process-container {
+      margin: 2rem auto;
+      max-width: 1000px;
+    }
+
+    .build-step {
+      margin-bottom: 2rem;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .step-header {
+      padding: 1rem 1.5rem;
+      background-color: #e0e0e0;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .step-content {
+      padding: 1.5rem;
+      background-color: #fff;
+    }
+
+    .step-content p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .step-content code {
+      background-color: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Color variations for steps */
+    .step-green {
+      border-left: 6px solid #4caf50;
+      background-color: #e8f5e8;
+    }
+
+    .step-blue {
+      border-left: 6px solid #2196f3;
+      background-color: #e3f2fd;
+    }
+
+    .step-orange {
+      border-left: 6px solid #ff9800;
+      background-color: #fff3e0;
+    }
+
+    .step-purple {
+      border-left: 6px solid #9c27b0;
+      background-color: #f3e5f5;
+    }
+
+    .step-teal {
+      border-left: 6px solid #009688;
+      background-color: #e0f2f1;
+    }
+
+    .step-crimson {
+      border-left: 6px solid #dc3545;
+      background-color: #f8d7da;
+    }
+
+    /* Additional mobile responsiveness */
+    @media (max-width: 768px) {
+      .build-process-container {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+      }
+
+      .step-header {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+      }
+
+      .step-content {
+        padding: 1rem;
+      }
+
+      .documentation-image {
+        margin: 0.5rem 0;
+      }
     }
   </style>
 </head>
@@ -276,69 +385,69 @@
       <h2>Website Build Process</h2>
       <p>This section documents all the steps taken to build this dashboard.</p>
 
-      <img src="images/Overview.png" alt="Documentation Slide" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px; margin-top: 1rem;" />
+      <img src="images/Overview.png" alt="Documentation Slide" class="documentation-image" />
 
       <p style="text-align: center; margin-top: 1rem; font-style: italic;">
         This entire pipeline was designed with cost-efficiency in mind, using only free-tier tools across AWS, Google, and Tableau.
       </p>
 
-      <div style="display: flex; flex-direction: column; gap: 2rem; margin: 2rem auto; max-width: 1000px;">
+      <div class="build-process-container">
         <!-- Step 1 -->
-        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid green; border-radius: 10px; font-weight: bold;">
+        <div class="build-step">
+          <div class="step-header step-green">
             1. Write Python Script and Save to GitHub
           </div>
-          <div>
+          <div class="step-content">
             <p>I started by developing Python scripts that use <code>the-odds-api.com</code> to pull real-time soccer odds. The API covers many global competitions and provides generous free-tier access. To manage and version my scripts, I uploaded them to a GitHub repository, ensuring accessibility and ease of updates.</p>
           </div>
         </div>
 
         <!-- Step 2 -->
-        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid dodgerblue; border-radius: 10px; font-weight: bold;">
+        <div class="build-step">
+          <div class="step-header step-blue">
             2. Upload CSV to AWS S3
           </div>
-          <div>
+          <div class="step-content">
             <p>After fetching the data, the script saves the results as CSV files and uploads them to an AWS S3 bucket. I chose S3 because it's free for small-scale use. Integration with Python via <code>boto3</code> made it easy to automate the storage process.</p>
           </div>
         </div>
 
         <!-- Step 3 -->
-        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid orange; border-radius: 10px; font-weight: bold;">
+        <div class="build-step">
+          <div class="step-header step-orange">
             3. Push CSV to Google Sheets (via API)
           </div>
-          <div>
+          <div class="step-content">
             <p>Since Tableau Public doesn't connect directly to S3, I used the Google Sheets API to act as a middleman. Each CSV is uploaded to a designated tab within a single Sheet, allowing Tableau to reference updated live data.</p>
           </div>
         </div>
 
         <!-- Step 4 -->
-        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid purple; border-radius: 10px; font-weight: bold;">
+        <div class="build-step">
+          <div class="step-header step-purple">
             4. Launch EC2 Instance
           </div>
-          <div>
+          <div class="step-content">
             <p>I spun up a t2.micro EC2 instance on AWS using the free tier to host my HTML website. I configured the security groups to allow HTTP/HTTPS traffic and uploaded the site via SFTP. The website is built with lightweight HTML, CSS, and JavaScript.</p>
           </div>
         </div>
 
         <!-- Step 5 -->
-        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid teal; border-radius: 10px; font-weight: bold;">
+        <div class="build-step">
+          <div class="step-header step-teal">
             5. Automate Everything on EC2
           </div>
-          <div>
+          <div class="step-content">
             <p>To eliminate manual updates, I set up cron jobs on my EC2 instance. These jobs run the Python scripts once daily, ensuring the data is always fresh. This makes the system self-sustaining with no daily intervention needed.</p>
           </div>
         </div>
 
         <!-- Step 6 -->
-        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid crimson; border-radius: 10px; font-weight: bold;">
+        <div class="build-step">
+          <div class="step-header step-crimson">
             6. Connect Tableau to Google Sheets
           </div>
-          <div>
+          <div class="step-content">
             <p>Finally, I used Tableau Public to create dashboards that pull data directly from the Google Sheet. Using Tableau's embed options, I published each dashboard and integrated it into the site using their JavaScript embed code. This keeps the visualizations synced with the latest data and provides users with an interactive experience right from the browser.</p>
           </div>
         </div>
