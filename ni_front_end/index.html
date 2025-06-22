@@ -159,77 +159,48 @@
     </div>
 
     <div id="documentation" class="tab">
-      <h2>Website Build Process</h2>
-      <p>This section documents all the steps taken to build this dashboard.</p>
-    
-      <img src="images/Overview.png" alt="Documentation Slide" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px; margin-top: 1rem;" />
-    
-      <div style="display: flex; flex-direction: column; gap: 2rem; margin: 2rem auto; max-width: 1000px;">
-    
-        <!-- Step 1 -->
-        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-radius: 10px; font-weight: bold;">
-            1. Python Script (API Call to the-odds-api.com)
-          </div>
-          <div>
-            <p>Python scripts were written to fetch betting odds from <code>the-odds-api.com</code>, chosen for its generous free-tier access and real-time market coverage for global soccer competitions.</p>
-          </div>
-        </div>
-    
-        <!-- Step 2 -->
-        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-radius: 10px; font-weight: bold;">
-            2. Save CSV to AWS S3 (Free Tier)
-          </div>
-          <div>
-            <p>Odds data was saved as CSV files to an AWS S3 bucket. S3’s free tier (5GB storage and 1M requests/month) makes it ideal for storing lightweight tabular data with high availability.</p>
-          </div>
-        </div>
-    
-        <!-- Step 3 -->
-        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-radius: 10px; font-weight: bold;">
-            3. Push CSV to Google Sheets (via API)
-          </div>
-          <div>
-            <p>Each CSV was parsed and uploaded to a Google Sheet using the Sheets API. This created a live data bridge that Tableau Public could access. This was a critical workaround since Tableau doesn’t natively connect to S3.</p>
-          </div>
-        </div>
-    
-        <!-- Step 4 -->
-        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-radius: 10px; font-weight: bold;">
-            4. Connect Tableau Public to Google Sheet
-          </div>
-          <div>
-            <p>Google Sheets were used as data sources in Tableau Public dashboards. Tableau Public is free and supports regular auto-refreshing of embedded dashboards connected to Google Sheets.</p>
-          </div>
-        </div>
-    
-        <!-- Step 5 -->
-        <div style="display: flex; align-items: flex-start; gap: 1rem;">
-          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-radius: 10px; font-weight: bold;">
-            5. Embed Dashboards on Website
-          </div>
-          <div>
-            <p>Each Tableau dashboard was embedded directly into this site using the Tableau JavaScript API. This ensures users always see the latest data while maintaining a lightweight and responsive layout.</p>
-          </div>
-        </div>
-    
-      </div>
-    
-      <p style="text-align: center; margin-top: 2rem;">
-        <em>This entire pipeline was designed with cost-efficiency in mind, using only free-tier tools across AWS, Google, and Tableau.</em>
+      <h2 style="text-align: center; font-size: 2rem; color: #222; margin-bottom: 0.5rem;">Website Build Process</h2>
+      <p style="text-align: center; color: #666; max-width: 700px; margin: 0 auto 2rem;">
+        This section documents all the steps taken to build this dashboard.
       </p>
     
+      <img src="images/Overview.png" alt="Process Diagram" style="max-width: 100%; display: block; margin: 0 auto 2rem; border-radius: 10px; border: 1px solid #ccc; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
     
+      <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 1000px; margin: 0 auto;">
+        
+        <!-- Step Block -->
+        <div style="display: flex; align-items: flex-start; background: #ffffff; border-left: 6px solid #4CAF50; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); padding: 1rem;">
+          <div style="font-weight: bold; min-width: 300px; color: #333;">1. Python Script (API Call to the-odds-api.com)</div>
+          <div style="color: #555;">Python scripts were written to fetch betting odds from <code>the-odds-api.com</code>, chosen for its generous free-tier access and real-time market coverage for global soccer competitions.</div>
+        </div>
     
-      <div class="scroll-fade">
-        <p>
-          The website was built using a lightweight front-end architecture: HTML, CSS, and vanilla JavaScript. The layout is structured around a sidebar menu with tabs dynamically shown and hidden via JavaScript. Tableau dashboards are embedded directly through the public API. All betting data is fetched through scheduled Python scripts and stored on AWS S3, which is then surfaced in Tableau through a connected Google Sheet.
-        </p>
+        <div style="display: flex; align-items: flex-start; background: #ffffff; border-left: 6px solid #2196F3; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); padding: 1rem;">
+          <div style="font-weight: bold; min-width: 300px; color: #333;">2. Save CSV to AWS S3 (Free Tier)</div>
+          <div style="color: #555;">Odds data was saved as CSV files to an AWS S3 bucket. S3’s free tier (5GB storage and 1M requests/month) makes it ideal for storing lightweight tabular data with high availability.</div>
+        </div>
+    
+        <div style="display: flex; align-items: flex-start; background: #ffffff; border-left: 6px solid #FF9800; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); padding: 1rem;">
+          <div style="font-weight: bold; min-width: 300px; color: #333;">3. Push CSV to Google Sheets (via API)</div>
+          <div style="color: #555;">Each CSV was parsed and uploaded to a Google Sheet using the Sheets API. This created a live data bridge that Tableau Public could access. This was a critical workaround since Tableau doesn’t natively connect to S3.</div>
+        </div>
+    
+        <div style="display: flex; align-items: flex-start; background: #ffffff; border-left: 6px solid #9C27B0; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); padding: 1rem;">
+          <div style="font-weight: bold; min-width: 300px; color: #333;">4. Connect Tableau Public to Google Sheet</div>
+          <div style="color: #555;">Google Sheets were used as data sources in Tableau Public dashboards. Tableau Public is free and supports regular auto-refreshing of embedded dashboards connected to Google Sheets.</div>
+        </div>
+    
+        <div style="display: flex; align-items: flex-start; background: #ffffff; border-left: 6px solid #F44336; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); padding: 1rem;">
+          <div style="font-weight: bold; min-width: 300px; color: #333;">5. Embed Dashboards on Website</div>
+          <div style="color: #555;">Each Tableau dashboard was embedded directly into this site using the Tableau JavaScript API. This ensures users always see the latest data while maintaining a lightweight and responsive layout.</div>
+        </div>
+    
       </div>
+    
+      <p style="text-align: center; margin-top: 3rem; color: #444;">
+        <em>This entire pipeline was designed with cost-efficiency in mind, using only free-tier tools across AWS, Google, and Tableau.</em>
+      </p>
     </div>
+    
         
 
     <div id="worldcup" class="tab">
