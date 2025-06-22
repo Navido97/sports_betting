@@ -568,17 +568,20 @@
     </div>
   </div>
 
+  <!-- Load Tableau JavaScript API -->
+  <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script>
+
   <script>
     // Initialize variables
     let isMenuOpen = false;
-    let loadedTableauDashboards = new Set();
+    let tableauVizzes = {};
     
     // Get DOM elements
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
 
-    // Tab switching functionality with lazy loading
+    // Tab switching functionality with proper Tableau loading
     function showTab(tabId) {
       // Hide all tabs
       document.querySelectorAll('.tab').forEach(tab => {
@@ -590,8 +593,8 @@
       if (selectedTab) {
         selectedTab.classList.add('active');
         
-        // Load Tableau dashboard if it's one of the competition tabs and not already loaded
-        if (['worldcup', 'goldcup', 'clubworldcup'].includes(tabId) && !loadedTableauDashboards.has(tabId)) {
+        // Load Tableau dashboard if it's one of the competition tabs
+        if (['worldcup', 'goldcup', 'clubworldcup'].includes(tabId)) {
           loadTableauDashboard(tabId);
         }
       }
@@ -602,90 +605,79 @@
       }
     }
 
-    // Function to load Tableau dashboard lazily
+    // Function to load Tableau dashboard
     function loadTableauDashboard(tabId) {
+      // If already loaded, just show it
+      if (tableauVizzes[tabId]) {
+        return;
+      }
+
       const vizMappings = {
-        'worldcup': 'vizWorldCup',
-        'goldcup': 'vizGoldCup',
-        'clubworldcup': 'vizClubWorldCup'
+        'worldcup': {
+          containerId: 'vizWorldCup',
+          url: 'https://public.tableau.com/views/WorldCupOdds/Dashboard1'
+        },
+        'goldcup': {
+          containerId: 'vizGoldCup', 
+          url: 'https://public.tableau.com/views/ConcacafGoldCup/Dashboard1'
+        },
+        'clubworldcup': {
+          containerId: 'vizClubWorldCup',
+          url: 'https://public.tableau.com/views/ClubWorldCup/Dashboard1'
+        }
       };
 
-      const vizId = vizMappings[tabId];
-      if (!vizId) return;
+      const vizConfig = vizMappings[tabId];
+      if (!vizConfig) return;
 
-      const divElement = document.getElementById(vizId);
+      const containerDiv = document.getElementById(vizConfig.containerId);
       const loadingElement = document.getElementById(tabId + '-loading');
       
-      if (divElement && loadingElement) {
+      if (containerDiv && loadingElement) {
         // Show loading indicator
         loadingElement.style.display = 'flex';
-        divElement.style.display = 'none';
+        containerDiv.style.display = 'none';
 
-        // Add delay for mobile devices to ensure proper rendering
-        setTimeout(() => {
-          const vizElement = divElement.getElementsByTagName('object')[0];
-          if (vizElement) {
-            // Set responsive dimensions
-            const isMobile = window.innerWidth <= 768;
-            const isSmallMobile = window.innerWidth <= 480;
-            
-            vizElement.style.width = '100%';
-            vizElement.style.height = '100%';
-            
-            // Add device parameter for mobile optimization
-            if (isMobile) {
-              const deviceParam = document.createElement('param');
-              deviceParam.name = 'device';
-              deviceParam.value = isSmallMobile ? 'phone' : 'tablet';
-              vizElement.appendChild(deviceParam);
-            }
-            
-            // Create and load Tableau script if not already loaded
-            if (!document.querySelector('script[src*="viz_v1.js"]')) {
-              const scriptElement = document.createElement('script');
-              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-              scriptElement.async = true;
-              scriptElement.onload = function() {
-                // Hide loading indicator and show viz after script loads
-                setTimeout(() => {
-                  loadingElement.style.display = 'none';
-                  divElement.style.display = 'block';
-                  vizElement.style.display = 'block';
-                  
-                  // Force refresh for proper sizing
-                  setTimeout(() => {
-                    if (window.tableau && window.tableau.VizManager) {
-                      const viz = window.tableau.VizManager.getVizs()[0];
-                      if (viz) {
-                        viz.refreshDataAsync();
-                      }
-                    }
-                  }, 1000);
-                }, 500);
-              };
-              scriptElement.onerror = function() {
-                loadingElement.textContent = 'Error loading dashboard. Please refresh the page.';
-              };
-              document.head.appendChild(scriptElement);
-            } else {
-              // Script already loaded, just show the viz
-              setTimeout(() => {
-                loadingElement.style.display = 'none';
-                divElement.style.display = 'block';
-                vizElement.style.display = 'block';
-              }, 300);
-            }
+        // Clear the container
+        containerDiv.innerHTML = '';
+
+        // Configure Tableau options
+        const options = {
+          hideTabs: true,
+          hideToolbar: false,
+          width: '100%',
+          height: '100%',
+          onFirstInteractive: function () {
+            // Hide loading indicator and show viz
+            loadingElement.style.display = 'none';
+            containerDiv.style.display = 'block';
           }
-        }, isMobile() ? 800 : 200);
+        };
 
-        // Mark as loaded
-        loadedTableauDashboards.add(tabId);
+        // Add mobile-specific options
+        if (isMobile()) {
+          options.device = isSmallMobile() ? 'phone' : 'tablet';
+        }
+
+        try {
+          // Create new Tableau viz
+          const viz = new tableau.Viz(containerDiv, vizConfig.url, options);
+          tableauVizzes[tabId] = viz;
+        } catch (error) {
+          console.error('Error loading Tableau dashboard:', error);
+          loadingElement.textContent = 'Error loading dashboard. Please refresh the page.';
+        }
       }
     }
 
     // Check if device is mobile
     function isMobile() {
       return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    // Check if device is small mobile
+    function isSmallMobile() {
+      return window.innerWidth <= 480;
     }
 
     // Submenu toggle functionality
@@ -755,36 +747,14 @@
       window.addEventListener('resize', function() {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(function() {
-          // Refresh loaded Tableau dashboards on resize
-          loadedTableauDashboards.forEach(tabId => {
-            const vizMappings = {
-              'worldcup': 'vizWorldCup',
-              'goldcup': 'vizGoldCup',
-              'clubworldcup': 'vizClubWorldCup'
-            };
-            const vizId = vizMappings[tabId];
-            const divElement = document.getElementById(vizId);
-            if (divElement) {
-              const vizElement = divElement.getElementsByTagName('object')[0];
-              if (vizElement) {
-                vizElement.style.width = '100%';
-                vizElement.style.height = '100%';
-                
-                // Trigger Tableau resize if available
-                if (window.tableau && window.tableau.VizManager) {
-                  const vizs = window.tableau.VizManager.getVizs();
-                  vizs.forEach(viz => {
-                    if (viz && viz.getWorkbook) {
-                      setTimeout(() => {
-                        try {
-                          viz.refreshDataAsync();
-                        } catch (e) {
-                          console.log('Tableau refresh not available');
-                        }
-                      }, 300);
-                    }
-                  });
-                }
+          // Refresh Tableau vizzes on resize
+          Object.keys(tableauVizzes).forEach(tabId => {
+            const viz = tableauVizzes[tabId];
+            if (viz && viz.getAreTabsHidden !== undefined) { // Check if viz is valid
+              try {
+                viz.refreshAsync();
+              } catch (e) {
+                console.log('Tableau refresh not available for', tabId);
               }
             }
           });
