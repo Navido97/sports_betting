@@ -5,9 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Odds Maker</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     html, body {
       font-family: Arial, sans-serif;
       margin: 0;
+      padding: 0;
       background-color: #f4f4f4;
       color: #333;
       height: 100%;
@@ -24,38 +29,70 @@
       position: fixed;
       top: 1rem;
       left: 1rem;
-      z-index: 1100;
+      z-index: 1200;
       background-color: #1e1e1e;
       color: white;
-      font-size: 1.5rem;
-      padding: 0.5rem 0.75rem;
+      font-size: 1.2rem;
+      padding: 8px 12px;
       border: none;
-      border-radius: 5px;
+      border-radius: 4px;
       cursor: pointer;
       display: none;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     .menu-toggle:hover {
       background-color: #333;
+      transform: scale(1.05);
+    }
+
+    .menu-toggle.active {
+      background-color: #333;
+    }
+
+    /* Mobile Overlay */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+      display: block;
+      opacity: 1;
     }
 
     /* Sidebar Styles */
-    aside {
+    #sidebar {
       width: 220px;
       background-color: #1e1e1e;
       color: white;
       padding: 2rem 1rem;
-      box-sizing: border-box;
-      transition: transform 0.3s ease;
       position: relative;
       z-index: 1000;
+      transition: transform 0.3s ease;
+      overflow-y: auto;
     }
 
-    aside h1 {
+    #sidebar h1 {
       font-size: 1.5rem;
       text-align: center;
       margin-bottom: 2rem;
+      margin-top: 0;
+    }
+
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
     .menu a, .menu button {
@@ -69,21 +106,26 @@
       display: block;
       text-decoration: none;
       transition: background-color 0.3s ease;
+      border-radius: 4px;
+      margin-bottom: 2px;
     }
 
     .menu a:hover, .menu button:hover {
-      background-color: #555;
+      background-color: #444;
     }
 
     .menu .submenu {
       display: none;
       margin-left: 1rem;
+      padding-left: 0;
+      list-style: none;
       overflow: hidden;
-      transition: max-height 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .menu .submenu a {
-      padding: 0.5rem 0;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
     }
 
     .menu .accordion-toggle.active + .submenu {
@@ -93,6 +135,7 @@
     .arrow {
       float: right;
       transition: transform 0.3s ease;
+      font-size: 0.8rem;
     }
 
     .accordion-toggle.active .arrow {
@@ -113,7 +156,7 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      z-index: 9999;
+      z-index: 100;
     }
 
     .feedback-button {
@@ -136,7 +179,7 @@
       display: none;
       padding: 2rem;
       height: 100%;
-      box-sizing: border-box;
+      min-height: calc(100vh - 4rem);
     }
 
     .tab.active {
@@ -146,6 +189,7 @@
     .tab h2 {
       text-align: center;
       margin-bottom: 1rem;
+      margin-top: 0;
     }
 
     .tableauPlaceholder {
@@ -154,42 +198,43 @@
       min-height: 1000px;
     }
 
-    /* Mobile Overlay */
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .overlay.active {
-      display: block;
-      opacity: 1;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
+    /* Desktop - Always show sidebar */
+    @media (min-width: 769px) {
       .menu-toggle {
-        display: block;
+        display: none !important;
       }
 
-      aside {
+      .sidebar-overlay {
+        display: none !important;
+      }
+
+      #sidebar {
+        position: relative;
+        transform: translateX(0) !important;
+      }
+
+      body {
+        flex-direction: row;
+      }
+    }
+
+    /* Mobile - Hamburger menu */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block !important;
+      }
+
+      #sidebar {
         position: fixed;
         top: 0;
         left: 0;
         bottom: 0;
+        height: 100vh;
         transform: translateX(-100%);
-        z-index: 1000;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
       }
 
-      aside.open {
+      #sidebar.open {
         transform: translateX(0);
       }
 
@@ -198,56 +243,42 @@
         margin-left: 0;
       }
 
+      .feedback-wrapper {
+        top: 70px;
+        right: 10px;
+      }
+
       body {
         flex-direction: row;
         overflow-x: hidden;
-      }
-
-      .feedback-wrapper {
-        top: 70px;
-      }
-    }
-
-    @media (min-width: 769px) {
-      aside {
-        position: relative;
-        transform: translateX(0) !important;
-      }
-
-      .menu-toggle {
-        display: none !important;
-      }
-
-      .overlay {
-        display: none !important;
       }
     }
   </style>
 </head>
 <body>
   <!-- Hamburger Menu Button -->
-  <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Menu">
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
     &#9776;
   </button>
 
   <!-- Mobile Overlay -->
-  <div class="overlay" onclick="closeMenu()"></div>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
   <!-- Sidebar -->
   <aside id="sidebar">
     <h1>Odds Maker</h1>
-    <div class="menu">
+    <nav class="menu">
       <a href="#" onclick="showTab('home')">Home</a>
       <a href="#" onclick="showTab('documentation')">Documentation</a>
       <button class="accordion-toggle" onclick="toggleSubmenu(this)">
         Competitions <span class="arrow">▶</span>
       </button>
-      <div class="submenu">
-        <a href="#" onclick="showTab('worldcup')">World Cup Winners</a>
-        <a href="#" onclick="showTab('goldcup')">Concacaf Gold Cup</a>
-        <a href="#" onclick="showTab('clubworldcup')">Club World Cup</a>
-      </div>
-    </div>
+      <ul class="submenu">
+        <li><a href="#" onclick="showTab('worldcup')">World Cup Winners</a></li>
+        <li><a href="#" onclick="showTab('goldcup')">Concacaf Gold Cup</a></li>
+        <li><a href="#" onclick="showTab('clubworldcup')">Club World Cup</a></li>
+      </ul>
+    </nav>
   </aside>
 
   <!-- Main Content -->
@@ -404,13 +435,29 @@
   </div>
 
   <script>
+    // Initialize variables
+    let isMenuOpen = false;
+    
+    // Get DOM elements
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
     // Tab switching functionality
-    function showTab(id) {
-      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+    function showTab(tabId) {
+      // Hide all tabs
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Show selected tab
+      const selectedTab = document.getElementById(tabId);
+      if (selectedTab) {
+        selectedTab.classList.add('active');
+      }
       
       // Close mobile menu when tab is selected
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= 768 && isMenuOpen) {
         closeMenu();
       }
     }
@@ -419,71 +466,94 @@
     function toggleSubmenu(button) {
       const isActive = button.classList.contains('active');
 
-      // Remove active from all accordion buttons
+      // Close all submenus first
       document.querySelectorAll('.accordion-toggle').forEach(btn => {
         btn.classList.remove('active');
       });
 
+      // Open this submenu if it wasn't active
       if (!isActive) {
         button.classList.add('active');
       }
     }
 
-    // Hamburger menu functionality
-    function toggleMenu() {
-      const sidebar = document.getElementById('sidebar');
-      const overlay = document.querySelector('.overlay');
-      
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('active');
+    // Menu toggle functions
+    function openMenu() {
+      isMenuOpen = true;
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      menuToggle.classList.add('active');
     }
 
     function closeMenu() {
-      const sidebar = document.getElementById('sidebar');
-      const overlay = document.querySelector('.overlay');
-      
+      isMenuOpen = false;
       sidebar.classList.remove('open');
       overlay.classList.remove('active');
+      menuToggle.classList.remove('active');
     }
 
-    // Close menu when clicking outside on mobile
-    document.addEventListener('click', function(event) {
-      const sidebar = document.getElementById('sidebar');
-      const menuToggle = document.querySelector('.menu-toggle');
-      
-      if (window.innerWidth <= 768 && 
-          !sidebar.contains(event.target) && 
-          !menuToggle.contains(event.target)) {
+    function toggleMenu() {
+      if (isMenuOpen) {
         closeMenu();
+      } else {
+        openMenu();
       }
-    });
+    }
 
-    // Initialize page
-    document.addEventListener('DOMContentLoaded', () => {
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize page
       showTab('home');
 
+      // Menu toggle button
+      menuToggle?.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      // Overlay click to close
+      overlay?.addEventListener('click', closeMenu);
+
+      // Close menu when clicking outside (mobile only)
+      document.addEventListener('click', function(event) {
+        if (window.innerWidth <= 768 && isMenuOpen) {
+          if (!sidebar.contains(event.target) && 
+              !menuToggle.contains(event.target)) {
+            closeMenu();
+          }
+        }
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          closeMenu();
+        }
+      });
+
       // Initialize Tableau visualizations
-      const ids = ['vizWorldCup', 'vizGoldCup', 'vizClubWorldCup'];
-      ids.forEach(id => {
+      const tableauIds = ['vizWorldCup', 'vizGoldCup', 'vizClubWorldCup'];
+      tableauIds.forEach(id => {
         const divElement = document.getElementById(id);
         if (divElement) {
           const vizElement = divElement.getElementsByTagName('object')[0];
           if (vizElement) {
             vizElement.style.width = '100%';
             vizElement.style.height = '1000px';
+            
+            // Load Tableau script
             const scriptElement = document.createElement('script');
             scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            scriptElement.async = true;
             vizElement.parentNode.insertBefore(scriptElement, vizElement);
           }
         }
       });
     });
 
-    // Handle window resize
-    window.addEventListener('resize', function() {
-      if (window.innerWidth > 768) {
-        closeMenu();
-      }
+    // Prevent menu from closing when clicking inside sidebar
+    sidebar?.addEventListener('click', function(e) {
+      e.stopPropagation();
     });
   </script>
 </body>
