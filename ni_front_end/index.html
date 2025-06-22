@@ -130,7 +130,8 @@
 </head>
 <body>
   <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
-  <aside id="sidebar">
+
+  <aside id="sidebar" onclick="event.stopPropagation()">
     <h1>Odds Maker</h1>
     <div class="menu">
       <a href="#" onclick="showTab('home')">Home</a>
@@ -138,9 +139,6 @@
       <button class="accordion-toggle" onclick="toggleSubmenu(this)">
         Competitions <span class="arrow">▶</span>
       </button>
-      
-
-      
       <div class="submenu">
         <a href="#" onclick="showTab('worldcup')">World Cup Winners</a>
         <a href="#" onclick="showTab('goldcup')">Concacaf Gold Cup</a>
@@ -148,6 +146,7 @@
       </div>
     </div>
   </aside>
+  
 
   <div class="content">
     <div class="feedback-wrapper">

@@ -45,3 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
 });
+
+function toggleMenu() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('open');
+}
+
+// Optional: close sidebar when clicking outside
+document.addEventListener('click', function (event) {
+  const sidebar = document.getElementById('sidebar');
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+    sidebar.classList.remove('open');
+  }
+});
