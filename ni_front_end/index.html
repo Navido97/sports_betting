@@ -207,6 +207,21 @@
       width: 100%;
       height: 1000px;
       min-height: 1000px;
+      position: relative;
+    }
+
+    /* Loading indicator for Tableau dashboards */
+    .loading-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      font-size: 1.2rem;
+      color: #666;
+    }
+
+    .loading-indicator.hidden {
+      display: none;
     }
 
     /* Mobile specific adjustments */
@@ -223,6 +238,11 @@
       .tab h2 {
         font-size: 1.5rem;
         margin-bottom: 1rem;
+      }
+
+      .tableauPlaceholder {
+        height: 800px;
+        min-height: 800px;
       }
     }
 
@@ -458,7 +478,8 @@
     <div id="worldcup" class="tab">
       <h2>World Cup Winners</h2>
       <p>This dashboard displays outright winner odds for the FIFA World Cup. You can compare which countries are favored to win the tournament, with odds pulled from multiple betting platforms. Use it to track line movement and identify longshot opportunities.</p>
-      <div class='tableauPlaceholder' id='vizWorldCup' style='position: relative'>
+      <div class="loading-indicator" id="worldcup-loading">Loading dashboard...</div>
+      <div class='tableauPlaceholder' id='vizWorldCup' style='position: relative; display: none;'>
         <noscript><a href='#'><img alt='World Cup Odds' src='https://public.tableau.com/static/images/Wo/WorldCupOdds/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
         <object class='tableauViz' style='display: none;'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
@@ -475,7 +496,8 @@
     <div id="goldcup" class="tab">
       <h2>Concacaf Gold Cup</h2>
       <p>This dashboard shows match-by-match betting odds for the Concacaf Gold Cup. Each matchup includes odds from multiple sportsbooks, enabling you to find the best line for moneyline bets across North American teams.</p>
-      <div class='tableauPlaceholder' id='vizGoldCup' style='position: relative'>
+      <div class="loading-indicator" id="goldcup-loading">Loading dashboard...</div>
+      <div class='tableauPlaceholder' id='vizGoldCup' style='position: relative; display: none;'>
         <noscript><a href='#'><img alt='Gold Cup Odds' src='https://public.tableau.com/static/images/Co/ConcacafGoldCup/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
         <object class='tableauViz' style='display: none;'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
@@ -492,7 +514,8 @@
     <div id="clubworldcup" class="tab">
       <h2>Club World Cup</h2>
       <p>This dashboard provides odds for the FIFA Club World Cup matches, showing bookmaker spreads and predictions for games between top clubs from each continent. Useful for comparing teams that don't typically meet in domestic leagues.</p>
-      <div class='tableauPlaceholder' id='vizClubWorldCup' style='position: relative'>
+      <div class="loading-indicator" id="clubworldcup-loading">Loading dashboard...</div>
+      <div class='tableauPlaceholder' id='vizClubWorldCup' style='position: relative; display: none;'>
         <noscript><a href='#'><img alt='Club World Cup Odds' src='https://public.tableau.com/static/images/Cl/ClubWorldCup/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
         <object class='tableauViz' style='display: none;'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
@@ -509,13 +532,14 @@
   <script>
     // Initialize variables
     let isMenuOpen = false;
+    let loadedTableauDashboards = new Set();
     
     // Get DOM elements
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
 
-    // Tab switching functionality
+    // Tab switching functionality with lazy loading
     function showTab(tabId) {
       // Hide all tabs
       document.querySelectorAll('.tab').forEach(tab => {
@@ -526,12 +550,83 @@
       const selectedTab = document.getElementById(tabId);
       if (selectedTab) {
         selectedTab.classList.add('active');
+        
+        // Load Tableau dashboard if it's one of the competition tabs and not already loaded
+        if (['worldcup', 'goldcup', 'clubworldcup'].includes(tabId) && !loadedTableauDashboards.has(tabId)) {
+          loadTableauDashboard(tabId);
+        }
       }
       
       // Close menu when tab is selected
       if (isMenuOpen) {
         closeMenu();
       }
+    }
+
+    // Function to load Tableau dashboard lazily
+    function loadTableauDashboard(tabId) {
+      const vizMappings = {
+        'worldcup': 'vizWorldCup',
+        'goldcup': 'vizGoldCup',
+        'clubworldcup': 'vizClubWorldCup'
+      };
+
+      const vizId = vizMappings[tabId];
+      if (!vizId) return;
+
+      const divElement = document.getElementById(vizId);
+      const loadingElement = document.getElementById(tabId + '-loading');
+      
+      if (divElement && loadingElement) {
+        // Show loading indicator
+        loadingElement.style.display = 'flex';
+        divElement.style.display = 'none';
+
+        // Add delay for mobile devices to ensure proper rendering
+        setTimeout(() => {
+          const vizElement = divElement.getElementsByTagName('object')[0];
+          if (vizElement) {
+            // Set responsive dimensions
+            const isMobile = window.innerWidth <= 768;
+            vizElement.style.width = '100%';
+            vizElement.style.height = isMobile ? '800px' : '1000px';
+            
+            // Create and load Tableau script if not already loaded
+            if (!document.querySelector('script[src*="viz_v1.js"]')) {
+              const scriptElement = document.createElement('script');
+              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+              scriptElement.async = true;
+              scriptElement.onload = function() {
+                // Hide loading indicator and show viz after script loads
+                setTimeout(() => {
+                  loadingElement.style.display = 'none';
+                  divElement.style.display = 'block';
+                  vizElement.style.display = 'block';
+                }, 1000);
+              };
+              scriptElement.onerror = function() {
+                loadingElement.textContent = 'Error loading dashboard. Please refresh the page.';
+              };
+              document.head.appendChild(scriptElement);
+            } else {
+              // Script already loaded, just show the viz
+              setTimeout(() => {
+                loadingElement.style.display = 'none';
+                divElement.style.display = 'block';
+                vizElement.style.display = 'block';
+              }, 500);
+            }
+          }
+        }, isMobile() ? 500 : 100);
+
+        // Mark as loaded
+        loadedTableauDashboards.add(tabId);
+      }
+    }
+
+    // Check if device is mobile
+    function isMobile() {
+      return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
     // Submenu toggle functionality
@@ -596,23 +691,29 @@
         }
       });
 
-      // Initialize Tableau visualizations
-      const tableauIds = ['vizWorldCup', 'vizGoldCup', 'vizClubWorldCup'];
-      tableauIds.forEach(id => {
-        const divElement = document.getElementById(id);
-        if (divElement) {
-          const vizElement = divElement.getElementsByTagName('object')[0];
-          if (vizElement) {
-            vizElement.style.width = '100%';
-            vizElement.style.height = '1000px';
-            
-            // Load Tableau script
-            const scriptElement = document.createElement('script');
-            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-            scriptElement.async = true;
-            vizElement.parentNode.insertBefore(scriptElement, vizElement);
-          }
-        }
+      // Handle window resize for responsive Tableau dashboards
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+          // Refresh loaded Tableau dashboards on resize
+          loadedTableauDashboards.forEach(tabId => {
+            const vizMappings = {
+              'worldcup': 'vizWorldCup',
+              'goldcup': 'vizGoldCup',
+              'clubworldcup': 'vizClubWorldCup'
+            };
+            const vizId = vizMappings[tabId];
+            const divElement = document.getElementById(vizId);
+            if (divElement) {
+              const vizElement = divElement.getElementsByTagName('object')[0];
+              if (vizElement) {
+                const isMobile = window.innerWidth <= 768;
+                vizElement.style.height = isMobile ? '800px' : '1000px';
+              }
+            }
+          });
+        }, 250);
       });
     });
 
@@ -620,6 +721,10 @@
     sidebar?.addEventListener('click', function(e) {
       e.stopPropagation();
     });
+
+    // Add touch event support for mobile devices
+    document.addEventListener('touchstart', function() {}, {passive: true});
+    document.addEventListener('touchmove', function() {}, {passive: true});
   </script>
 </body>
 </html>
