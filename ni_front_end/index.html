@@ -623,11 +623,10 @@
           const vizElement = divElement.getElementsByTagName('object')[0];
           if (vizElement) {
             // Set responsive dimensions
-            const isMobile = window.innerWidth <= 768;
             vizElement.style.width = '100%';
             vizElement.style.height = '100%';
             
-            // Load Tableau script
+            // Create and load Tableau script for each dashboard
             const scriptElement = document.createElement('script');
             scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
             scriptElement.async = true;
@@ -642,9 +641,12 @@
             scriptElement.onerror = function() {
               loadingElement.textContent = 'Error loading dashboard. Please refresh the page.';
             };
-            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+            
+            // Always append the script, even if one exists already
+            // This ensures each dashboard gets properly initialized
+            document.head.appendChild(scriptElement);
           }
-        }, isMobile() ? 500 : 100);
+        }, 500);
 
         // Mark as loaded
         loadedTableauDashboards.add(tabId);
