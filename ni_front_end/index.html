@@ -207,21 +207,6 @@
       width: 100%;
       height: 1000px;
       min-height: 1000px;
-      position: relative;
-    }
-
-    /* Loading indicator for Tableau dashboards */
-    .loading-indicator {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 200px;
-      font-size: 1.2rem;
-      color: #666;
-    }
-
-    .loading-indicator.hidden {
-      display: none;
     }
 
     /* Mobile specific adjustments */
@@ -229,120 +214,6 @@
       .feedback-wrapper {
         top: 70px;
         right: 10px;
-      }
-      
-      .tab {
-        padding: 1rem;
-      }
-      
-      .tab h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .tableauPlaceholder {
-        height: 800px;
-        min-height: 800px;
-      }
-    }
-
-    /* Documentation page specific styles */
-    .documentation-image {
-      max-width: 100%;
-      height: auto;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin: 1rem 0;
-      display: block;
-    }
-
-    .build-process-container {
-      margin: 2rem auto;
-      max-width: 1000px;
-    }
-
-    .build-step {
-      margin-bottom: 2rem;
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
-
-    .step-header {
-      padding: 1rem 1.5rem;
-      background-color: #e0e0e0;
-      font-weight: bold;
-      font-size: 1.1rem;
-      border-radius: 12px 12px 0 0;
-    }
-
-    .step-content {
-      padding: 1.5rem;
-      background-color: #fff;
-    }
-
-    .step-content p {
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    .step-content code {
-      background-color: #f5f5f5;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-family: 'Courier New', monospace;
-    }
-
-    /* Color variations for steps */
-    .step-green {
-      border-left: 6px solid #4caf50;
-      background-color: #e8f5e8;
-    }
-
-    .step-blue {
-      border-left: 6px solid #2196f3;
-      background-color: #e3f2fd;
-    }
-
-    .step-orange {
-      border-left: 6px solid #ff9800;
-      background-color: #fff3e0;
-    }
-
-    .step-purple {
-      border-left: 6px solid #9c27b0;
-      background-color: #f3e5f5;
-    }
-
-    .step-teal {
-      border-left: 6px solid #009688;
-      background-color: #e0f2f1;
-    }
-
-    .step-crimson {
-      border-left: 6px solid #dc3545;
-      background-color: #f8d7da;
-    }
-
-    /* Additional mobile responsiveness */
-    @media (max-width: 768px) {
-      .build-process-container {
-        margin: 1rem auto;
-        padding: 0 0.5rem;
-      }
-
-      .step-header {
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
-      }
-
-      .step-content {
-        padding: 1rem;
-      }
-
-      .documentation-image {
-        margin: 0.5rem 0;
       }
     }
   </style>
@@ -405,69 +276,69 @@
       <h2>Website Build Process</h2>
       <p>This section documents all the steps taken to build this dashboard.</p>
 
-      <img src="images/Overview.png" alt="Documentation Slide" class="documentation-image" />
+      <img src="images/Overview.png" alt="Documentation Slide" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px; margin-top: 1rem;" />
 
       <p style="text-align: center; margin-top: 1rem; font-style: italic;">
         This entire pipeline was designed with cost-efficiency in mind, using only free-tier tools across AWS, Google, and Tableau.
       </p>
 
-      <div class="build-process-container">
+      <div style="display: flex; flex-direction: column; gap: 2rem; margin: 2rem auto; max-width: 1000px;">
         <!-- Step 1 -->
-        <div class="build-step">
-          <div class="step-header step-green">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid green; border-radius: 10px; font-weight: bold;">
             1. Write Python Script and Save to GitHub
           </div>
-          <div class="step-content">
+          <div>
             <p>I started by developing Python scripts that use <code>the-odds-api.com</code> to pull real-time soccer odds. The API covers many global competitions and provides generous free-tier access. To manage and version my scripts, I uploaded them to a GitHub repository, ensuring accessibility and ease of updates.</p>
           </div>
         </div>
 
         <!-- Step 2 -->
-        <div class="build-step">
-          <div class="step-header step-blue">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid dodgerblue; border-radius: 10px; font-weight: bold;">
             2. Upload CSV to AWS S3
           </div>
-          <div class="step-content">
+          <div>
             <p>After fetching the data, the script saves the results as CSV files and uploads them to an AWS S3 bucket. I chose S3 because it's free for small-scale use. Integration with Python via <code>boto3</code> made it easy to automate the storage process.</p>
           </div>
         </div>
 
         <!-- Step 3 -->
-        <div class="build-step">
-          <div class="step-header step-orange">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid orange; border-radius: 10px; font-weight: bold;">
             3. Push CSV to Google Sheets (via API)
           </div>
-          <div class="step-content">
+          <div>
             <p>Since Tableau Public doesn't connect directly to S3, I used the Google Sheets API to act as a middleman. Each CSV is uploaded to a designated tab within a single Sheet, allowing Tableau to reference updated live data.</p>
           </div>
         </div>
 
         <!-- Step 4 -->
-        <div class="build-step">
-          <div class="step-header step-purple">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid purple; border-radius: 10px; font-weight: bold;">
             4. Launch EC2 Instance
           </div>
-          <div class="step-content">
+          <div>
             <p>I spun up a t2.micro EC2 instance on AWS using the free tier to host my HTML website. I configured the security groups to allow HTTP/HTTPS traffic and uploaded the site via SFTP. The website is built with lightweight HTML, CSS, and JavaScript.</p>
           </div>
         </div>
 
         <!-- Step 5 -->
-        <div class="build-step">
-          <div class="step-header step-teal">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid teal; border-radius: 10px; font-weight: bold;">
             5. Automate Everything on EC2
           </div>
-          <div class="step-content">
+          <div>
             <p>To eliminate manual updates, I set up cron jobs on my EC2 instance. These jobs run the Python scripts once daily, ensuring the data is always fresh. This makes the system self-sustaining with no daily intervention needed.</p>
           </div>
         </div>
 
         <!-- Step 6 -->
-        <div class="build-step">
-          <div class="step-header step-crimson">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+          <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid crimson; border-radius: 10px; font-weight: bold;">
             6. Connect Tableau to Google Sheets
           </div>
-          <div class="step-content">
+          <div>
             <p>Finally, I used Tableau Public to create dashboards that pull data directly from the Google Sheet. Using Tableau's embed options, I published each dashboard and integrated it into the site using their JavaScript embed code. This keeps the visualizations synced with the latest data and provides users with an interactive experience right from the browser.</p>
           </div>
         </div>
@@ -478,8 +349,7 @@
     <div id="worldcup" class="tab">
       <h2>World Cup Winners</h2>
       <p>This dashboard displays outright winner odds for the FIFA World Cup. You can compare which countries are favored to win the tournament, with odds pulled from multiple betting platforms. Use it to track line movement and identify longshot opportunities.</p>
-      <div class="loading-indicator" id="worldcup-loading">Loading dashboard...</div>
-      <div class='tableauPlaceholder' id='vizWorldCup' style='position: relative; display: none;'>
+      <div class='tableauPlaceholder' id='vizWorldCup' style='position: relative'>
         <noscript><a href='#'><img alt='World Cup Odds' src='https://public.tableau.com/static/images/Wo/WorldCupOdds/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
         <object class='tableauViz' style='display: none;'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
@@ -496,8 +366,7 @@
     <div id="goldcup" class="tab">
       <h2>Concacaf Gold Cup</h2>
       <p>This dashboard shows match-by-match betting odds for the Concacaf Gold Cup. Each matchup includes odds from multiple sportsbooks, enabling you to find the best line for moneyline bets across North American teams.</p>
-      <div class="loading-indicator" id="goldcup-loading">Loading dashboard...</div>
-      <div class='tableauPlaceholder' id='vizGoldCup' style='position: relative; display: none;'>
+      <div class='tableauPlaceholder' id='vizGoldCup' style='position: relative'>
         <noscript><a href='#'><img alt='Gold Cup Odds' src='https://public.tableau.com/static/images/Co/ConcacafGoldCup/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
         <object class='tableauViz' style='display: none;'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
@@ -514,8 +383,7 @@
     <div id="clubworldcup" class="tab">
       <h2>Club World Cup</h2>
       <p>This dashboard provides odds for the FIFA Club World Cup matches, showing bookmaker spreads and predictions for games between top clubs from each continent. Useful for comparing teams that don't typically meet in domestic leagues.</p>
-      <div class="loading-indicator" id="clubworldcup-loading">Loading dashboard...</div>
-      <div class='tableauPlaceholder' id='vizClubWorldCup' style='position: relative; display: none;'>
+      <div class='tableauPlaceholder' id='vizClubWorldCup' style='position: relative'>
         <noscript><a href='#'><img alt='Club World Cup Odds' src='https://public.tableau.com/static/images/Cl/ClubWorldCup/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
         <object class='tableauViz' style='display: none;'>
           <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
@@ -532,14 +400,13 @@
   <script>
     // Initialize variables
     let isMenuOpen = false;
-    let loadedTableauDashboards = new Set();
     
     // Get DOM elements
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
 
-    // Tab switching functionality with lazy loading
+    // Tab switching functionality
     function showTab(tabId) {
       // Hide all tabs
       document.querySelectorAll('.tab').forEach(tab => {
@@ -550,83 +417,12 @@
       const selectedTab = document.getElementById(tabId);
       if (selectedTab) {
         selectedTab.classList.add('active');
-        
-        // Load Tableau dashboard if it's one of the competition tabs and not already loaded
-        if (['worldcup', 'goldcup', 'clubworldcup'].includes(tabId) && !loadedTableauDashboards.has(tabId)) {
-          loadTableauDashboard(tabId);
-        }
       }
       
       // Close menu when tab is selected
       if (isMenuOpen) {
         closeMenu();
       }
-    }
-
-    // Function to load Tableau dashboard lazily
-    function loadTableauDashboard(tabId) {
-      const vizMappings = {
-        'worldcup': 'vizWorldCup',
-        'goldcup': 'vizGoldCup',
-        'clubworldcup': 'vizClubWorldCup'
-      };
-
-      const vizId = vizMappings[tabId];
-      if (!vizId) return;
-
-      const divElement = document.getElementById(vizId);
-      const loadingElement = document.getElementById(tabId + '-loading');
-      
-      if (divElement && loadingElement) {
-        // Show loading indicator
-        loadingElement.style.display = 'flex';
-        divElement.style.display = 'none';
-
-        // Add delay for mobile devices to ensure proper rendering
-        setTimeout(() => {
-          const vizElement = divElement.getElementsByTagName('object')[0];
-          if (vizElement) {
-            // Set responsive dimensions
-            const isMobile = window.innerWidth <= 768;
-            vizElement.style.width = '100%';
-            vizElement.style.height = isMobile ? '800px' : '1000px';
-            
-            // Create and load Tableau script if not already loaded
-            if (!document.querySelector('script[src*="viz_v1.js"]')) {
-              const scriptElement = document.createElement('script');
-              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-              scriptElement.async = true;
-              scriptElement.onload = function() {
-                // Hide loading indicator and show viz after script loads
-                setTimeout(() => {
-                  loadingElement.style.display = 'none';
-                  divElement.style.display = 'block';
-                  vizElement.style.display = 'block';
-                }, 1000);
-              };
-              scriptElement.onerror = function() {
-                loadingElement.textContent = 'Error loading dashboard. Please refresh the page.';
-              };
-              document.head.appendChild(scriptElement);
-            } else {
-              // Script already loaded, just show the viz
-              setTimeout(() => {
-                loadingElement.style.display = 'none';
-                divElement.style.display = 'block';
-                vizElement.style.display = 'block';
-              }, 500);
-            }
-          }
-        }, isMobile() ? 500 : 100);
-
-        // Mark as loaded
-        loadedTableauDashboards.add(tabId);
-      }
-    }
-
-    // Check if device is mobile
-    function isMobile() {
-      return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
     // Submenu toggle functionality
@@ -691,29 +487,23 @@
         }
       });
 
-      // Handle window resize for responsive Tableau dashboards
-      let resizeTimeout;
-      window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
-          // Refresh loaded Tableau dashboards on resize
-          loadedTableauDashboards.forEach(tabId => {
-            const vizMappings = {
-              'worldcup': 'vizWorldCup',
-              'goldcup': 'vizGoldCup',
-              'clubworldcup': 'vizClubWorldCup'
-            };
-            const vizId = vizMappings[tabId];
-            const divElement = document.getElementById(vizId);
-            if (divElement) {
-              const vizElement = divElement.getElementsByTagName('object')[0];
-              if (vizElement) {
-                const isMobile = window.innerWidth <= 768;
-                vizElement.style.height = isMobile ? '800px' : '1000px';
-              }
-            }
-          });
-        }, 250);
+      // Initialize Tableau visualizations
+      const tableauIds = ['vizWorldCup', 'vizGoldCup', 'vizClubWorldCup'];
+      tableauIds.forEach(id => {
+        const divElement = document.getElementById(id);
+        if (divElement) {
+          const vizElement = divElement.getElementsByTagName('object')[0];
+          if (vizElement) {
+            vizElement.style.width = '100%';
+            vizElement.style.height = '1000px';
+            
+            // Load Tableau script
+            const scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            scriptElement.async = true;
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+          }
+        }
       });
     });
 
@@ -721,10 +511,6 @@
     sidebar?.addEventListener('click', function(e) {
       e.stopPropagation();
     });
-
-    // Add touch event support for mobile devices
-    document.addEventListener('touchstart', function() {}, {passive: true});
-    document.addEventListener('touchmove', function() {}, {passive: true});
   </script>
 </body>
 </html>
