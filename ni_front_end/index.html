@@ -232,7 +232,7 @@
       display: none;
     }
 
-    /* Mobile specific adjustments */
+    /* Mobile specific adjustments - Increased font sizes for better readability */
     @media (max-width: 768px) {
       .feedback-wrapper {
         top: 70px;
@@ -244,15 +244,16 @@
       }
       
       .tab h2 {
-        font-size: 1.3rem;
+        font-size: 1.8rem;
         margin-bottom: 0.5rem;
         padding: 0 0.5rem;
       }
 
       .tab p {
         padding: 0 0.5rem;
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         margin-bottom: 1rem;
+        line-height: 1.5;
       }
 
       .tableauPlaceholder {
@@ -260,6 +261,16 @@
         min-height: 500px;
         margin: 0;
         padding: 0;
+        /* Ensure Tableau content is larger on mobile */
+        font-size: 16px !important;
+      }
+
+      /* Force larger text in Tableau visualizations */
+      .tableauPlaceholder iframe {
+        transform: scale(1.2);
+        transform-origin: top left;
+        width: 83.33% !important;
+        height: 83.33% !important;
       }
     }
 
@@ -274,11 +285,20 @@
       }
       
       .tab h2 {
-        font-size: 1.2rem;
+        font-size: 1.6rem;
       }
       
       .tab p {
-        font-size: 0.85rem;
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+
+      /* More aggressive scaling for small phones */
+      .tableauPlaceholder iframe {
+        transform: scale(1.4);
+        transform-origin: top left;
+        width: 71.43% !important;
+        height: 71.43% !important;
       }
     }
 
@@ -515,18 +535,7 @@
       <h2>World Cup Winners</h2>
       <p>This dashboard displays outright winner odds for the FIFA World Cup. You can compare which countries are favored to win the tournament, with odds pulled from multiple betting platforms. Use it to track line movement and identify longshot opportunities.</p>
       <div class="loading-indicator" id="worldcup-loading">Loading dashboard...</div>
-      <div class='tableauPlaceholder' id='vizWorldCup' style='position: relative; display: none;'>
-        <noscript><a href='#'><img alt='World Cup Odds' src='https://public.tableau.com/static/images/Wo/WorldCupOdds/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
-        <object class='tableauViz' style='display: none;'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='site_root' value='' />
-          <param name='name' value='WorldCupOdds/Dashboard1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-          <param name='device' value='desktop' />
-        </object>
-      </div>
+      <div class='tableauPlaceholder' id='vizWorldCup' style='position: relative; display: none;'></div>
     </div>
 
     <!-- Gold Cup Tab -->
@@ -534,18 +543,7 @@
       <h2>Concacaf Gold Cup</h2>
       <p>This dashboard shows match-by-match betting odds for the Concacaf Gold Cup. Each matchup includes odds from multiple sportsbooks, enabling you to find the best line for moneyline bets across North American teams.</p>
       <div class="loading-indicator" id="goldcup-loading">Loading dashboard...</div>
-      <div class='tableauPlaceholder' id='vizGoldCup' style='position: relative; display: none;'>
-        <noscript><a href='#'><img alt='Gold Cup Odds' src='https://public.tableau.com/static/images/Co/ConcacafGoldCup/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
-        <object class='tableauViz' style='display: none;'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='site_root' value='' />
-          <param name='name' value='ConcacafGoldCup/Dashboard1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-          <param name='device' value='desktop' />
-        </object>
-      </div>
+      <div class='tableauPlaceholder' id='vizGoldCup' style='position: relative; display: none;'></div>
     </div>
 
     <!-- Club World Cup Tab -->
@@ -553,18 +551,7 @@
       <h2>Club World Cup</h2>
       <p>This dashboard provides odds for the FIFA Club World Cup matches, showing bookmaker spreads and predictions for games between top clubs from each continent. Useful for comparing teams that don't typically meet in domestic leagues.</p>
       <div class="loading-indicator" id="clubworldcup-loading">Loading dashboard...</div>
-      <div class='tableauPlaceholder' id='vizClubWorldCup' style='position: relative; display: none;'>
-        <noscript><a href='#'><img alt='Club World Cup Odds' src='https://public.tableau.com/static/images/Cl/ClubWorldCup/Dashboard1/1_rss.png' style='border: none' /></a></noscript>
-        <object class='tableauViz' style='display: none;'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='site_root' value='' />
-          <param name='name' value='ClubWorldCup/Dashboard1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-          <param name='device' value='desktop' />
-        </object>
-      </div>
+      <div class='tableauPlaceholder' id='vizClubWorldCup' style='position: relative; display: none;'></div>
     </div>
   </div>
 
@@ -609,6 +596,12 @@
     function loadTableauDashboard(tabId) {
       // If already loaded, just show it
       if (tableauVizzes[tabId]) {
+        const containerDiv = document.getElementById(getContainerId(tabId));
+        const loadingElement = document.getElementById(tabId + '-loading');
+        if (containerDiv && loadingElement) {
+          loadingElement.style.display = 'none';
+          containerDiv.style.display = 'block';
+        }
         return;
       }
 
@@ -651,6 +644,10 @@
             // Hide loading indicator and show viz
             loadingElement.style.display = 'none';
             containerDiv.style.display = 'block';
+            console.log('Tableau dashboard loaded:', tabId);
+          },
+          onFirstVizSizeKnown: function() {
+            console.log('Tableau viz size known:', tabId);
           }
         };
 
@@ -660,14 +657,38 @@
         }
 
         try {
-          // Create new Tableau viz
-          const viz = new tableau.Viz(containerDiv, vizConfig.url, options);
-          tableauVizzes[tabId] = viz;
+          // Add a delay to ensure the container is visible
+          setTimeout(function() {
+            console.log('Attempting to load Tableau dashboard:', tabId, vizConfig.url);
+            const viz = new tableau.Viz(containerDiv, vizConfig.url, options);
+            tableauVizzes[tabId] = viz;
+            
+            // Backup timeout in case onFirstInteractive doesn't fire
+            setTimeout(function() {
+              if (loadingElement.style.display !== 'none') {
+                loadingElement.style.display = 'none';
+                containerDiv.style.display = 'block';
+                console.log('Tableau dashboard loaded (timeout):', tabId);
+              }
+            }, 10000);
+            
+          }, 100);
+          
         } catch (error) {
-          console.error('Error loading Tableau dashboard:', error);
+          console.error('Error loading Tableau dashboard:', tabId, error);
           loadingElement.textContent = 'Error loading dashboard. Please refresh the page.';
         }
       }
+    }
+
+    // Helper function to get container ID
+    function getContainerId(tabId) {
+      const mapping = {
+        'worldcup': 'vizWorldCup',
+        'goldcup': 'vizGoldCup',
+        'clubworldcup': 'vizClubWorldCup'
+      };
+      return mapping[tabId];
     }
 
     // Check if device is mobile
@@ -722,6 +743,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize page
       showTab('home');
+      console.log('Page initialized');
 
       // Menu toggle button
       menuToggle?.addEventListener('click', function(e) {
@@ -750,7 +772,7 @@
           // Refresh Tableau vizzes on resize
           Object.keys(tableauVizzes).forEach(tabId => {
             const viz = tableauVizzes[tabId];
-            if (viz && viz.getAreTabsHidden !== undefined) { // Check if viz is valid
+            if (viz && typeof viz.refreshAsync === 'function') {
               try {
                 viz.refreshAsync();
               } catch (e) {
@@ -760,6 +782,13 @@
           });
         }, 300);
       });
+
+      // Check if Tableau API is loaded
+      if (typeof tableau === 'undefined') {
+        console.error('Tableau JavaScript API not loaded');
+      } else {
+        console.log('Tableau JavaScript API loaded successfully');
+      }
     });
 
     // Prevent menu from closing when clicking inside sidebar
