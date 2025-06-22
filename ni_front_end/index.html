@@ -187,7 +187,7 @@
         2. Upload CSV to AWS S3
       </div>
       <div>
-        <p>After fetching the data, the script saves the results as CSV files and uploads them to an AWS S3 bucket. I chose S3 because it’s scalable, reliable, and free for small-scale use (5 GB and up to 1M requests per month). Integration with Python via <code>boto3</code> made it easy to automate the storage process.</p>
+        <p>After fetching the data, the script saves the results as CSV files and uploads them to an AWS S3 bucket. I chose S3 because it’s free for small-scale use. Integration with Python via <code>boto3</code> made it easy to automate the storage process.</p>
       </div>
     </div>
 
@@ -197,7 +197,7 @@
         3. Push CSV to Google Sheets (via API)
       </div>
       <div>
-        <p>Since Tableau Public doesn’t connect directly to S3, I used the Google Sheets API to act as a middleman. Each CSV is uploaded to a designated tab within a single Sheet, allowing Tableau to reference updated live data without manual effort.</p>
+        <p>Since Tableau Public doesn’t connect directly to S3, I used the Google Sheets API to act as a middleman. Each CSV is uploaded to a designated tab within a single Sheet, allowing Tableau to reference updated live data.</p>
       </div>
     </div>
 
@@ -207,7 +207,7 @@
         4. Launch EC2 Instance
       </div>
       <div>
-        <p>I spun up a t2.micro EC2 instance on AWS using the free tier to host my HTML website. I configured the security groups to allow HTTP/HTTPS traffic and uploaded the site via SFTP. The website is built with lightweight HTML, CSS, and JavaScript, designed for quick load times and user-friendly navigation through dynamic tabs.</p>
+        <p>I spun up a t2.micro EC2 instance on AWS using the free tier to host my HTML website. I configured the security groups to allow HTTP/HTTPS traffic and uploaded the site via SFTP. The website is built with lightweight HTML, CSS, and JavaScript.</p>
       </div>
     </div>
 
@@ -217,7 +217,7 @@
         5. Automate Everything on EC2
       </div>
       <div>
-        <p>To eliminate manual updates, I set up cron jobs on my EC2 instance. These jobs run the Python scripts once daily, ensuring the data is always fresh. This makes the system self-sustaining with no daily intervention needed.</p>
+        <p>To eliminate manual updates, I set up cron jobs on my EC2 instance. These jobs run the Python scripts once daily, ensuring the data is always fresh. This makes the system self-sustaining with no daily intervention needed. </p>
       </div>
     </div>
 
