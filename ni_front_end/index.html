@@ -618,38 +618,46 @@
         loadingElement.style.display = 'flex';
         divElement.style.display = 'none';
 
-        // Add delay for mobile devices to ensure proper rendering
-        setTimeout(() => {
-          const vizElement = divElement.getElementsByTagName('object')[0];
-          if (vizElement) {
-            // Set responsive dimensions
-            vizElement.style.width = '100%';
-            vizElement.style.height = '100%';
-            
-            // Create and load Tableau script for each dashboard
-            const scriptElement = document.createElement('script');
-            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-            scriptElement.async = true;
-            scriptElement.onload = function() {
-              // Hide loading indicator and show viz after script loads
-              setTimeout(() => {
-                loadingElement.style.display = 'none';
-                divElement.style.display = 'block';
-                vizElement.style.display = 'block';
-              }, 1000);
-            };
-            scriptElement.onerror = function() {
-              loadingElement.textContent = 'Error loading dashboard. Please refresh the page.';
-            };
-            
-            // Always append the script, even if one exists already
-            // This ensures each dashboard gets properly initialized
-            document.head.appendChild(scriptElement);
-          }
-        }, 500);
+        // Check if Tableau script is already loaded
+        const existingScript = document.querySelector('script[src*="viz_v1.js"]');
+        
+        if (!existingScript) {
+          // Load script for the first time
+          const scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          scriptElement.async = true;
+          scriptElement.onload = function() {
+            // Initialize this specific dashboard
+            initializeDashboard(tabId, divElement, loadingElement);
+          };
+          scriptElement.onerror = function() {
+            loadingElement.textContent = 'Error loading dashboard. Please refresh the page.';
+          };
+          document.head.appendChild(scriptElement);
+        } else {
+          // Script already exists, just initialize the dashboard
+          setTimeout(() => {
+            initializeDashboard(tabId, divElement, loadingElement);
+          }, 500);
+        }
 
         // Mark as loaded
         loadedTableauDashboards.add(tabId);
+      }
+    }
+
+    // Helper function to initialize individual dashboards
+    function initializeDashboard(tabId, divElement, loadingElement) {
+      const vizElement = divElement.getElementsByTagName('object')[0];
+      if (vizElement) {
+        vizElement.style.width = '100%';
+        vizElement.style.height = '100%';
+        
+        setTimeout(() => {
+          loadingElement.style.display = 'none';
+          divElement.style.display = 'block';
+          vizElement.style.display = 'block';
+        }, 1000);
       }
     }
 
