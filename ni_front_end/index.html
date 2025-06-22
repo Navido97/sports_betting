@@ -177,17 +177,17 @@
         1. Write Python Script and Save to GitHub
       </div>
       <div>
-        <p>To kick things off, I wrote Python scripts that retrieve live betting odds from <code>the-odds-api.com</code>. The site was perfect for my needs—it’s free to use up to 1,000 requests per month, covers a wide range of soccer competitions, and includes multiple betting markets. I committed the scripts to GitHub to make them easy to version, store, and access across my different environments.</p>
+        <p>I started by developing Python scripts that use <code>the-odds-api.com</code> to pull real-time soccer odds. The API covers many global competitions and provides generous free-tier access. To manage and version my scripts, I uploaded them to a GitHub repository, ensuring accessibility and ease of updates.</p>
       </div>
     </div>
 
     <!-- Step 2 -->
     <div style="display: flex; align-items: flex-start; gap: 1rem;">
       <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid dodgerblue; border-radius: 10px; font-weight: bold;">
-        2. Store CSV Output in AWS S3 (Free Tier)
+        2. Upload CSV to AWS S3
       </div>
       <div>
-        <p>After fetching the data, the script saves it as a CSV file and uploads it to <strong>Amazon S3</strong>. I chose S3 because its free tier includes 5 GB of storage and 1 million monthly PUT requests—perfect for a lightweight personal project like this. Plus, S3 integrates smoothly with Python using <code>boto3</code>, so it was easy to automate the upload process.</p>
+        <p>After fetching the data, the script saves the results as CSV files and uploads them to an AWS S3 bucket. I chose S3 because it’s scalable, reliable, and free for small-scale use (5 GB and up to 1M requests per month). Integration with Python via <code>boto3</code> made it easy to automate the storage process.</p>
       </div>
     </div>
 
@@ -197,32 +197,42 @@
         3. Push CSV to Google Sheets (via API)
       </div>
       <div>
-        <p>Since Tableau Public doesn’t support direct connections to S3, I needed a workaround. I used the <strong>Google Sheets API</strong> to push each CSV file to a unique tab in a shared Google Sheet. This allowed Tableau to pull live data from a sheet that’s constantly updated behind the scenes, essentially bridging S3 and Tableau.</p>
+        <p>Since Tableau Public doesn’t connect directly to S3, I used the Google Sheets API to act as a middleman. Each CSV is uploaded to a designated tab within a single Sheet, allowing Tableau to reference updated live data without manual effort.</p>
       </div>
     </div>
 
     <!-- Step 4 -->
     <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid rebeccapurple; border-radius: 10px; font-weight: bold;">
-        4. Deploy EC2 Instance and Build the Website
+      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid purple; border-radius: 10px; font-weight: bold;">
+        4. Launch EC2 Instance
       </div>
       <div>
-        <p>To host everything, I launched an <strong>AWS EC2 instance</strong> using the free tier (t2.micro). I configured the security groups to allow HTTP traffic and uploaded all files via SFTP. The website is built using HTML, CSS, and vanilla JavaScript. It’s designed to be lightweight and responsive, with dynamic tabs to switch between dashboards. The layout makes it easy for users to interact with the data without distractions or performance issues.</p>
+        <p>I spun up a t2.micro EC2 instance on AWS using the free tier to host my HTML website. I configured the security groups to allow HTTP/HTTPS traffic and uploaded the site via SFTP. The website is built with lightweight HTML, CSS, and JavaScript, designed for quick load times and user-friendly navigation through dynamic tabs.</p>
       </div>
     </div>
 
     <!-- Step 5 -->
     <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid crimson; border-radius: 10px; font-weight: bold;">
-        5. Connect Tableau and Automate Everything
+      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid teal; border-radius: 10px; font-weight: bold;">
+        5. Automate Everything on EC2
       </div>
       <div>
-        <p>I created <strong>Tableau Public dashboards</strong> that pull data directly from Google Sheets. Using Tableau’s JavaScript API, I embedded the dashboards into the website. To keep everything up to date, I scheduled daily <strong>cron jobs</strong> on the EC2 instance to run each Python script. This way, the latest data is always pulled, processed, and displayed—no manual work needed.</p>
+        <p>To eliminate manual updates, I set up cron jobs on my EC2 instance. These jobs run the Python scripts once daily, ensuring the data is always fresh. This makes the system self-sustaining with no daily intervention needed.</p>
       </div>
     </div>
 
+    <!-- Step 6 -->
+    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+      <div style="min-width: 300px; background-color: #e0e0e0; padding: 1rem; border-left: 6px solid crimson; border-radius: 10px; font-weight: bold;">
+        6. Connect Tableau to Google Sheets
+      </div>
+      <div>
+        <p>Finally, I used Tableau Public to create dashboards that pull data directly from the Google Sheet. Using Tableau’s embed options, I published each dashboard and integrated it into the site using their JavaScript embed code. This keeps the visualizations synced with the latest data and provides users with an interactive experience right from the browser.</p>
+      </div>
+    </div>
   </div>
 </div>
+
 
     
         
