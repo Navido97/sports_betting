@@ -59,3 +59,8 @@ document.addEventListener('click', function (event) {
     sidebar.classList.remove('open');
   }
 });
+
+function toggleMenu() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('collapsed');
+}
