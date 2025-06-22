@@ -161,13 +161,46 @@
     <div id="documentation" class="tab">
       <h2>Website Build Process</h2>
       <p>This section documents all the steps taken to build this dashboard.</p>
+    
       <img src="images/Overview.png" alt="Documentation Slide" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px; margin-top: 1rem;" />
-      <div>
-        <p>
-          The website was built using a lightweight front-end architecture: HTML, CSS, and vanilla JavaScript. The layout is structured around a sidebar menu with tabs dynamically shown and hidden via JavaScript. Tableau dashboards are embedded directly through the public API. All betting data is fetched through scheduled Python scripts and stored on AWS S3, which is then surfaced in Tableau through a connected Google Sheet.
-        </p>
+    
+      <h3 style="margin-top: 2rem;">Visual Flowchart</h3>
+      <div style="display: flex; flex-direction: column; align-items: center; margin: 2rem 0;">
+        <div style="background-color: #e0e0e0; padding: 1rem 2rem; border-radius: 10px;">Python Script (API Call to the-odds-api.com)</div>
+        <div style="font-size: 2rem; margin: 0.5rem 0;">↓</div>
+        <div style="background-color: #e0e0e0; padding: 1rem 2rem; border-radius: 10px;">Save CSV to AWS S3 (Free Tier)</div>
+        <div style="font-size: 2rem; margin: 0.5rem 0;">↓</div>
+        <div style="background-color: #e0e0e0; padding: 1rem 2rem; border-radius: 10px;">Push CSV to Google Sheets (via API)</div>
+        <div style="font-size: 2rem; margin: 0.5rem 0;">↓</div>
+        <div style="background-color: #e0e0e0; padding: 1rem 2rem; border-radius: 10px;">Connect Tableau Public to Google Sheet</div>
+        <div style="font-size: 2rem; margin: 0.5rem 0;">↓</div>
+        <div style="background-color: #e0e0e0; padding: 1rem 2rem; border-radius: 10px;">Embed Dashboards on Website</div>
       </div>
+    
+      <h3>Step-by-Step Breakdown</h3>
+      <ol style="text-align: left; max-width: 900px; margin: auto;">
+        <li><strong>Define Project Scope:</strong> The goal was to create a free, automated dashboard showing real-time soccer betting odds from multiple competitions.</li>
+    
+        <li><strong>Fetch Odds via API:</strong> Used <code>the-odds-api.com</code> for its free-tier access to sports betting data. Python scripts fetch odds for World Cup, Club World Cup, and Gold Cup daily.</li>
+    
+        <li><strong>Store Data in AWS S3:</strong> Chose S3 due to its free-tier 5GB storage and ease of integration with Python via Boto3. Each dataset was saved as a CSV to the S3 bucket.</li>
+    
+        <li><strong>Bridge to Tableau via Google Sheets:</strong> Since Tableau Public cannot pull from S3 directly, I used the Google Sheets API to push each CSV to a unique tab in one Google Sheet. This allowed live access to the data.</li>
+    
+        <li><strong>Build Dashboards in Tableau Public:</strong> Tableau Public is free and powerful. Each sheet is linked to a Google Sheets tab and visualized with relevant filters, team names, and odds spread metrics.</li>
+    
+        <li><strong>Design a Lightweight Front-End:</strong> I built the front-end using plain HTML, CSS, and JS with tab navigation and sidebar menu. Each tab contains a Tableau dashboard embed and associated context.</li>
+    
+        <li><strong>Automate on EC2 (Free Tier):</strong> The Python pipeline runs daily on a t2.micro EC2 instance. This instance also serves the front-end files using a basic static HTTP server.</li>
+    
+        <li><strong>Document the Project:</strong> Finally, I created a high-level chart and added this section to document the steps, tools, and decisions — all designed to stay within the free-tier ecosystem.</li>
+      </ol>
+    
+      <p style="text-align: center; margin-top: 2rem;">
+        <em>This project showcases how a fully automated, data-driven website can be built and hosted end-to-end using only free-tier tools — without sacrificing quality or automation.</em>
+      </p>
     </div>
+    
     
     
       <div class="scroll-fade">
