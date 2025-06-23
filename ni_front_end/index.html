@@ -1117,6 +1117,173 @@
       }
     }
 
+    /* Pipeline Diagram Styles */
+    .pipeline-diagram {
+      margin: 2rem 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 16px;
+      overflow-x: auto;
+    }
+
+    .pipeline-steps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 1rem;
+      min-width: 1200px;
+      padding: 1rem 0;
+    }
+
+    .pipeline-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 180px;
+      min-width: 160px;
+    }
+
+    .step-icons {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      justify-content: center;
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .python-icon { background: linear-gradient(135deg, #3776ab, #ffd43b); }
+    .github-icon { background: linear-gradient(135deg, #333, #666); }
+    .aws-icon { background: linear-gradient(135deg, #ff9900, #ff6600); }
+    .s3-icon { background: linear-gradient(135deg, #569a31, #7cb342); }
+    .sheets-icon { background: linear-gradient(135deg, #0f9d58, #4caf50); }
+    .drive-icon { background: linear-gradient(135deg, #4285f4, #1976d2); }
+    .ec2-icon { background: linear-gradient(135deg, #ff9900, #ff6600); }
+    .html-icon { background: linear-gradient(135deg, #e34f26, #f16529); }
+    .automation-icon { background: linear-gradient(135deg, #666, #999); }
+    .cron-icon { background: linear-gradient(135deg, #795548, #5d4037); }
+    .chart-icon { background: linear-gradient(135deg, #ff5722, #d84315); }
+    .dashboard-icon { background: linear-gradient(135deg, #0f9d58, #4caf50); }
+
+    .step-box {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid;
+      min-height: 140px;
+      width: 100%;
+    }
+
+    .step-green-box { border-left-color: #4caf50; }
+    .step-blue-box { border-left-color: #2196f3; }
+    .step-orange-box { border-left-color: #ff9800; }
+    .step-purple-box { border-left-color: #9c27b0; }
+    .step-teal-box { border-left-color: #009688; }
+    .step-red-box { border-left-color: #f44336; }
+
+    .step-box h4 {
+      margin: 0 0 1rem 0;
+      font-size: 1rem;
+      color: #333;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .step-box ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .step-box li {
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+
+    .pipeline-arrow {
+      font-size: 2rem;
+      color: #007bff;
+      font-weight: bold;
+      margin: 0 0.5rem;
+      align-self: center;
+      margin-top: 80px;
+    }
+
+    /* Mobile responsiveness for pipeline */
+    @media (max-width: 1024px) {
+      .pipeline-diagram {
+        padding: 1rem;
+      }
+      
+      .pipeline-steps {
+        min-width: 900px;
+        gap: 0.5rem;
+      }
+      
+      .pipeline-step {
+        max-width: 140px;
+        min-width: 120px;
+      }
+      
+      .step-box {
+        padding: 1rem;
+        min-height: 120px;
+      }
+      
+      .step-box h4 {
+        font-size: 0.9rem;
+      }
+      
+      .step-box li {
+        font-size: 0.8rem;
+      }
+      
+      .icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pipeline-steps {
+        flex-direction: column;
+        align-items: center;
+        min-width: auto;
+        gap: 1rem;
+      }
+      
+      .pipeline-step {
+        max-width: 300px;
+        min-width: 280px;
+      }
+      
+      .pipeline-arrow {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
+        align-self: center;
+        margin-top: 0;
+      }
+      
+      .step-box {
+        min-height: auto;
+      }
+    }
+
     /* Google Sheets Data Table Styles */
     .data-container {
       margin: 2rem 0;
@@ -1621,7 +1788,106 @@
         </div>
 
         <div class="overview-section">
-          <img src="images/Overview.png" alt="Technical Architecture Overview" class="documentation-image" />
+          <div class="pipeline-diagram">
+            <div class="pipeline-steps">
+              <!-- Step 1: Data Collection -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon python-icon">🐍</div>
+                  <div class="icon github-icon">📁</div>
+                </div>
+                <div class="step-box step-green-box">
+                  <h4>Data Collection</h4>
+                  <ul>
+                    <li>• Developed Python scripts to retrieve data from using an API key</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pipeline-arrow">→</div>
+
+              <!-- Step 2: Upload CSV to AWS S3 -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon aws-icon">☁️</div>
+                  <div class="icon s3-icon">🗃️</div>
+                </div>
+                <div class="step-box step-blue-box">
+                  <h4>Upload CSV to AWS S3</h4>
+                  <ul>
+                    <li>• Created and configured an S3 bucket to store CSV output files</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pipeline-arrow">→</div>
+
+              <!-- Step 3: Save to Google Sheets -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon sheets-icon">📊</div>
+                  <div class="icon drive-icon">📁</div>
+                </div>
+                <div class="step-box step-orange-box">
+                  <h4>Save to Google Sheets</h4>
+                  <ul>
+                    <li>• Set up a Google Service Account and enabled the Sheets API</li>
+                    <li>• Wrote a script to push S3 data into designated Google Sheet tabs</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pipeline-arrow">→</div>
+
+              <!-- Step 4: Launched EC2 Instance -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon ec2-icon">💻</div>
+                  <div class="icon html-icon">🌐</div>
+                </div>
+                <div class="step-box step-purple-box">
+                  <h4>Launched EC2 Instance</h4>
+                  <ul>
+                    <li>• Deployed an EC2 instance and hosted a basic HTML site</li>
+                    <li>• Configured security groups to allow web traffic</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pipeline-arrow">→</div>
+
+              <!-- Step 5: Automate Everything on EC2 -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon automation-icon">⚙️</div>
+                  <div class="icon cron-icon">⏰</div>
+                </div>
+                <div class="step-box step-teal-box">
+                  <h4>Automate Everything on EC2</h4>
+                  <ul>
+                    <li>• Wrote shell scripts to run each Python pipeline daily via cron jobs</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pipeline-arrow">→</div>
+
+              <!-- Step 6: Created Dashboard -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon chart-icon">📈</div>
+                  <div class="icon dashboard-icon">📊</div>
+                </div>
+                <div class="step-box step-red-box">
+                  <h4>Created Dashboard</h4>
+                  <ul>
+                    <li>• Connected Google Sheets as a data source using live data</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="overview-callout">
             <div class="callout-icon">💡</div>
             <div class="callout-content">
