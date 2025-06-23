@@ -2417,10 +2417,20 @@
               // Team name column
               html += `<td class="team-cell">${cellValue || ''}</td>`;
             } else {
+              // Check if this is a datetime column
+              const headerName = headers[colIndex].toLowerCase();
+              const isDateTimeColumn = headerName.includes('commence time') || 
+                                     headerName.includes('time') ||
+                                     headerName.includes('date');
+              
               // Check if this column contains odds
               const isOddsColumn = oddsColumnIndices.includes(colIndex);
               
-              if (isOddsColumn) {
+              if (isDateTimeColumn) {
+                // Convert UTC to CDT for datetime columns
+                const convertedTime = convertUTCtoCDT(cellValue);
+                html += `<td class="odds-value">${convertedTime || '-'}</td>`;
+              } else if (isOddsColumn) {
                 // Get odds values for comparison (only from odds columns)
                 const oddsValues = oddsColumnIndices.map(idx => row[idx]);
                 const numericOdds = oddsValues.map(val => parseFloat(val) || -Infinity);
@@ -2430,7 +2440,7 @@
                 const className = isBest ? 'odds-value best-odds' : 'odds-value';
                 html += `<td class="${className}">${cellValue || '-'}</td>`;
               } else {
-                // Non-odds column (like Commence Time UTC)
+                // Non-odds, non-datetime column
                 html += `<td class="odds-value">${cellValue || '-'}</td>`;
               }
             }
@@ -2470,6 +2480,40 @@
         });
       } catch (error) {
         return dateString;
+      }
+    }
+
+    // Convert UTC datetime to CDT and format
+    function convertUTCtoCDT(utcString) {
+      if (!utcString || utcString === '' || utcString === '-') {
+        return utcString;
+      }
+      
+      try {
+        // Parse the UTC datetime string
+        const utcDate = new Date(utcString);
+        
+        // Check if the date is valid
+        if (isNaN(utcDate.getTime())) {
+          return utcString; // Return original if can't parse
+        }
+        
+        // Convert to CDT (Central Daylight Time)
+        const cdtDate = new Date(utcDate.toLocaleString("en-US", {timeZone: "America/Chicago"}));
+        
+        // Format as needed - you can adjust this format
+        return cdtDate.toLocaleString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZone: 'America/Chicago',
+          timeZoneName: 'short'
+        });
+      } catch (error) {
+        console.error('Error converting UTC to CDT:', error);
+        return utcString; // Return original on error
       }
     }
 
