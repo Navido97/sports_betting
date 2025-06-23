@@ -1129,18 +1129,19 @@
     .pipeline-steps {
       display: flex;
       align-items: flex-start;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 1rem;
-      min-width: 1200px;
-      padding: 1rem 0;
+      min-width: 1400px;
+      padding: 1rem 2rem;
     }
 
     .pipeline-step {
       display: flex;
       flex-direction: column;
       align-items: center;
-      max-width: 180px;
-      min-width: 160px;
+      max-width: 200px;
+      min-width: 180px;
+      flex-shrink: 0;
     }
 
     .step-icons {
@@ -1157,24 +1158,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      color: white;
-      font-weight: bold;
+      background: white;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
     }
 
-    .python-icon { background: linear-gradient(135deg, #3776ab, #ffd43b); }
-    .github-icon { background: linear-gradient(135deg, #333, #666); }
-    .aws-icon { background: linear-gradient(135deg, #ff9900, #ff6600); }
-    .s3-icon { background: linear-gradient(135deg, #569a31, #7cb342); }
-    .sheets-icon { background: linear-gradient(135deg, #0f9d58, #4caf50); }
-    .drive-icon { background: linear-gradient(135deg, #4285f4, #1976d2); }
-    .ec2-icon { background: linear-gradient(135deg, #ff9900, #ff6600); }
-    .html-icon { background: linear-gradient(135deg, #e34f26, #f16529); }
-    .automation-icon { background: linear-gradient(135deg, #666, #999); }
-    .cron-icon { background: linear-gradient(135deg, #795548, #5d4037); }
-    .chart-icon { background: linear-gradient(135deg, #ff5722, #d84315); }
-    .dashboard-icon { background: linear-gradient(135deg, #0f9d58, #4caf50); }
+    .icon img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
 
     .step-box {
       background: white;
@@ -1182,7 +1176,7 @@
       padding: 1.5rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       border-left: 4px solid;
-      min-height: 140px;
+      min-height: 160px;
       width: 100%;
     }
 
@@ -1195,7 +1189,7 @@
 
     .step-box h4 {
       margin: 0 0 1rem 0;
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #333;
       font-weight: 600;
       text-align: center;
@@ -1208,7 +1202,7 @@
     }
 
     .step-box li {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       line-height: 1.4;
       color: #555;
       margin-bottom: 0.5rem;
@@ -1221,6 +1215,7 @@
       margin: 0 0.5rem;
       align-self: center;
       margin-top: 80px;
+      flex-shrink: 0;
     }
 
     /* Mobile responsiveness for pipeline */
@@ -1230,32 +1225,37 @@
       }
       
       .pipeline-steps {
-        min-width: 900px;
+        min-width: 1200px;
         gap: 0.5rem;
+        padding: 1rem;
       }
       
       .pipeline-step {
-        max-width: 140px;
-        min-width: 120px;
+        max-width: 160px;
+        min-width: 140px;
       }
       
       .step-box {
         padding: 1rem;
-        min-height: 120px;
+        min-height: 140px;
       }
       
       .step-box h4 {
-        font-size: 0.9rem;
+        font-size: 1rem;
       }
       
       .step-box li {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
       }
       
       .icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+        width: 45px;
+        height: 45px;
+      }
+      
+      .icon img {
+        width: 35px;
+        height: 35px;
       }
     }
 
@@ -1265,11 +1265,12 @@
         align-items: center;
         min-width: auto;
         gap: 1rem;
+        padding: 1rem;
       }
       
       .pipeline-step {
-        max-width: 300px;
-        min-width: 280px;
+        max-width: 320px;
+        min-width: 300px;
       }
       
       .pipeline-arrow {
@@ -1793,8 +1794,12 @@
               <!-- Step 1: Data Collection -->
               <div class="pipeline-step">
                 <div class="step-icons">
-                  <div class="icon python-icon">🐍</div>
-                  <div class="icon github-icon">📁</div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC1.png" alt="Python" />
+                  </div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC2.png" alt="GitHub" />
+                  </div>
                 </div>
                 <div class="step-box step-green-box">
                   <h4>Data Collection</h4>
@@ -1809,8 +1814,12 @@
               <!-- Step 2: Upload CSV to AWS S3 -->
               <div class="pipeline-step">
                 <div class="step-icons">
-                  <div class="icon aws-icon">☁️</div>
-                  <div class="icon s3-icon">🗃️</div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC8.png" alt="AWS" />
+                  </div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC9.png" alt="S3" />
+                  </div>
                 </div>
                 <div class="step-box step-blue-box">
                   <h4>Upload CSV to AWS S3</h4>
@@ -1825,8 +1834,12 @@
               <!-- Step 3: Save to Google Sheets -->
               <div class="pipeline-step">
                 <div class="step-icons">
-                  <div class="icon sheets-icon">📊</div>
-                  <div class="icon drive-icon">📁</div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC7.png" alt="Google Sheets" />
+                  </div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC6.png" alt="Google Drive" />
+                  </div>
                 </div>
                 <div class="step-box step-orange-box">
                   <h4>Save to Google Sheets</h4>
@@ -1842,8 +1855,12 @@
               <!-- Step 4: Launched EC2 Instance -->
               <div class="pipeline-step">
                 <div class="step-icons">
-                  <div class="icon ec2-icon">💻</div>
-                  <div class="icon html-icon">🌐</div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC5.png" alt="EC2" />
+                  </div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC4.png" alt="HTML" />
+                  </div>
                 </div>
                 <div class="step-box step-purple-box">
                   <h4>Launched EC2 Instance</h4>
@@ -1859,8 +1876,12 @@
               <!-- Step 5: Automate Everything on EC2 -->
               <div class="pipeline-step">
                 <div class="step-icons">
-                  <div class="icon automation-icon">⚙️</div>
-                  <div class="icon cron-icon">⏰</div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC3.png" alt="Automation" />
+                  </div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC3.png" alt="Cron" />
+                  </div>
                 </div>
                 <div class="step-box step-teal-box">
                   <h4>Automate Everything on EC2</h4>
@@ -1875,8 +1896,12 @@
               <!-- Step 6: Created Dashboard -->
               <div class="pipeline-step">
                 <div class="step-icons">
-                  <div class="icon chart-icon">📈</div>
-                  <div class="icon dashboard-icon">📊</div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC1.png" alt="Charts" />
+                  </div>
+                  <div class="icon">
+                    <img src="ni_front_end/images/SC7.png" alt="Dashboard" />
+                  </div>
                 </div>
                 <div class="step-box step-red-box">
                   <h4>Created Dashboard</h4>
