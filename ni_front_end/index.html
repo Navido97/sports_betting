@@ -1117,43 +1117,34 @@
       }
     }
 
-    .lucidchart-link-container {
+    .lucidchart-container {
       margin: 2rem 0;
-      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      background: white;
+      position: relative;
     }
 
-    .lucidchart-button {
-      display: inline-flex;
-      align-items: center;
-      background: linear-gradient(135deg, #007bff, #0056b3);
-      color: white;
-      text-decoration: none;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
-      margin-bottom: 1rem;
+    .lucidchart-container iframe {
+      display: block;
+      width: 100%;
+      min-height: 600px;
+      border: none;
+      border-radius: 8px;
     }
 
-    .lucidchart-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
-      text-decoration: none;
-      color: white;
+    /* Mobile responsiveness for Lucidchart */
+    @media (max-width: 768px) {
+      .lucidchart-container iframe {
+        min-height: 400px;
+      }
     }
 
-    .lucidchart-icon {
-      font-size: 1.2rem;
-      margin-right: 0.75rem;
-    }
-
-    .link-description {
-      color: #666;
-      font-size: 0.9rem;
-      margin: 0.5rem 0 0 0;
-      font-style: italic;
+    @media (max-width: 480px) {
+      .lucidchart-container iframe {
+        min-height: 300px;
+      }
     }
 
     /* Pipeline Diagram Styles */
@@ -1700,17 +1691,17 @@
           <div class="placeholder-content">
             <div class="placeholder-icon">📊</div>
             <h3>Interactive Architecture Diagram</h3>
-            <p>View the complete system architecture and data flow:</p>
+            <p>Complete system architecture and data flow:</p>
             
-            <!-- Lucidchart Link -->
-            <div class="lucidchart-link-container">
-              <a href="https://lucid.app/lucidchart/b4f0ed30-32bb-483d-b061-026d38cdd558/edit?beaconFlowId=55AFC96AC3D2FDDC&invitationId=inv_0f064a88-d6e7-403a-9a4e-d9031748cc78&page=0_0#" 
-                 target="_blank" 
-                 class="lucidchart-button">
-                <span class="lucidchart-icon">🔗</span>
-                View Interactive Architecture Diagram
-              </a>
-              <p class="link-description">Opens in new tab - Interactive zoom and pan available</p>
+            <!-- Lucidchart Embed -->
+            <div class="lucidchart-container">
+              <iframe 
+                allowfullscreen 
+                frameborder="0" 
+                style="width:100%; height:600px; border-radius:8px;" 
+                src="https://lucid.app/documents/embedded/b4f0ed30-32bb-483d-b061-026d38cdd558" 
+                id="PRErr~CbmQbE">
+              </iframe>
             </div>
             
             <div class="architecture-features">
