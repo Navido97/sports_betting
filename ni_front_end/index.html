@@ -2363,22 +2363,38 @@
 
     // Create match odds table with separators
     function createMatchTable(headers, rows, tabId) {
-      const oddsColumns = headers.slice(1, -1);
+      // Find which columns contain odds (exclude Team, Commence Time UTC, and last_updated)
+      const excludeColumns = ['Team', 'Commence Time UTC', 'last_updated'];
+      const oddsColumnIndices = [];
+      const oddsColumns = [];
+      
+      headers.forEach((header, index) => {
+        const isExcluded = excludeColumns.some(exclude => 
+          header.toLowerCase().includes(exclude.toLowerCase())
+        );
+        if (!isExcluded && index > 0 && index < headers.length - 1) {
+          oddsColumnIndices.push(index);
+          oddsColumns.push(header);
+        }
+      });
+      
       const lastUpdated = rows.length > 0 ? rows[0][headers.length - 1] : 'Unknown';
       
       let html = '<div class="table-container"><table class="odds-table">';
       
       // Header
       html += '<thead><tr>';
-      html += '<th>Team/Match</th>';
-      oddsColumns.forEach(col => {
-        html += `<th class="odds-value">${col}</th>`;
+      headers.slice(0, -1).forEach(header => {
+        if (header === headers[0]) {
+          html += `<th>${header}</th>`;
+        } else {
+          html += `<th class="odds-value">${header}</th>`;
+        }
       });
       html += '</tr></thead>';
       
       // Body with match separators
       html += '<tbody>';
-      let currentMatch = '';
       
       rows.forEach((row, rowIndex) => {
         if (row.length >= headers.length - 1) {
@@ -2395,18 +2411,29 @@
           
           html += '<tr>';
           
-          // Team name
-          html += `<td class="team-cell">${teamName}</td>`;
-          
-          // Odds values - find HIGHEST odds (best for bettors)
-          const oddsValues = row.slice(1, -1);
-          const numericOdds = oddsValues.map(val => parseFloat(val) || -Infinity);
-          const bestOddsIndex = numericOdds.indexOf(Math.max(...numericOdds.filter(v => v !== -Infinity)));
-          
-          oddsValues.forEach((odds, index) => {
-            const isBest = index === bestOddsIndex && parseFloat(odds) > 0;
-            const className = isBest ? 'odds-value best-odds' : 'odds-value';
-            html += `<td class="${className}">${odds || '-'}</td>`;
+          // Process each column
+          row.slice(0, -1).forEach((cellValue, colIndex) => {
+            if (colIndex === 0) {
+              // Team name column
+              html += `<td class="team-cell">${cellValue || ''}</td>`;
+            } else {
+              // Check if this column contains odds
+              const isOddsColumn = oddsColumnIndices.includes(colIndex);
+              
+              if (isOddsColumn) {
+                // Get odds values for comparison (only from odds columns)
+                const oddsValues = oddsColumnIndices.map(idx => row[idx]);
+                const numericOdds = oddsValues.map(val => parseFloat(val) || -Infinity);
+                const maxOdds = Math.max(...numericOdds.filter(v => v !== -Infinity));
+                const isBest = parseFloat(cellValue) === maxOdds && parseFloat(cellValue) > 0;
+                
+                const className = isBest ? 'odds-value best-odds' : 'odds-value';
+                html += `<td class="${className}">${cellValue || '-'}</td>`;
+              } else {
+                // Non-odds column (like Commence Time UTC)
+                html += `<td class="odds-value">${cellValue || '-'}</td>`;
+              }
+            }
           });
           
           html += '</tr>';
