@@ -2363,16 +2363,39 @@
 
     // Create match odds table with separators
     function createMatchTable(headers, rows, tabId) {
-      // Find which columns contain odds (exclude Team, Commence Time UTC, and last_updated)
-      const excludeColumns = ['Team', 'Commence Time UTC', 'last_updated'];
+      // Sort rows by commence time (ascending) - find the time column first
+      const timeColumnIndex = headers.findIndex(header => 
+        header.toLowerCase().includes('commence time') || 
+        header.toLowerCase().includes('time') ||
+        header.toLowerCase().includes('kickoff')
+      );
+      
+      if (timeColumnIndex !== -1) {
+        rows.sort((a, b) => {
+          const timeA = new Date(a[timeColumnIndex] || 0);
+          const timeB = new Date(b[timeColumnIndex] || 0);
+          return timeA - timeB;
+        });
+      }
+      
+      // Find which columns contain odds (exclude Team, Commence Time UTC/Kickoff, and last_updated)
+      const excludeColumns = ['Team', 'Commence Time UTC', 'Kickoff CDT', 'last_updated'];
       const oddsColumnIndices = [];
       const oddsColumns = [];
       
-      headers.forEach((header, index) => {
+      // Update headers - change "Commence Time UTC" to "Kickoff CDT"
+      const updatedHeaders = headers.map(header => {
+        if (header.toLowerCase().includes('commence time') && header.toLowerCase().includes('utc')) {
+          return 'Kickoff CDT';
+        }
+        return header;
+      });
+      
+      updatedHeaders.forEach((header, index) => {
         const isExcluded = excludeColumns.some(exclude => 
           header.toLowerCase().includes(exclude.toLowerCase())
         );
-        if (!isExcluded && index > 0 && index < headers.length - 1) {
+        if (!isExcluded && index > 0 && index < updatedHeaders.length - 1) {
           oddsColumnIndices.push(index);
           oddsColumns.push(header);
         }
@@ -2382,10 +2405,10 @@
       
       let html = '<div class="table-container"><table class="odds-table">';
       
-      // Header
+      // Header - use updated headers
       html += '<thead><tr>';
-      headers.slice(0, -1).forEach(header => {
-        if (header === headers[0]) {
+      updatedHeaders.slice(0, -1).forEach(header => {
+        if (header === updatedHeaders[0]) {
           html += `<th>${header}</th>`;
         } else {
           html += `<th class="odds-value">${header}</th>`;
@@ -2417,11 +2440,12 @@
               // Team name column
               html += `<td class="team-cell">${cellValue || ''}</td>`;
             } else {
-              // Check if this is a datetime column
-              const headerName = headers[colIndex].toLowerCase();
-              const isDateTimeColumn = headerName.includes('commence time') || 
-                                     headerName.includes('time') ||
-                                     headerName.includes('date');
+              // Check if this is a datetime column (using original headers for detection)
+              const originalHeader = headers[colIndex].toLowerCase();
+              const isDateTimeColumn = originalHeader.includes('commence time') || 
+                                     originalHeader.includes('time') ||
+                                     originalHeader.includes('date') ||
+                                     originalHeader.includes('kickoff');
               
               // Check if this column contains odds
               const isOddsColumn = oddsColumnIndices.includes(colIndex);
