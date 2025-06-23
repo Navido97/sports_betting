@@ -485,7 +485,7 @@
       margin-top: 0;
     }
 
-    .tableauPlaceholder {
+    .dashboardPlaceholder {
       width: 100%;
       height: 1000px;
       min-height: 1000px;
@@ -772,7 +772,7 @@
         margin-bottom: 1rem;
       }
 
-      .tableauPlaceholder {
+      .dashboardPlaceholder {
         height: 800px;
         min-height: 800px;
       }
@@ -1299,7 +1299,7 @@
               </div>
               <div class="feature-row">
                 <span class="feature-bullet">•</span>
-                <span>Tableau Public dashboard connectivity</span>
+                <span>Dashboard connectivity</span>
               </div>
               <div class="feature-row">
                 <span class="feature-bullet">•</span>
@@ -1347,7 +1347,7 @@
                 <h4>Visualization Stack</h4>
               </div>
               <ul class="spec-list">
-                <li>Tableau Public 2024.1</li>
+                <li>Chart.js for data visualization</li>
                 <li>JavaScript API integration</li>
                 <li>Responsive HTML5/CSS3</li>
                 <li>Mobile-optimized design</li>
@@ -1393,7 +1393,7 @@
               <div class="flow-number">3</div>
               <div class="flow-content">
                 <h4>Data Bridge</h4>
-                <p>Google Sheets API syncs data for Tableau access</p>
+                <p>Google Sheets API syncs data for dashboard access</p>
               </div>
             </div>
             <div class="flow-arrow">→</div>
@@ -1401,7 +1401,7 @@
               <div class="flow-number">4</div>
               <div class="flow-content">
                 <h4>Visualization</h4>
-                <p>Tableau dashboards render interactive charts</p>
+                <p>Interactive dashboards render charts and data</p>
               </div>
             </div>
           </div>
@@ -1423,7 +1423,7 @@
             <div class="callout-icon">💡</div>
             <div class="callout-content">
               <h3>Cost-Efficient Design</h3>
-              <p>This entire pipeline was engineered with cost-efficiency in mind, utilizing only free-tier services across AWS, Google Cloud, and Tableau Public.</p>
+              <p>This entire pipeline was engineered with cost-efficiency in mind, utilizing only free-tier services across AWS, Google Cloud, and visualization platforms.</p>
             </div>
           </div>
         </div>
@@ -1489,9 +1489,9 @@
                 </div>
               </div>
               <div class="step-content">
-                <p>Since Tableau Public lacks native S3 connectivity, Google Sheets serves as an intelligent data bridge. The Google Sheets API facilitates seamless data transfer, with each tournament assigned to dedicated worksheet tabs for organized data management.</p>
+                <p>Since many visualization platforms lack native S3 connectivity, Google Sheets serves as an intelligent data bridge. The Google Sheets API facilitates seamless data transfer, with each tournament assigned to dedicated worksheet tabs for organized data management.</p>
                 <div class="tech-details">
-                  <strong>Architecture:</strong> S3 → Google Sheets API → Tableau Public
+                  <strong>Architecture:</strong> S3 → Google Sheets API → Visualization Platform
                 </div>
               </div>
             </div>
@@ -1546,13 +1546,13 @@
               <div class="step-header">
                 <h4>Data Visualization & User Interface</h4>
                 <div class="step-tags">
-                  <span class="tag">Tableau Public</span>
+                  <span class="tag">Chart.js</span>
                   <span class="tag">JavaScript API</span>
                   <span class="tag">Responsive Design</span>
                 </div>
               </div>
               <div class="step-content">
-                <p>Created interactive dashboards using Tableau Public with seamless Google Sheets integration. Advanced JavaScript embedding provides responsive, mobile-optimized visualizations that automatically sync with live data sources.</p>
+                <p>Created interactive dashboards using modern charting libraries with seamless Google Sheets integration. Advanced JavaScript embedding provides responsive, mobile-optimized visualizations that automatically sync with live data sources.</p>
                 <div class="tech-details">
                   <strong>Features:</strong> Interactive filtering, Mobile optimization, Real-time updates
                 </div>
@@ -1585,25 +1585,43 @@
       </div>
     </div>
 
-    <!-- World Cup Tab - UPDATED WITH NEW EMBED CODE -->
+    <!-- World Cup Tab -->
     <div id="worldcup" class="tab">
       <h2>World Cup Winners</h2>
       <p>This dashboard displays outright winner odds for the FIFA World Cup. You can compare which countries are favored to win the tournament, with odds pulled from multiple betting platforms. Use it to track line movement and identify longshot opportunities.</p>
-      <div class='tableauPlaceholder' id='viz1750565508913' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wo&#47;WorldCupOdds&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='WorldCupOdds&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wo&#47;WorldCupOdds&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+      <div class='dashboardPlaceholder' id='worldcup-viz' style='position: relative'>
+        <div style="padding: 2rem; text-align: center; background: #f8f9fa; border-radius: 8px; margin: 1rem 0;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+          <h3>World Cup Winner Odds</h3>
+          <p>Interactive dashboard will be loaded here</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Gold Cup Tab - UPDATED WITH NEW EMBED CODE -->
+    <!-- Gold Cup Tab -->
     <div id="goldcup" class="tab">
       <h2>Concacaf Gold Cup</h2>
       <p>This dashboard shows match-by-match betting odds for the Concacaf Gold Cup. Each matchup includes odds from multiple sportsbooks, enabling you to find the best line for moneyline bets across North American teams.</p>
-      <div class='tableauPlaceholder' id='viz1750565496977' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;ConcacafGoldCup&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='ConcacafGoldCup&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;ConcacafGoldCup&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+      <div class='dashboardPlaceholder' id='goldcup-viz' style='position: relative'>
+        <div style="padding: 2rem; text-align: center; background: #f8f9fa; border-radius: 8px; margin: 1rem 0;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🥇</div>
+          <h3>Gold Cup Match Odds</h3>
+          <p>Interactive dashboard will be loaded here</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Club World Cup Tab - UPDATED WITH NEW EMBED CODE -->
+    <!-- Club World Cup Tab -->
     <div id="clubworldcup" class="tab">
       <h2>Club World Cup</h2>
       <p>This dashboard provides odds for the FIFA Club World Cup matches, showing bookmaker spreads and predictions for games between top clubs from each continent. Useful for comparing teams that don't typically meet in domestic leagues.</p>
-      <div class='tableauPlaceholder' id='viz1750565518537' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cl&#47;ClubWorldCup&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='ClubWorldCup&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cl&#47;ClubWorldCup&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+      <div class='dashboardPlaceholder' id='clubworldcup-viz' style='position: relative'>
+        <div style="padding: 2rem; text-align: center; background: #f8f9fa; border-radius: 8px; margin: 1rem 0;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
+          <h3>Club World Cup Odds</h3>
+          <p>Interactive dashboard will be loaded here</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1673,7 +1691,7 @@
       }
     }
 
-    // Event listeners - UPDATED FOR ALL NEW EMBED CODES
+    // Event listeners
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize page
       showTab('home');
@@ -1731,60 +1749,6 @@
           });
         });
       });
-      
-      // Concacaf Gold Cup - NEW EMBED CODE
-      var divElement1 = document.getElementById('viz1750565496977');
-      if (divElement1) {
-        var vizElement1 = divElement1.getElementsByTagName('object')[0];
-        if (vizElement1) {
-          if ( divElement1.offsetWidth > 800 ) { 
-            vizElement1.style.width='800px';vizElement1.style.height='827px';
-          } else if ( divElement1.offsetWidth > 500 ) { 
-            vizElement1.style.width='800px';vizElement1.style.height='827px';
-          } else { 
-            vizElement1.style.width='100%';vizElement1.style.height='727px';
-          }
-          var scriptElement1 = document.createElement('script');
-          scriptElement1.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-          vizElement1.parentNode.insertBefore(scriptElement1, vizElement1);
-        }
-      }
-
-      // World Cup Winners - NEW EMBED CODE
-      var divElement2 = document.getElementById('viz1750565508913');
-      if (divElement2) {
-        var vizElement2 = divElement2.getElementsByTagName('object')[0];
-        if (vizElement2) {
-          if ( divElement2.offsetWidth > 800 ) { 
-            vizElement2.style.width='800px';vizElement2.style.height='827px';
-          } else if ( divElement2.offsetWidth > 500 ) { 
-            vizElement2.style.width='800px';vizElement2.style.height='827px';
-          } else { 
-            vizElement2.style.width='100%';vizElement2.style.height='727px';
-          }
-          var scriptElement2 = document.createElement('script');
-          scriptElement2.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-          vizElement2.parentNode.insertBefore(scriptElement2, vizElement2);
-        }
-      }
-
-      // Club World Cup - NEW EMBED CODE
-      var divElement3 = document.getElementById('viz1750565518537');
-      if (divElement3) {
-        var vizElement3 = divElement3.getElementsByTagName('object')[0];
-        if (vizElement3) {
-          if ( divElement3.offsetWidth > 800 ) { 
-            vizElement3.style.width='800px';vizElement3.style.height='827px';
-          } else if ( divElement3.offsetWidth > 500 ) { 
-            vizElement3.style.width='800px';vizElement3.style.height='827px';
-          } else { 
-            vizElement3.style.width='100%';vizElement3.style.height='727px';
-          }
-          var scriptElement3 = document.createElement('script');
-          scriptElement3.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-          vizElement3.parentNode.insertBefore(scriptElement3, vizElement3);
-        }
-      }
     });
 
     // Prevent menu from closing when clicking inside sidebar
