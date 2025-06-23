@@ -1116,6 +1116,209 @@
         margin: 0.5rem 0;
       }
     }
+
+    /* Google Sheets Data Table Styles */
+    .data-container {
+      margin: 2rem 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .data-header {
+      background: linear-gradient(135deg, #1e1e1e, #333);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .data-header h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.4rem;
+    }
+
+    .data-header p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 3rem;
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .loading-spinner::before {
+      content: "⚽";
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .odds-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .odds-table th {
+      background: #f8f9fa;
+      padding: 1rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 2px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .odds-table td {
+      padding: 0.875rem 0.75rem;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background-color 0.2s ease;
+    }
+
+    .odds-table tbody tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    .odds-table .team-cell {
+      font-weight: 600;
+      color: #333;
+      background: #f8f9fa;
+      border-right: 3px solid #007bff;
+    }
+
+    .odds-table .odds-value {
+      text-align: center;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .odds-table .best-odds {
+      background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+      color: #2e7d32;
+      font-weight: 700;
+      border-left: 3px solid #4caf50;
+    }
+
+    .match-separator {
+      height: 12px;
+      background: linear-gradient(90deg, transparent, #e0e0e0, transparent);
+      position: relative;
+    }
+
+    .match-separator::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 2px;
+      background: #007bff;
+      border-radius: 2px;
+    }
+
+    .table-container {
+      max-height: 70vh;
+      overflow-y: auto;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .error-message {
+      text-align: center;
+      padding: 3rem;
+      color: #d32f2f;
+      background: #ffebee;
+      margin: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid #d32f2f;
+    }
+
+    .error-message h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.2rem;
+    }
+
+    .error-message p {
+      margin: 0;
+      opacity: 0.8;
+    }
+
+    .refresh-button {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .refresh-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    .last-updated {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+      background: #f8f9fa;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    /* Mobile responsiveness for tables */
+    @media (max-width: 768px) {
+      .odds-table {
+        font-size: 0.85rem;
+      }
+
+      .odds-table th,
+      .odds-table td {
+        padding: 0.5rem 0.4rem;
+      }
+
+      .data-header {
+        padding: 1rem;
+      }
+
+      .data-header h3 {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .table-container {
+        max-height: 60vh;
+      }
+
+      .odds-table th:not(:first-child):not(:last-child) {
+        display: none;
+      }
+
+      .odds-table td:not(:first-child):not(:last-child) {
+        display: none;
+      }
+
+      .odds-table th:last-child::before {
+        content: "Best Odds";
+      }
+    }
   </style>
 </head>
 <body>
@@ -1589,12 +1792,16 @@
     <div id="worldcup" class="tab">
       <h2>World Cup Winners</h2>
       <p>This dashboard displays outright winner odds for the FIFA World Cup. You can compare which countries are favored to win the tournament, with odds pulled from multiple betting platforms. Use it to track line movement and identify longshot opportunities.</p>
-      <div class='dashboardPlaceholder' id='worldcup-viz' style='position: relative'>
-        <div style="padding: 2rem; text-align: center; background: #f8f9fa; border-radius: 8px; margin: 1rem 0;">
-          <div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
-          <h3>World Cup Winner Odds</h3>
-          <p>Interactive dashboard will be loaded here</p>
+      
+      <div class="data-container">
+        <div class="data-header">
+          <h3>⚽ FIFA World Cup Winner Odds</h3>
+          <p>Live odds from major sportsbooks updated daily</p>
         </div>
+        <div id="worldcup-loading" class="loading-spinner">
+          Loading latest odds data...
+        </div>
+        <div id="worldcup-data" style="display: none;"></div>
       </div>
     </div>
 
@@ -1602,12 +1809,16 @@
     <div id="goldcup" class="tab">
       <h2>Concacaf Gold Cup</h2>
       <p>This dashboard shows match-by-match betting odds for the Concacaf Gold Cup. Each matchup includes odds from multiple sportsbooks, enabling you to find the best line for moneyline bets across North American teams.</p>
-      <div class='dashboardPlaceholder' id='goldcup-viz' style='position: relative'>
-        <div style="padding: 2rem; text-align: center; background: #f8f9fa; border-radius: 8px; margin: 1rem 0;">
-          <div style="font-size: 3rem; margin-bottom: 1rem;">🥇</div>
-          <h3>Gold Cup Match Odds</h3>
-          <p>Interactive dashboard will be loaded here</p>
+      
+      <div class="data-container">
+        <div class="data-header">
+          <h3>🥇 CONCACAF Gold Cup Match Odds</h3>
+          <p>Head-to-head odds for all upcoming matches</p>
         </div>
+        <div id="goldcup-loading" class="loading-spinner">
+          Loading latest match odds...
+        </div>
+        <div id="goldcup-data" style="display: none;"></div>
       </div>
     </div>
 
@@ -1615,12 +1826,16 @@
     <div id="clubworldcup" class="tab">
       <h2>Club World Cup</h2>
       <p>This dashboard provides odds for the FIFA Club World Cup matches, showing bookmaker spreads and predictions for games between top clubs from each continent. Useful for comparing teams that don't typically meet in domestic leagues.</p>
-      <div class='dashboardPlaceholder' id='clubworldcup-viz' style='position: relative'>
-        <div style="padding: 2rem; text-align: center; background: #f8f9fa; border-radius: 8px; margin: 1rem 0;">
-          <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
-          <h3>Club World Cup Odds</h3>
-          <p>Interactive dashboard will be loaded here</p>
+      
+      <div class="data-container">
+        <div class="data-header">
+          <h3>🌍 FIFA Club World Cup Odds</h3>
+          <p>Premier club matchups from around the globe</p>
         </div>
+        <div id="clubworldcup-loading" class="loading-spinner">
+          Loading club match odds...
+        </div>
+        <div id="clubworldcup-data" style="display: none;"></div>
       </div>
     </div>
   </div>
@@ -1634,6 +1849,19 @@
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
 
+    // Google Sheets configuration
+    const SHEET_ID = '1GPRbsdM58pZkQzOAKEoGSI8G1CQuJhzefmXfKBDUaa0';
+    const API_KEY = '091dfff8f92a1be2f83cb4e7a1bcd2e1125bc240';
+    const SHEETS = {
+      worldcup: 'WorldCup_Odds',
+      goldcup: 'Concacaf_Gold_Cup',
+      clubworldcup: 'ClubWorldCup'
+    };
+
+    // Cache for data
+    let dataCache = {};
+    let lastFetchTime = {};
+
     // Tab switching functionality
     function showTab(tabId) {
       // Hide all tabs
@@ -1645,12 +1873,238 @@
       const selectedTab = document.getElementById(tabId);
       if (selectedTab) {
         selectedTab.classList.add('active');
+        
+        // Load data for competition tabs
+        if (SHEETS[tabId]) {
+          loadSheetData(tabId);
+        }
       }
       
       // Close menu when tab is selected
       if (isMenuOpen) {
         closeMenu();
       }
+    }
+
+    // Google Sheets data fetching
+    async function loadSheetData(tabId) {
+      const sheetName = SHEETS[tabId];
+      const cacheKey = tabId;
+      const now = Date.now();
+      
+      // Check cache (refresh every 5 minutes)
+      if (dataCache[cacheKey] && (now - lastFetchTime[cacheKey]) < 300000) {
+        displayData(tabId, dataCache[cacheKey]);
+        return;
+      }
+
+      const loadingElement = document.getElementById(`${tabId}-loading`);
+      const dataElement = document.getElementById(`${tabId}-data`);
+      
+      loadingElement.style.display = 'block';
+      dataElement.style.display = 'none';
+
+      try {
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(sheetName)}?key=${API_KEY}`;
+        
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (!data.values || data.values.length === 0) {
+          throw new Error('No data found in the spreadsheet');
+        }
+
+        // Cache the data
+        dataCache[cacheKey] = data.values;
+        lastFetchTime[cacheKey] = now;
+        
+        displayData(tabId, data.values);
+        
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        showError(tabId, error.message);
+      }
+    }
+
+    // Display data in tables
+    function displayData(tabId, rawData) {
+      const loadingElement = document.getElementById(`${tabId}-loading`);
+      const dataElement = document.getElementById(`${tabId}-data`);
+      
+      if (!rawData || rawData.length === 0) {
+        showError(tabId, 'No data available');
+        return;
+      }
+
+      const headers = rawData[0];
+      const rows = rawData.slice(1);
+      
+      let tableHTML = '';
+      
+      if (tabId === 'worldcup') {
+        tableHTML = createWorldCupTable(headers, rows);
+      } else {
+        tableHTML = createMatchTable(headers, rows, tabId);
+      }
+      
+      dataElement.innerHTML = tableHTML;
+      loadingElement.style.display = 'none';
+      dataElement.style.display = 'block';
+    }
+
+    // Create World Cup odds table
+    function createWorldCupTable(headers, rows) {
+      const oddsColumns = headers.slice(1, -1); // Exclude Team and last_updated columns
+      const lastUpdated = rows.length > 0 ? rows[0][headers.length - 1] : 'Unknown';
+      
+      let html = '<div class="table-container"><table class="odds-table">';
+      
+      // Header
+      html += '<thead><tr>';
+      html += '<th>Team</th>';
+      oddsColumns.forEach(col => {
+        html += `<th class="odds-value">${col}</th>`;
+      });
+      html += '</tr></thead>';
+      
+      // Body
+      html += '<tbody>';
+      rows.forEach(row => {
+        if (row.length >= headers.length - 1) {
+          html += '<tr>';
+          
+          // Team name
+          html += `<td class="team-cell">${row[0] || ''}</td>`;
+          
+          // Odds values
+          const oddsValues = row.slice(1, -1);
+          const numericOdds = oddsValues.map(val => parseFloat(val) || Infinity);
+          const bestOddsIndex = numericOdds.indexOf(Math.min(...numericOdds.filter(v => v !== Infinity)));
+          
+          oddsValues.forEach((odds, index) => {
+            const isBest = index === bestOddsIndex && parseFloat(odds) > 0;
+            const className = isBest ? 'odds-value best-odds' : 'odds-value';
+            html += `<td class="${className}">${odds || '-'}</td>`;
+          });
+          
+          html += '</tr>';
+        }
+      });
+      html += '</tbody></table></div>';
+      
+      // Last updated info
+      html += `<div class="last-updated">Last updated: ${formatDateTime(lastUpdated)}</div>`;
+      
+      return html;
+    }
+
+    // Create match odds table with separators
+    function createMatchTable(headers, rows, tabId) {
+      const oddsColumns = headers.slice(1, -1);
+      const lastUpdated = rows.length > 0 ? rows[0][headers.length - 1] : 'Unknown';
+      
+      let html = '<div class="table-container"><table class="odds-table">';
+      
+      // Header
+      html += '<thead><tr>';
+      html += '<th>Team/Match</th>';
+      oddsColumns.forEach(col => {
+        html += `<th class="odds-value">${col}</th>`;
+      });
+      html += '</tr></thead>';
+      
+      // Body with match separators
+      html += '<tbody>';
+      let currentMatch = '';
+      
+      rows.forEach((row, rowIndex) => {
+        if (row.length >= headers.length - 1) {
+          // Detect match changes for separators
+          const teamName = row[0] || '';
+          
+          // Simple match detection: if team name suggests a new match
+          if (tabId !== 'worldcup' && rowIndex > 0) {
+            const prevRow = rows[rowIndex - 1];
+            if (prevRow && shouldAddSeparator(teamName, prevRow[0], rowIndex)) {
+              html += '<tr><td colspan="100%" class="match-separator"></td></tr>';
+            }
+          }
+          
+          html += '<tr>';
+          
+          // Team name
+          html += `<td class="team-cell">${teamName}</td>`;
+          
+          // Odds values
+          const oddsValues = row.slice(1, -1);
+          const numericOdds = oddsValues.map(val => parseFloat(val) || Infinity);
+          const bestOddsIndex = numericOdds.indexOf(Math.min(...numericOdds.filter(v => v !== Infinity)));
+          
+          oddsValues.forEach((odds, index) => {
+            const isBest = index === bestOddsIndex && parseFloat(odds) > 0;
+            const className = isBest ? 'odds-value best-odds' : 'odds-value';
+            html += `<td class="${className}">${odds || '-'}</td>`;
+          });
+          
+          html += '</tr>';
+        }
+      });
+      html += '</tbody></table></div>';
+      
+      // Last updated info
+      html += `<div class="last-updated">Last updated: ${formatDateTime(lastUpdated)}</div>`;
+      
+      return html;
+    }
+
+    // Determine if a separator should be added between matches
+    function shouldAddSeparator(currentTeam, previousTeam, rowIndex) {
+      // Add separator every 2-3 rows to separate different matches
+      // This is a simple heuristic - you might want to adjust based on your data structure
+      return rowIndex % 3 === 0;
+    }
+
+    // Format date/time
+    function formatDateTime(dateString) {
+      if (!dateString || dateString === 'Unknown') return 'Unknown';
+      
+      try {
+        const date = new Date(dateString);
+        return date.toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZoneName: 'short'
+        });
+      } catch (error) {
+        return dateString;
+      }
+    }
+
+    // Show error message
+    function showError(tabId, message) {
+      const loadingElement = document.getElementById(`${tabId}-loading`);
+      const dataElement = document.getElementById(`${tabId}-data`);
+      
+      const errorHTML = `
+        <div class="error-message">
+          <h4>Unable to Load Data</h4>
+          <p>${message}</p>
+          <button class="refresh-button" onclick="loadSheetData('${tabId}')">
+            Try Again
+          </button>
+        </div>
+      `;
+      
+      dataElement.innerHTML = errorHTML;
+      loadingElement.style.display = 'none';
+      dataElement.style.display = 'block';
     }
 
     // Submenu toggle functionality
