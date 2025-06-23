@@ -1851,7 +1851,9 @@
 
     // Google Sheets configuration
     const SHEET_ID = '1GPRbsdM58pZkQzOAKEoGSI8G1CQuJhzefmXfKBDUaa0';
-    const API_KEY = '091dfff8f92a1be2f83cb4e7a1bcd2e1125bc240';
+    // For public sheets, we can access without API key
+    // If sheet is private, you'll need a proper Google Sheets API key
+    const API_KEY = ''; // Leave empty for public sheets
     const SHEETS = {
       worldcup: 'WorldCup_Odds',
       goldcup: 'Concacaf_Gold_Cup',
@@ -1905,29 +1907,72 @@
       dataElement.style.display = 'none';
 
       try {
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(sheetName)}?key=${API_KEY}`;
+        let url;
+        if (API_KEY) {
+          // Private sheet with API key
+          url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(sheetName)}?key=${API_KEY}`;
+        } else {
+          // Public sheet - try CSV export first, fallback to JSON
+          url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
+        }
         
         const response = await fetch(url);
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status} - Make sure your Google Sheet is public or provide a valid API key`);
         }
         
-        const data = await response.json();
-        
-        if (!data.values || data.values.length === 0) {
-          throw new Error('No data found in the spreadsheet');
+        let data;
+        if (API_KEY) {
+          // JSON response from Sheets API
+          data = await response.json();
+          if (!data.values || data.values.length === 0) {
+            throw new Error('No data found in the spreadsheet');
+          }
+          data = data.values;
+        } else {
+          // CSV response
+          const csvText = await response.text();
+          data = parseCSV(csvText);
+          if (!data || data.length === 0) {
+            throw new Error('No data found in the spreadsheet');
+          }
         }
 
         // Cache the data
-        dataCache[cacheKey] = data.values;
+        dataCache[cacheKey] = data;
         lastFetchTime[cacheKey] = now;
         
-        displayData(tabId, data.values);
+        displayData(tabId, data);
         
       } catch (error) {
         console.error('Error fetching data:', error);
         showError(tabId, error.message);
       }
+    }
+
+    // Simple CSV parser
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      return lines.map(line => {
+        // Simple CSV parsing - handles quoted fields
+        const result = [];
+        let current = '';
+        let inQuotes = false;
+        
+        for (let i = 0; i < line.length; i++) {
+          const char = line[i];
+          if (char === '"') {
+            inQuotes = !inQuotes;
+          } else if (char === ',' && !inQuotes) {
+            result.push(current.trim());
+            current = '';
+          } else {
+            current += char;
+          }
+        }
+        result.push(current.trim());
+        return result;
+      });
     }
 
     // Display data in tables
