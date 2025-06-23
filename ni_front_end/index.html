@@ -110,32 +110,103 @@
       border: none;
       color: white;
       text-align: left;
-      padding: 0.75rem 1rem;
+      padding: 0;
       width: 100%;
       cursor: pointer;
       display: block;
       text-decoration: none;
-      transition: background-color 0.3s ease;
-      border-radius: 4px;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      margin-bottom: 4px;
+    }
+
+    .menu-item {
+      display: flex !important;
+      align-items: center;
+      padding: 0.875rem 1rem !important;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .menu-item:hover::before {
+      left: 100%;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .menu-icon {
+      font-size: 1.2rem;
+      margin-right: 0.75rem;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .menu-text {
+      flex: 1;
+      font-weight: 500;
+    }
+
+    .submenu-item {
+      display: flex !important;
+      align-items: center;
+      padding: 0.625rem 1rem !important;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 6px;
+      transition: all 0.3s ease;
       margin-bottom: 2px;
     }
 
-    .menu a:hover, .menu button:hover {
-      background-color: #444;
+    .submenu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(3px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .submenu-icon {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .submenu-text {
+      font-size: 0.9rem;
+      font-weight: 400;
     }
 
     .menu .submenu {
       display: none;
-      margin-left: 1rem;
-      padding-left: 0;
+      margin: 0.5rem 0 0 0;
+      padding: 0.5rem;
       list-style: none;
       overflow: hidden;
       transition: all 0.3s ease;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .menu .submenu a {
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
+    .menu .submenu li {
+      margin-bottom: 0;
     }
 
     .menu .accordion-toggle.active + .submenu {
@@ -143,13 +214,18 @@
     }
 
     .arrow {
-      float: right;
+      font-size: 0.9rem;
       transition: transform 0.3s ease;
-      font-size: 0.8rem;
+      margin-left: auto;
     }
 
     .accordion-toggle.active .arrow {
       transform: rotate(90deg);
+    }
+
+    .accordion-toggle.active {
+      background: rgba(255, 255, 255, 0.2) !important;
+      border-color: rgba(255, 255, 255, 0.4) !important;
     }
 
     /* Content Area - Now takes full width */
@@ -210,24 +286,255 @@
     }
 
     /* Mobile specific adjustments */
-    @media (max-width: 768px) {
-      .feedback-wrapper {
-        top: 70px;
-        right: 10px;
-      }
-      
-      .tab {
-        padding: 1rem;
-      }
-      
-      .tab h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-      }
+    /* Cloud Architecture tab styles */
+    .architecture-intro {
+      margin-bottom: 2rem;
+    }
 
-      .tableauPlaceholder {
-        height: 800px;
-        min-height: 800px;
+    .intro-card {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .intro-icon {
+      font-size: 2.5rem;
+      margin-right: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .intro-content h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.4rem;
+    }
+
+    .intro-content p {
+      margin: 0;
+      opacity: 0.95;
+      line-height: 1.5;
+    }
+
+    .architecture-placeholder {
+      background: white;
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 2rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border: 2px dashed #e0e0e0;
+    }
+
+    .placeholder-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.6;
+    }
+
+    .placeholder-content h3 {
+      margin: 0 0 1rem 0;
+      color: #333;
+      font-size: 1.6rem;
+    }
+
+    .placeholder-content p {
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .architecture-features {
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      text-align: left;
+    }
+
+    .feature-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .feature-bullet {
+      color: #007bff;
+      font-weight: bold;
+      margin-right: 0.75rem;
+      font-size: 1.2rem;
+    }
+
+    .coming-soon-btn {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    .coming-soon-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+    }
+
+    .architecture-specs {
+      margin: 3rem 0;
+    }
+
+    .architecture-specs h3 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.6rem;
+      color: #333;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .spec-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .spec-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .spec-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .spec-icon {
+      font-size: 1.5rem;
+      margin-right: 0.75rem;
+    }
+
+    .spec-header h4 {
+      margin: 0;
+      color: #333;
+      font-size: 1.2rem;
+    }
+
+    .spec-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .spec-list li {
+      padding: 0.5rem 0;
+      color: #666;
+      border-bottom: 1px solid #f0f0f0;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .spec-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .spec-list li:last-child {
+      border-bottom: none;
+    }
+
+    .data-flow-summary {
+      margin-top: 3rem;
+    }
+
+    .data-flow-summary h3 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.6rem;
+      color: #333;
+    }
+
+    .flow-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 200px;
+      text-align: center;
+    }
+
+    .flow-number {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .flow-content h4 {
+      margin: 0 0 0.5rem 0;
+      color: #333;
+      font-size: 1rem;
+    }
+
+    .flow-content p {
+      margin: 0;
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .flow-arrow {
+      font-size: 1.5rem;
+      color: #007bff;
+      font-weight: bold;
+      margin: 0 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .flow-steps {
+        flex-direction: column;
+      }
+      
+      .flow-arrow {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
+      }
+      
+      .specs-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .architecture-placeholder {
+        padding: 2rem 1rem;
       }
     }
 
@@ -567,15 +874,36 @@
   <aside id="sidebar">
     <h1>Odds Maker</h1>
     <nav class="menu">
-      <a href="#" onclick="showTab('home')">Home</a>
-      <a href="#" onclick="showTab('documentation')">Documentation</a>
-      <button class="accordion-toggle" onclick="toggleSubmenu(this)">
-        Competitions <span class="arrow">▶</span>
+      <a href="#" onclick="showTab('home')" class="menu-item">
+        <span class="menu-icon">🏠</span>
+        <span class="menu-text">Home</span>
+      </a>
+      <a href="#" onclick="showTab('documentation')" class="menu-item">
+        <span class="menu-icon">📚</span>
+        <span class="menu-text">Website Build Process & Overview</span>
+      </a>
+      <a href="#" onclick="showTab('cloudarchitecture')" class="menu-item">
+        <span class="menu-icon">☁️</span>
+        <span class="menu-text">Cloud Architecture</span>
+      </a>
+      <button class="accordion-toggle menu-item" onclick="toggleSubmenu(this)">
+        <span class="menu-icon">⚽</span>
+        <span class="menu-text">Competitions</span>
+        <span class="arrow">▶</span>
       </button>
       <ul class="submenu">
-        <li><a href="#" onclick="showTab('worldcup')">World Cup Winners</a></li>
-        <li><a href="#" onclick="showTab('goldcup')">Concacaf Gold Cup</a></li>
-        <li><a href="#" onclick="showTab('clubworldcup')">Club World Cup</a></li>
+        <li><a href="#" onclick="showTab('worldcup')" class="submenu-item">
+          <span class="submenu-icon">🏆</span>
+          <span class="submenu-text">World Cup Winners</span>
+        </a></li>
+        <li><a href="#" onclick="showTab('goldcup')" class="submenu-item">
+          <span class="submenu-icon">🥇</span>
+          <span class="submenu-text">Concacaf Gold Cup</span>
+        </a></li>
+        <li><a href="#" onclick="showTab('clubworldcup')" class="submenu-item">
+          <span class="submenu-icon">🌍</span>
+          <span class="submenu-text">Club World Cup</span>
+        </a></li>
       </ul>
     </nav>
   </aside>
@@ -619,6 +947,154 @@
             <div class="feature-content">
               <h3>Feedback</h3>
               <p>Have thoughts or feedback? Click the "Feedback" button in the top-right corner to let me know!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cloud Architecture Tab -->
+    <div id="cloudarchitecture" class="tab">
+      <div class="documentation-container">
+        <div class="doc-header">
+          <h2>Cloud Architecture Overview</h2>
+          <p class="doc-subtitle">Technical infrastructure and data flow visualization</p>
+        </div>
+
+        <div class="architecture-intro">
+          <div class="intro-card">
+            <div class="intro-icon">🏗️</div>
+            <div class="intro-content">
+              <h3>System Architecture</h3>
+              <p>This section provides a comprehensive visual representation of the complete technical stack, data flow, and cloud infrastructure powering the Odds Maker dashboard.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="architecture-placeholder">
+          <div class="placeholder-content">
+            <div class="placeholder-icon">📊</div>
+            <h3>Interactive Architecture Diagram</h3>
+            <p>A detailed Lucidchart diagram will be embedded here showing:</p>
+            <div class="architecture-features">
+              <div class="feature-row">
+                <span class="feature-bullet">•</span>
+                <span>Complete data pipeline from API to visualization</span>
+              </div>
+              <div class="feature-row">
+                <span class="feature-bullet">•</span>
+                <span>AWS infrastructure components and connections</span>
+              </div>
+              <div class="feature-row">
+                <span class="feature-bullet">•</span>
+                <span>Google Sheets integration and data flow</span>
+              </div>
+              <div class="feature-row">
+                <span class="feature-bullet">•</span>
+                <span>Tableau Public dashboard connectivity</span>
+              </div>
+              <div class="feature-row">
+                <span class="feature-bullet">•</span>
+                <span>Automation workflows and scheduling</span>
+              </div>
+            </div>
+            <div class="placeholder-action">
+              <button class="coming-soon-btn">Lucidchart Diagram Coming Soon</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="architecture-specs">
+          <h3>Technical Specifications</h3>
+          <div class="specs-grid">
+            <div class="spec-card">
+              <div class="spec-header">
+                <span class="spec-icon">🔧</span>
+                <h4>Data Processing</h4>
+              </div>
+              <ul class="spec-list">
+                <li>Python 3.9+ Runtime</li>
+                <li>Pandas for data manipulation</li>
+                <li>Requests for API calls</li>
+                <li>Boto3 for AWS integration</li>
+                <li>Google Sheets API v4</li>
+              </ul>
+            </div>
+            <div class="spec-card">
+              <div class="spec-header">
+                <span class="spec-icon">☁️</span>
+                <h4>Cloud Infrastructure</h4>
+              </div>
+              <ul class="spec-list">
+                <li>AWS EC2 t2.micro instance</li>
+                <li>AWS S3 for data storage</li>
+                <li>Ubuntu 20.04 LTS</li>
+                <li>Nginx web server</li>
+                <li>SSL/TLS encryption</li>
+              </ul>
+            </div>
+            <div class="spec-card">
+              <div class="spec-header">
+                <span class="spec-icon">📈</span>
+                <h4>Visualization Stack</h4>
+              </div>
+              <ul class="spec-list">
+                <li>Tableau Public 2024.1</li>
+                <li>JavaScript API integration</li>
+                <li>Responsive HTML5/CSS3</li>
+                <li>Mobile-optimized design</li>
+                <li>Real-time data refresh</li>
+              </ul>
+            </div>
+            <div class="spec-card">
+              <div class="spec-header">
+                <span class="spec-icon">⚡</span>
+                <h4>Automation & Monitoring</h4>
+              </div>
+              <ul class="spec-list">
+                <li>Cron job scheduling</li>
+                <li>Error logging & alerts</li>
+                <li>Health check monitoring</li>
+                <li>Automated backup system</li>
+                <li>Performance metrics</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-flow-summary">
+          <h3>Data Flow Summary</h3>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-number">1</div>
+              <div class="flow-content">
+                <h4>API Data Collection</h4>
+                <p>Python scripts fetch live odds data from the-odds-api.com</p>
+              </div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div class="flow-number">2</div>
+              <div class="flow-content">
+                <h4>Cloud Storage</h4>
+                <p>Processed CSV files uploaded to AWS S3 buckets</p>
+              </div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div class="flow-number">3</div>
+              <div class="flow-content">
+                <h4>Data Bridge</h4>
+                <p>Google Sheets API syncs data for Tableau access</p>
+              </div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div class="flow-number">4</div>
+              <div class="flow-content">
+                <h4>Visualization</h4>
+                <p>Tableau dashboards render interactive charts</p>
+              </div>
             </div>
           </div>
         </div>
