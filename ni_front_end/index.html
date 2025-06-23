@@ -24,10 +24,10 @@
       overflow: hidden;
     }
 
-    /* Hamburger Menu Button - Now shows on all screen sizes */
+    /* Hamburger Menu Button - Updated position */
     .menu-toggle {
       position: fixed;
-      top: 1rem;
+      top: 5rem;
       left: 1rem;
       z-index: 1200;
       background-color: #1e1e1e;
@@ -49,6 +49,212 @@
 
     .menu-toggle.active {
       background-color: #333;
+    }
+
+    /* Top Menu Bar Styles */
+    .top-menu-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+      z-index: 1100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .top-menu-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .logo-icon {
+      font-size: 1.8rem;
+      margin-right: 0.5rem;
+    }
+
+    .logo-text {
+      background: linear-gradient(135deg, #ffffff, #e0e0e0);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .top-nav-item {
+      display: flex;
+      align-items: center;
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-nav-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .top-nav-item:hover::before {
+      left: 100%;
+    }
+
+    .top-nav-item:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .top-nav-icon {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    .top-nav-text {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      cursor: pointer;
+    }
+
+    .dropdown-arrow {
+      font-size: 0.7rem;
+      margin-left: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown.active .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      background: #2d2d2d;
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1200;
+    }
+
+    .dropdown.active .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .dropdown-icon {
+      font-size: 1rem;
+      margin-right: 0.75rem;
+    }
+
+    .top-menu-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .feedback-btn-top {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    }
+
+    .feedback-btn-top:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+    }
+
+    .feedback-icon {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    /* Content adjustments for top menu */
+    .content {
+      flex: 1;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      height: 100vh;
+      overflow-y: auto;
+      position: relative;
+      padding-top: 60px; /* Account for top menu height */
+    }
+
+    .feedback-wrapper {
+      display: none; /* Hide original feedback button since it's now in top menu */
     }
 
     /* Overlay - Now shows on all screen sizes when menu is open */
@@ -519,7 +725,58 @@
       margin: 0 0.5rem;
     }
 
+    /* Mobile responsive adjustments */
+    @media (max-width: 1024px) {
+      .top-nav {
+        display: none;
+      }
+      
+      .top-menu-content {
+        padding: 0 1rem;
+      }
+      
+      .feedback-btn-top {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+      }
+    }
+
     @media (max-width: 768px) {
+      .top-menu-content {
+        padding: 0 0.5rem;
+      }
+      
+      .logo-text {
+        display: none;
+      }
+      
+      .logo-icon {
+        font-size: 1.5rem;
+        margin-right: 0;
+      }
+      
+      .feedback-btn-top .feedback-icon {
+        margin-right: 0;
+      }
+      
+      .feedback-btn-top .feedback-text {
+        display: none;
+      }
+      
+      .tab {
+        padding: 1rem;
+      }
+      
+      .tab h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .tableauPlaceholder {
+        height: 800px;
+        min-height: 800px;
+      }
+      
       .flow-steps {
         flex-direction: column;
       }
@@ -862,6 +1119,57 @@
   </style>
 </head>
 <body>
+  <!-- Top Menu Bar -->
+  <header class="top-menu-bar">
+    <div class="top-menu-content">
+      <div class="logo-section">
+        <span class="logo-icon">⚽</span>
+        <span class="logo-text">Odds Maker</span>
+      </div>
+      <nav class="top-nav">
+        <a href="#" onclick="showTab('home')" class="top-nav-item">
+          <span class="top-nav-icon">🏠</span>
+          <span class="top-nav-text">Home</span>
+        </a>
+        <a href="#" onclick="showTab('documentation')" class="top-nav-item">
+          <span class="top-nav-icon">📚</span>
+          <span class="top-nav-text">Docs</span>
+        </a>
+        <a href="#" onclick="showTab('cloudarchitecture')" class="top-nav-item">
+          <span class="top-nav-icon">☁️</span>
+          <span class="top-nav-text">Architecture</span>
+        </a>
+        <div class="dropdown">
+          <button class="dropdown-toggle top-nav-item">
+            <span class="top-nav-icon">⚽</span>
+            <span class="top-nav-text">Competitions</span>
+            <span class="dropdown-arrow">▼</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="#" onclick="showTab('worldcup')" class="dropdown-item">
+              <span class="dropdown-icon">🏆</span>
+              World Cup Winners
+            </a>
+            <a href="#" onclick="showTab('goldcup')" class="dropdown-item">
+              <span class="dropdown-icon">🥇</span>
+              Concacaf Gold Cup
+            </a>
+            <a href="#" onclick="showTab('clubworldcup')" class="dropdown-item">
+              <span class="dropdown-icon">🌍</span>
+              Club World Cup
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div class="top-menu-actions">
+        <a href="https://forms.gle/st4WrF57QNMYykBeA" target="_blank" class="feedback-btn-top">
+          <span class="feedback-icon">💬</span>
+          <span class="feedback-text">Feedback</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
   <!-- Hamburger Menu Button -->
   <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
     &#9776;
@@ -1389,7 +1697,40 @@
         }
       });
 
-      // UPDATED: All three dashboards now use the new embed code format
+      // Dropdown functionality for top menu
+      document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const dropdown = this.parentElement;
+          const isActive = dropdown.classList.contains('active');
+          
+          // Close all dropdowns
+          document.querySelectorAll('.dropdown').forEach(d => {
+            d.classList.remove('active');
+          });
+          
+          // Open this dropdown if it wasn't active
+          if (!isActive) {
+            dropdown.classList.add('active');
+          }
+        });
+      });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function() {
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+          dropdown.classList.remove('active');
+        });
+      });
+
+      // Close dropdowns when selecting an item
+      document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function() {
+          document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.classList.remove('active');
+          });
+        });
+      });
       
       // Concacaf Gold Cup - NEW EMBED CODE
       var divElement1 = document.getElementById('viz1750565496977');
