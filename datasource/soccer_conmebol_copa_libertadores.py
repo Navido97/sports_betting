@@ -5,8 +5,7 @@ from datetime import datetime
 import pytz
 
 # --- CONFIGURATION ---
-API_KEY = "6c13523c85c4fae3bb0d6d5ec7a89784"
-BUCKET_NAME = "soccer-data-bucket-nav"
+from config import ODDS_API_KEY as API_KEY, BUCKET_NAME
 CSV_FILE_NAME = "soccer_conmebol_copa_libertadores.csv"
 S3_KEY = f"data/{CSV_FILE_NAME}"
 SPORT_KEY = "soccer_conmebol_copa_libertadores"

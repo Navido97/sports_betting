@@ -8,8 +8,7 @@ import pytz
 # ---------------------------------------
 # STEP 1: Configuration
 # ---------------------------------------
-API_KEY = "6c13523c85c4fae3bb0d6d5ec7a89784"  
-BUCKET_NAME = "soccer-data-bucket-nav"  
+from datasource.config import ODDS_API_KEY as API_KEY, BUCKET_NAME
 CSV_FILE_NAME = "worldcup_odds.csv"
 S3_KEY = f"data/{CSV_FILE_NAME}"
 
