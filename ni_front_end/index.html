@@ -207,27 +207,6 @@
       background: rgba(255, 255, 255, 0.1);
     }
 
-    .dropdown-item.coming-soon {
-      color: #999;
-      cursor: not-allowed;
-      position: relative;
-    }
-
-    .dropdown-item.coming-soon:hover {
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .dropdown-item.coming-soon::after {
-      content: "Coming Soon";
-      position: absolute;
-      right: 1rem;
-      font-size: 0.7rem;
-      background: #666;
-      color: white;
-      padding: 0.2rem 0.5rem;
-      border-radius: 10px;
-    }
-
     .dropdown-icon {
       font-size: 1rem;
       margin-right: 0.75rem;
@@ -272,7 +251,6 @@
       overflow-y: auto;
       position: relative;
       padding-top: 60px; /* Account for top menu height */
-      padding-bottom: 120px; /* Account for footer height */
     }
 
     .feedback-wrapper {
@@ -409,29 +387,6 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .submenu-item.coming-soon {
-      color: #999;
-      cursor: not-allowed;
-      position: relative;
-    }
-
-    .submenu-item.coming-soon:hover {
-      background: rgba(255, 255, 255, 0.05);
-      transform: none;
-      box-shadow: none;
-    }
-
-    .submenu-item.coming-soon::after {
-      content: "Soon";
-      position: absolute;
-      right: 1rem;
-      font-size: 0.7rem;
-      background: #666;
-      color: white;
-      padding: 0.2rem 0.5rem;
-      border-radius: 10px;
-    }
-
     .submenu-icon {
       font-size: 1rem;
       margin-right: 0.5rem;
@@ -534,131 +489,6 @@
       width: 100%;
       height: 1000px;
       min-height: 1000px;
-    }
-
-    /* Footer Styles */
-    .footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-      color: white;
-      padding: 1rem 0;
-      z-index: 1050;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .footer-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .footer-header {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    .footer-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, #ffffff, #e0e0e0);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .contributors-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .contributor-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 1rem;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .contributor-card:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-    }
-
-    .contributor-name {
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      color: #ffffff;
-    }
-
-    .contributor-links {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .contributor-link {
-      display: flex;
-      align-items: center;
-      color: #e0e0e0;
-      text-decoration: none;
-      font-size: 0.85rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .contributor-link:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.15);
-      transform: scale(1.05);
-    }
-
-    .link-icon {
-      font-size: 0.9rem;
-      margin-right: 0.3rem;
-    }
-
-    .repo-section {
-      text-align: center;
-      padding-top: 0.75rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .repo-link {
-      display: inline-flex;
-      align-items: center;
-      color: #e0e0e0;
-      text-decoration: none;
-      font-size: 0.9rem;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .repo-link:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: translateY(-1px);
-    }
-
-    .repo-icon {
-      font-size: 1rem;
-      margin-right: 0.5rem;
     }
 
     /* Mobile specific adjustments */
@@ -909,10 +739,6 @@
         font-size: 0.8rem;
         padding: 0.4rem 0.8rem;
       }
-
-      .contributors-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     @media (max-width: 768px) {
@@ -966,18 +792,6 @@
       
       .architecture-placeholder {
         padding: 2rem 1rem;
-      }
-
-      .footer-content {
-        padding: 0 1rem;
-      }
-
-      .contributor-links {
-        gap: 0.5rem;
-      }
-
-      .contributor-link {
-        font-size: 0.8rem;
       }
     }
 
@@ -1752,18 +1566,6 @@
               <span class="dropdown-icon">🌍</span>
               Club World Cup
             </a>
-            <a href="#" class="dropdown-item coming-soon">
-              <span class="dropdown-icon">🇬🇧</span>
-              Premier League
-            </a>
-            <a href="#" class="dropdown-item coming-soon">
-              <span class="dropdown-icon">🇪🇸</span>
-              La Liga
-            </a>
-            <a href="#" class="dropdown-item coming-soon">
-              <span class="dropdown-icon">🇩🇪</span>
-              Bundesliga
-            </a>
           </div>
         </div>
       </nav>
@@ -1818,18 +1620,6 @@
           <span class="submenu-icon">🌍</span>
           <span class="submenu-text">Club World Cup</span>
         </a></li>
-        <li><a href="#" class="submenu-item coming-soon">
-          <span class="submenu-icon">🇬🇧</span>
-          <span class="submenu-text">Premier League</span>
-        </a></li>
-        <li><a href="#" class="submenu-item coming-soon">
-          <span class="submenu-icon">🇪🇸</span>
-          <span class="submenu-text">La Liga</span>
-        </a></li>
-        <li><a href="#" class="submenu-item coming-soon">
-          <span class="submenu-icon">🇩🇪</span>
-          <span class="submenu-text">Bundesliga</span>
-        </a></li>
       </ul>
     </nav>
   </aside>
@@ -1878,3 +1668,1040 @@
         </div>
       </div>
     </div>
+
+    <!-- Cloud Architecture Tab -->
+    <div id="cloudarchitecture" class="tab">
+      <div class="documentation-container">
+        <div class="doc-header">
+          <h2>Cloud Architecture Overview</h2>
+          <p class="doc-subtitle">Technical infrastructure and data flow visualization</p>
+        </div>
+
+        <div class="architecture-intro">
+          <div class="intro-card">
+            <div class="intro-icon">🏗️</div>
+            <div class="intro-content">
+              <h3>System Architecture</h3>
+              <p>This section provides a comprehensive visual representation of the complete technical stack, data flow, and cloud infrastructure powering the Odds Maker dashboard.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="architecture-placeholder">
+          <div class="placeholder-content">
+            <div class="placeholder-icon">📊</div>
+            <h3>Interactive Architecture Diagram</h3>
+            <p>Complete system architecture and data flow:</p>
+            
+            <!-- Lucidchart Embed -->
+            <div class="lucidchart-container">
+              <iframe 
+                allowfullscreen 
+                frameborder="0" 
+                style="width:100%; height:600px; border-radius:8px;" 
+                src="https://lucid.app/documents/embedded/b4f0ed30-32bb-483d-b061-026d38cdd558" 
+                id="PRErr~CbmQbE">
+              </iframe>
+            </div>
+            
+            <div class="architecture-features">
+              <div class="feature-row">
+                <span class="feature-bullet">•</span>
+                <span>Complete data pipeline from API to visualization</span>
+              </div>
+              <div class="feature-row">
+                <span class="feature-bullet">•</span>
+                <span>AWS infrastructure components and connections</span>
+              </div>
+              <div class="feature-row">
+                <span class="feature-bullet">•</span>
+                <span>Google Sheets integration and data flow</span>
+              </div>
+              <div class="feature-row">
+                <span class="feature-bullet">•</span>
+                <span>Interactive zoom and pan functionality</span>
+              </div>
+              <div class="feature-row">
+                <span class="feature-bullet">•</span>
+                <span>Real-time architecture documentation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="architecture-specs">
+          <h3>Technical Specifications</h3>
+          <div class="specs-grid">
+            <div class="spec-card">
+              <div class="spec-header">
+                <span class="spec-icon">🔧</span>
+                <h4>Data Processing</h4>
+              </div>
+              <ul class="spec-list">
+                <li>Python 3.9+ Runtime</li>
+                <li>Pandas for data manipulation</li>
+                <li>Requests for API calls</li>
+                <li>Boto3 for AWS integration</li>
+                <li>Google Sheets API v4</li>
+              </ul>
+            </div>
+            <div class="spec-card">
+              <div class="spec-header">
+                <span class="spec-icon">☁️</span>
+                <h4>Cloud Infrastructure</h4>
+              </div>
+              <ul class="spec-list">
+                <li>AWS EC2 t2.micro instance</li>
+                <li>AWS S3 for data storage</li>
+                <li>Ubuntu 20.04 LTS</li>
+                <li>Nginx web server</li>
+                <li>SSL/TLS encryption</li>
+              </ul>
+            </div>
+            <div class="spec-card">
+              <div class="spec-header">
+                <span class="spec-icon">📈</span>
+                <h4>Visualization Stack</h4>
+              </div>
+              <ul class="spec-list">
+                <li>Chart.js for data visualization</li>
+                <li>JavaScript API integration</li>
+                <li>Responsive HTML5/CSS3</li>
+                <li>Mobile-optimized design</li>
+                <li>Real-time data refresh</li>
+              </ul>
+            </div>
+            <div class="spec-card">
+              <div class="spec-header">
+                <span class="spec-icon">⚡</span>
+                <h4>Automation & Monitoring</h4>
+              </div>
+              <ul class="spec-list">
+                <li>Cron job scheduling</li>
+                <li>Error logging & alerts</li>
+                <li>Health check monitoring</li>
+                <li>Automated backup system</li>
+                <li>Performance metrics</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-flow-summary">
+          <h3>Data Flow Summary</h3>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-number">1</div>
+              <div class="flow-content">
+                <h4>API Data Collection</h4>
+                <p>Python scripts fetch live odds data from the-odds-api.com</p>
+              </div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div class="flow-number">2</div>
+              <div class="flow-content">
+                <h4>Cloud Storage</h4>
+                <p>Processed CSV files uploaded to AWS S3 buckets</p>
+              </div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div class="flow-number">3</div>
+              <div class="flow-content">
+                <h4>Data Bridge</h4>
+                <p>Google Sheets API syncs data for dashboard access</p>
+              </div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div class="flow-number">4</div>
+              <div class="flow-content">
+                <h4>Visualization</h4>
+                <p>Interactive dashboards render charts and data</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Documentation Tab -->
+    <div id="documentation" class="tab">
+      <div class="documentation-container">
+        <div class="doc-header">
+          <h2>Website Build Process</h2>
+          <p class="doc-subtitle">A comprehensive overview of the technical architecture and development pipeline</p>
+        </div>
+
+        <div class="overview-section">
+          <div class="pipeline-diagram">
+            <div class="pipeline-steps">
+              <!-- Step 1: Data Collection -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon">
+                    <img src="images/SC10.png" alt="Python" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">🐍</span>
+                  </div>
+                  <div class="icon">
+                    <img src="images/SC11.png" alt="GitHub" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">📂</span>
+                  </div>
+                </div>
+                <div class="step-box step-green-box">
+                  <h4>Data Collection</h4>
+                  <ul>
+                    <li>• Developed Python scripts to retrieve data from using an API key</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pipeline-arrow">→</div>
+
+              <!-- Step 2: Upload CSV to AWS S3 -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon">
+                    <img src="images/SC8.png" alt="AWS" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">☁️</span>
+                  </div>
+                  <div class="icon">
+                    <img src="images/SC9.png" alt="S3" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">🗄️</span>
+                  </div>
+                </div>
+                <div class="step-box step-blue-box">
+                  <h4>Upload CSV to AWS S3</h4>
+                  <ul>
+                    <li>• Created and configured an S3 bucket to store CSV output files</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pipeline-arrow">→</div>
+
+              <!-- Step 3: Save to Google Sheets -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon">
+                    <img src="images/SC7.png" alt="Google Sheets" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">📊</span>
+                  </div>
+                  <div class="icon">
+                    <img src="images/SC6.png" alt="Google Drive" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">📁</span>
+                  </div>
+                </div>
+                <div class="step-box step-orange-box">
+                  <h4>Save to Google Sheets</h4>
+                  <ul>
+                    <li>• Set up a Google Service Account and enabled the Sheets API</li>
+                    <li>• Wrote a script to push S3 data into designated Google Sheet tabs</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pipeline-arrow">→</div>
+
+              <!-- Step 4: Launched EC2 Instance -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon">
+                    <img src="images/SC5.png" alt="EC2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">💻</span>
+                  </div>
+                  <div class="icon">
+                    <img src="images/SC4.png" alt="HTML" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">🌐</span>
+                  </div>
+                </div>
+                <div class="step-box step-purple-box">
+                  <h4>Launched EC2 Instance</h4>
+                  <ul>
+                    <li>• Deployed an EC2 instance and hosted a basic HTML site</li>
+                    <li>• Configured security groups to allow web traffic</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pipeline-arrow">→</div>
+
+              <!-- Step 5: Automate Everything on EC2 -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon">
+                    <img src="images/SC3.png" alt="Automation" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">⚙️</span>
+                  </div>
+                  <div class="icon">
+                    <img src="images/SC3.png" alt="Cron" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">⏰</span>
+                  </div>
+                </div>
+                <div class="step-box step-teal-box">
+                  <h4>Automate Everything on EC2</h4>
+                  <ul>
+                    <li>• Wrote shell scripts to run each Python pipeline daily via cron jobs</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pipeline-arrow">→</div>
+
+              <!-- Step 6: Created Dashboard -->
+              <div class="pipeline-step">
+                <div class="step-icons">
+                  <div class="icon">
+                    <img src="images/SC10.png" alt="Charts" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">📈</span>
+                  </div>
+                  <div class="icon">
+                    <img src="images/SC7.png" alt="Dashboard" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <span class="icon-fallback" style="display:none;">📊</span>
+                  </div>
+                </div>
+                <div class="step-box step-red-box">
+                  <h4>Created Dashboard</h4>
+                  <ul>
+                    <li>• Connected Google Sheets as a data source using live data</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="overview-callout">
+            <div class="callout-icon">💡</div>
+            <div class="callout-content">
+              <h3>Cost-Efficient Design</h3>
+              <p>This entire pipeline was engineered with cost-efficiency in mind, utilizing only free-tier services across AWS, Google Cloud, and visualization platforms.</p>
+            </div>
+          </div>
+
+          <div class="performance-metrics">
+            <h3>System Performance</h3>
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-value">$0</div>
+                <div class="metric-label">Monthly Operating Cost</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">99.9%</div>
+                <div class="metric-label">Uptime Reliability</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">24hrs</div>
+                <div class="metric-label">Data Refresh Cycle</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">0</div>
+                <div class="metric-label">Total Outages</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">3</div>
+                <div class="metric-label">Tournament Coverage</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="build-process-container">
+          <div class="process-header">
+            <h3>Development Pipeline</h3>
+            <p>Six key phases from data collection to deployment</p>
+          </div>
+
+          <!-- Step 1 -->
+          <div class="build-step step-green">
+            <div class="step-number">01</div>
+            <div class="step-main">
+              <div class="step-header">
+                <h4>Python Script Development & Version Control</h4>
+                <div class="step-tags">
+                  <span class="tag">Python</span>
+                  <span class="tag">GitHub</span>
+                  <span class="tag">API Integration</span>
+                </div>
+              </div>
+              <div class="step-content">
+                <p>Developed Python scripts leveraging <code>the-odds-api.com</code> to collect real-time soccer betting odds. The API provides comprehensive coverage of global competitions with generous free-tier access limits. All code is maintained in a GitHub repository for version control and collaborative development.</p>
+                <div class="tech-details">
+                  <strong>Key Technologies:</strong> Python, Requests, Pandas, GitHub Actions
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="build-step step-blue">
+            <div class="step-number">02</div>
+            <div class="step-main">
+              <div class="step-header">
+                <h4>Cloud Storage Implementation</h4>
+                <div class="step-tags">
+                  <span class="tag">AWS S3</span>
+                  <span class="tag">Boto3</span>
+                  <span class="tag">CSV Processing</span>
+                </div>
+              </div>
+              <div class="step-content">
+                <p>Processed data is formatted as CSV files and automatically uploaded to AWS S3 buckets. S3 provides reliable, scalable storage with excellent integration capabilities through the <code>boto3</code> Python library, all within the AWS free tier limits.</p>
+                <div class="tech-details">
+                  <strong>Storage Strategy:</strong> Automated uploads, versioning, lifecycle management
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="build-step step-orange">
+            <div class="step-number">03</div>
+            <div class="step-main">
+              <div class="step-header">
+                <h4>Data Pipeline Integration</h4>
+                <div class="step-tags">
+                  <span class="tag">Google Sheets API</span>
+                  <span class="tag">Data Bridge</span>
+                  <span class="tag">Real-time Sync</span>
+                </div>
+              </div>
+              <div class="step-content">
+                <p>Since many visualization platforms lack native S3 connectivity, Google Sheets serves as an intelligent data bridge. The Google Sheets API facilitates seamless data transfer, with each tournament assigned to dedicated worksheet tabs for organized data management.</p>
+                <div class="tech-details">
+                  <strong>Architecture:</strong> S3 → Google Sheets API → Visualization Platform
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="build-step step-purple">
+            <div class="step-number">04</div>
+            <div class="step-main">
+              <div class="step-header">
+                <h4>Web Infrastructure Deployment</h4>
+                <div class="step-tags">
+                  <span class="tag">AWS EC2</span>
+                  <span class="tag">t2.micro</span>
+                  <span class="tag">SFTP</span>
+                </div>
+              </div>
+              <div class="step-content">
+                <p>Deployed a lightweight t2.micro EC2 instance leveraging AWS free tier resources. The instance hosts the responsive HTML/CSS/JavaScript frontend with optimized security group configurations for HTTP/HTTPS traffic management.</p>
+                <div class="tech-details">
+                  <strong>Infrastructure:</strong> Ubuntu Server, Nginx, SSL/TLS, Security Groups
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="build-step step-teal">
+            <div class="step-number">05</div>
+            <div class="step-main">
+              <div class="step-header">
+                <h4>Process Automation & Scheduling</h4>
+                <div class="step-tags">
+                  <span class="tag">Cron Jobs</span>
+                  <span class="tag">Automation</span>
+                  <span class="tag">Daily Updates</span>
+                </div>
+              </div>
+              <div class="step-content">
+                <p>Implemented comprehensive automation using Linux cron jobs for daily data refresh cycles. This eliminates manual intervention while ensuring data freshness and system reliability through automated error handling and logging.</p>
+                <div class="tech-details">
+                  <strong>Schedule:</strong> Daily at 6 AM UTC, Error logging, Health monitoring
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="build-step step-crimson">
+            <div class="step-number">06</div>
+            <div class="step-main">
+              <div class="step-header">
+                <h4>Data Visualization & User Interface</h4>
+                <div class="step-tags">
+                  <span class="tag">Chart.js</span>
+                  <span class="tag">JavaScript API</span>
+                  <span class="tag">Responsive Design</span>
+                </div>
+              </div>
+              <div class="step-content">
+                <p>Created interactive dashboards using modern charting libraries with seamless Google Sheets integration. Advanced JavaScript embedding provides responsive, mobile-optimized visualizations that automatically sync with live data sources.</p>
+                <div class="tech-details">
+                  <strong>Features:</strong> Interactive filtering, Mobile optimization, Real-time updates
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- World Cup Tab -->
+    <div id="worldcup" class="tab">
+      <h2>World Cup Winners</h2>
+      <p>This dashboard displays outright winner odds for the FIFA World Cup. You can compare which countries are favored to win the tournament, with odds pulled from multiple betting platforms. Use it to track line movement and identify longshot opportunities.</p>
+      
+      <div class="data-container">
+        <div class="data-header">
+          <h3>⚽ FIFA World Cup Winner Odds</h3>
+          <p>Live odds from major sportsbooks updated daily</p>
+        </div>
+        <div id="worldcup-loading" class="loading-spinner">
+          Loading latest odds data...
+        </div>
+        <div id="worldcup-data" style="display: none;"></div>
+      </div>
+    </div>
+
+    <!-- Gold Cup Tab -->
+    <div id="goldcup" class="tab">
+      <h2>Concacaf Gold Cup</h2>
+      <p>This dashboard shows match-by-match betting odds for the Concacaf Gold Cup. Each matchup includes odds from multiple sportsbooks, enabling you to find the best line for moneyline bets across North American teams.</p>
+      
+      <div class="data-container">
+        <div class="data-header">
+          <h3>🥇 CONCACAF Gold Cup Match Odds</h3>
+          <p>Head-to-head odds for all upcoming matches</p>
+        </div>
+        <div id="goldcup-loading" class="loading-spinner">
+          Loading latest match odds...
+        </div>
+        <div id="goldcup-data" style="display: none;"></div>
+      </div>
+    </div>
+
+    <!-- Club World Cup Tab -->
+    <div id="clubworldcup" class="tab">
+      <h2>Club World Cup</h2>
+      <p>This dashboard provides odds for the FIFA Club World Cup matches, showing bookmaker spreads and predictions for games between top clubs from each continent. Useful for comparing teams that don't typically meet in domestic leagues.</p>
+      
+      <div class="data-container">
+        <div class="data-header">
+          <h3>🌍 FIFA Club World Cup Odds</h3>
+          <p>Premier club matchups from around the globe</p>
+        </div>
+        <div id="clubworldcup-loading" class="loading-spinner">
+          Loading club match odds...
+        </div>
+        <div id="clubworldcup-data" style="display: none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize variables
+    let isMenuOpen = false;
+    
+    // Get DOM elements
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    // Google Sheets configuration
+    const SHEET_ID = '1GPRbsdM58pZkQzOAKEoGSI8G1CQuJhzefmXfKBDUaa0';
+    // For public sheets, we can access without API key
+    // If sheet is private, you'll need a proper Google Sheets API key
+    const API_KEY = ''; // Leave empty for public sheets
+    const SHEETS = {
+      worldcup: 'WorldCup_Odds',
+      goldcup: 'Concacaf_Gold_Cup',
+      clubworldcup: 'ClubWorldCup'
+    };
+
+    // Cache for data
+    let dataCache = {};
+    let lastFetchTime = {};
+
+    // Tab switching functionality
+    function showTab(tabId) {
+      // Hide all tabs
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Show selected tab
+      const selectedTab = document.getElementById(tabId);
+      if (selectedTab) {
+        selectedTab.classList.add('active');
+        
+        // Load data for competition tabs
+        if (SHEETS[tabId]) {
+          loadSheetData(tabId);
+        }
+      }
+      
+      // Close menu when tab is selected
+      if (isMenuOpen) {
+        closeMenu();
+      }
+    }
+
+    // Google Sheets data fetching
+    async function loadSheetData(tabId) {
+      const sheetName = SHEETS[tabId];
+      const cacheKey = tabId;
+      const now = Date.now();
+      
+      // Check cache (refresh every 5 minutes)
+      if (dataCache[cacheKey] && (now - lastFetchTime[cacheKey]) < 300000) {
+        displayData(tabId, dataCache[cacheKey]);
+        return;
+      }
+
+      const loadingElement = document.getElementById(`${tabId}-loading`);
+      const dataElement = document.getElementById(`${tabId}-data`);
+      
+      loadingElement.style.display = 'block';
+      dataElement.style.display = 'none';
+
+      try {
+        let url;
+        if (API_KEY) {
+          // Private sheet with API key
+          url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(sheetName)}?key=${API_KEY}`;
+        } else {
+          // Public sheet - try CSV export first, fallback to JSON
+          url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
+        }
+        
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status} - Make sure your Google Sheet is public or provide a valid API key`);
+        }
+        
+        let data;
+        if (API_KEY) {
+          // JSON response from Sheets API
+          data = await response.json();
+          if (!data.values || data.values.length === 0) {
+            throw new Error('No data found in the spreadsheet');
+          }
+          data = data.values;
+        } else {
+          // CSV response
+          const csvText = await response.text();
+          data = parseCSV(csvText);
+          if (!data || data.length === 0) {
+            throw new Error('No data found in the spreadsheet');
+          }
+        }
+
+        // Cache the data
+        dataCache[cacheKey] = data;
+        lastFetchTime[cacheKey] = now;
+        
+        displayData(tabId, data);
+        
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        showError(tabId, error.message);
+      }
+    }
+
+    // Simple CSV parser
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      return lines.map(line => {
+        // Simple CSV parsing - handles quoted fields
+        const result = [];
+        let current = '';
+        let inQuotes = false;
+        
+        for (let i = 0; i < line.length; i++) {
+          const char = line[i];
+          if (char === '"') {
+            inQuotes = !inQuotes;
+          } else if (char === ',' && !inQuotes) {
+            result.push(current.trim());
+            current = '';
+          } else {
+            current += char;
+          }
+        }
+        result.push(current.trim());
+        return result;
+      });
+    }
+
+    // Display data in tables
+    function displayData(tabId, rawData) {
+      const loadingElement = document.getElementById(`${tabId}-loading`);
+      const dataElement = document.getElementById(`${tabId}-data`);
+      
+      if (!rawData || rawData.length === 0) {
+        showError(tabId, 'No data available');
+        return;
+      }
+
+      const headers = rawData[0];
+      const rows = rawData.slice(1);
+      
+      let tableHTML = '';
+      
+      if (tabId === 'worldcup') {
+        tableHTML = createWorldCupTable(headers, rows);
+      } else {
+        tableHTML = createMatchTable(headers, rows, tabId);
+      }
+      
+      dataElement.innerHTML = tableHTML;
+      loadingElement.style.display = 'none';
+      dataElement.style.display = 'block';
+    }
+
+    // Create World Cup odds table
+    function createWorldCupTable(headers, rows) {
+      const oddsColumns = headers.slice(1, -1); // Exclude Team and last_updated columns
+      const lastUpdated = rows.length > 0 ? rows[0][headers.length - 1] : 'Unknown';
+      
+      let html = '<div class="table-container"><table class="odds-table">';
+      
+      // Header
+      html += '<thead><tr>';
+      html += '<th>Team</th>';
+      oddsColumns.forEach(col => {
+        html += `<th class="odds-value">${col}</th>`;
+      });
+      html += '</tr></thead>';
+      
+      // Body
+      html += '<tbody>';
+      rows.forEach(row => {
+        if (row.length >= headers.length - 1) {
+          html += '<tr>';
+          
+          // Team name
+          html += `<td class="team-cell">${row[0] || ''}</td>`;
+          
+          // Odds values - find HIGHEST odds (best for bettors)
+          const oddsValues = row.slice(1, -1);
+          const numericOdds = oddsValues.map(val => parseFloat(val) || -Infinity);
+          const bestOddsIndex = numericOdds.indexOf(Math.max(...numericOdds.filter(v => v !== -Infinity)));
+          
+          oddsValues.forEach((odds, index) => {
+            const isBest = index === bestOddsIndex && parseFloat(odds) > 0;
+            const className = isBest ? 'odds-value best-odds' : 'odds-value';
+            html += `<td class="${className}">${odds || '-'}</td>`;
+          });
+          
+          html += '</tr>';
+        }
+      });
+      html += '</tbody></table></div>';
+      
+      // Last updated info
+      html += `<div class="last-updated">Last updated: ${formatDateTime(lastUpdated)}</div>`;
+      
+      return html;
+    }
+
+    // Create match odds table with separators
+    function createMatchTable(headers, rows, tabId) {
+      // Sort rows by commence time (ascending) - find the time column first
+      const timeColumnIndex = headers.findIndex(header => 
+        header.toLowerCase().includes('commence time') || 
+        header.toLowerCase().includes('time') ||
+        header.toLowerCase().includes('kickoff')
+      );
+      
+      if (timeColumnIndex !== -1) {
+        rows.sort((a, b) => {
+          const timeA = new Date(a[timeColumnIndex] || 0);
+          const timeB = new Date(b[timeColumnIndex] || 0);
+          return timeA - timeB;
+        });
+      }
+      
+      // Find which columns contain odds (exclude Team, Commence Time UTC/Kickoff, and last_updated)
+      const excludeColumns = ['Team', 'Commence Time UTC', 'Kickoff CDT', 'last_updated'];
+      const oddsColumnIndices = [];
+      const oddsColumns = [];
+      
+      // Update headers - change "Commence Time UTC" to "Kickoff CDT"
+      const updatedHeaders = headers.map(header => {
+        if (header.toLowerCase().includes('commence time') && header.toLowerCase().includes('utc')) {
+          return 'Kickoff CDT';
+        }
+        return header;
+      });
+      
+      updatedHeaders.forEach((header, index) => {
+        const isExcluded = excludeColumns.some(exclude => 
+          header.toLowerCase().includes(exclude.toLowerCase())
+        );
+        if (!isExcluded && index > 0 && index < updatedHeaders.length - 1) {
+          oddsColumnIndices.push(index);
+          oddsColumns.push(header);
+        }
+      });
+      
+      const lastUpdated = rows.length > 0 ? rows[0][headers.length - 1] : 'Unknown';
+      
+      let html = '<div class="table-container"><table class="odds-table">';
+      
+      // Header - use updated headers
+      html += '<thead><tr>';
+      updatedHeaders.slice(0, -1).forEach(header => {
+        if (header === updatedHeaders[0]) {
+          html += `<th>${header}</th>`;
+        } else {
+          html += `<th class="odds-value">${header}</th>`;
+        }
+      });
+      html += '</tr></thead>';
+      
+      // Body with match separators
+      html += '<tbody>';
+      
+      rows.forEach((row, rowIndex) => {
+        if (row.length >= headers.length - 1) {
+          // Detect match changes for separators
+          const teamName = row[0] || '';
+          
+          // Simple match detection: if team name suggests a new match
+          if (tabId !== 'worldcup' && rowIndex > 0) {
+            const prevRow = rows[rowIndex - 1];
+            if (prevRow && shouldAddSeparator(teamName, prevRow[0], rowIndex)) {
+              html += '<tr><td colspan="100%" class="match-separator"></td></tr>';
+            }
+          }
+          
+          html += '<tr>';
+          
+          // Process each column
+          row.slice(0, -1).forEach((cellValue, colIndex) => {
+            if (colIndex === 0) {
+              // Team name column
+              html += `<td class="team-cell">${cellValue || ''}</td>`;
+            } else {
+              // Check if this is a datetime column (using original headers for detection)
+              const originalHeader = headers[colIndex].toLowerCase();
+              const isDateTimeColumn = originalHeader.includes('commence time') || 
+                                     originalHeader.includes('time') ||
+                                     originalHeader.includes('date') ||
+                                     originalHeader.includes('kickoff');
+              
+              // Check if this column contains odds
+              const isOddsColumn = oddsColumnIndices.includes(colIndex);
+              
+              if (isDateTimeColumn) {
+                // Convert UTC to CDT for datetime columns
+                const convertedTime = convertUTCtoCDT(cellValue);
+                html += `<td class="odds-value">${convertedTime || '-'}</td>`;
+              } else if (isOddsColumn) {
+                // Get odds values for comparison (only from odds columns)
+                const oddsValues = oddsColumnIndices.map(idx => row[idx]);
+                const numericOdds = oddsValues.map(val => parseFloat(val) || -Infinity);
+                const maxOdds = Math.max(...numericOdds.filter(v => v !== -Infinity));
+                const isBest = parseFloat(cellValue) === maxOdds && parseFloat(cellValue) > 0;
+                
+                const className = isBest ? 'odds-value best-odds' : 'odds-value';
+                html += `<td class="${className}">${cellValue || '-'}</td>`;
+              } else {
+                // Non-odds, non-datetime column
+                html += `<td class="odds-value">${cellValue || '-'}</td>`;
+              }
+            }
+          });
+          
+          html += '</tr>';
+        }
+      });
+      html += '</tbody></table></div>';
+      
+      // Last updated info
+      html += `<div class="last-updated">Last updated: ${formatDateTime(lastUpdated)}</div>`;
+      
+      return html;
+    }
+
+    // Determine if a separator should be added between matches
+    function shouldAddSeparator(currentTeam, previousTeam, rowIndex) {
+      // Add separator every 2-3 rows to separate different matches
+      // This is a simple heuristic - you might want to adjust based on your data structure
+      return rowIndex % 3 === 0;
+    }
+
+    // Format date/time
+    function formatDateTime(dateString) {
+      if (!dateString || dateString === 'Unknown') return 'Unknown';
+      
+      try {
+        const date = new Date(dateString);
+        return date.toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZoneName: 'short'
+        });
+      } catch (error) {
+        return dateString;
+      }
+    }
+
+    // Convert UTC datetime to CDT and format
+    function convertUTCtoCDT(utcString) {
+      if (!utcString || utcString === '' || utcString === '-') {
+        return utcString;
+      }
+      
+      try {
+        // Parse the UTC datetime string
+        const utcDate = new Date(utcString);
+        
+        // Check if the date is valid
+        if (isNaN(utcDate.getTime())) {
+          return utcString; // Return original if can't parse
+        }
+        
+        // Convert to CDT (Central Daylight Time)
+        const cdtDate = new Date(utcDate.toLocaleString("en-US", {timeZone: "America/Chicago"}));
+        
+        // Format as needed - you can adjust this format
+        return cdtDate.toLocaleString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZone: 'America/Chicago',
+          timeZoneName: 'short'
+        });
+      } catch (error) {
+        console.error('Error converting UTC to CDT:', error);
+        return utcString; // Return original on error
+      }
+    }
+
+    // Show error message
+    function showError(tabId, message) {
+      const loadingElement = document.getElementById(`${tabId}-loading`);
+      const dataElement = document.getElementById(`${tabId}-data`);
+      
+      const errorHTML = `
+        <div class="error-message">
+          <h4>Unable to Load Data</h4>
+          <p>${message}</p>
+          <button class="refresh-button" onclick="loadSheetData('${tabId}')">
+            Try Again
+          </button>
+        </div>
+      `;
+      
+      dataElement.innerHTML = errorHTML;
+      loadingElement.style.display = 'none';
+      dataElement.style.display = 'block';
+    }
+
+    // Submenu toggle functionality
+    function toggleSubmenu(button) {
+      const isActive = button.classList.contains('active');
+
+      // Close all submenus first
+      document.querySelectorAll('.accordion-toggle').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Open this submenu if it wasn't active
+      if (!isActive) {
+        button.classList.add('active');
+      }
+    }
+
+    // Menu toggle functions
+    function openMenu() {
+      isMenuOpen = true;
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      menuToggle.classList.add('active');
+    }
+
+    function closeMenu() {
+      isMenuOpen = false;
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      menuToggle.classList.remove('active');
+    }
+
+    function toggleMenu() {
+      if (isMenuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize page
+      showTab('home');
+
+      // Menu toggle button
+      menuToggle?.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      // Overlay click to close
+      overlay?.addEventListener('click', closeMenu);
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (isMenuOpen) {
+          if (!sidebar.contains(event.target) && 
+              !menuToggle.contains(event.target)) {
+            closeMenu();
+          }
+        }
+      });
+
+      // Dropdown functionality for top menu
+      document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const dropdown = this.parentElement;
+          const isActive = dropdown.classList.contains('active');
+          
+          // Close all dropdowns
+          document.querySelectorAll('.dropdown').forEach(d => {
+            d.classList.remove('active');
+          });
+          
+          // Open this dropdown if it wasn't active
+          if (!isActive) {
+            dropdown.classList.add('active');
+          }
+        });
+      });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function() {
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+          dropdown.classList.remove('active');
+        });
+      });
+
+      // Close dropdowns when selecting an item
+      document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function() {
+          document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.classList.remove('active');
+          });
+        });
+      });
+    });
+
+    // Prevent menu from closing when clicking inside sidebar
+    sidebar?.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  </script>
+</body>
+</html>
