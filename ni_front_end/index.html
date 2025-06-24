@@ -448,6 +448,23 @@
     // Initialize page
     showTab('home');
 
+    // Footer scroll functionality
+    const footer = document.querySelector('.footer');
+    const content = document.querySelector('.content');
+    
+    content.addEventListener('scroll', function() {
+      const scrollTop = content.scrollTop;
+      const scrollHeight = content.scrollHeight;
+      const clientHeight = content.clientHeight;
+      
+      // Show footer when user has scrolled more than 50% down the page
+      if (scrollTop > (scrollHeight - clientHeight) * 0.5) {
+        footer.classList.add('visible');
+      } else {
+        footer.classList.remove('visible');
+      }
+    });
+
     // Menu toggle button
     menuToggle?.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -1077,7 +1094,7 @@
     </div>
     
     <div class="repo-section">
-      <a href="#" target="_blank" class="repo-link">
+      <a href="https://github.com/soccer-analytics-HB-NI/sports_betting/tree/main" target="_blank" class="repo-link">
         <span class="repo-icon">📁</span>
         View Repository
       </a>
@@ -1357,7 +1374,7 @@
     overflow-y: auto;
     position: relative;
     padding-top: 60px; /* Account for top menu height */
-    padding-bottom: 160px; /* Account for footer height */
+    padding-bottom: 40px; /* Small padding at bottom */
   }
 
   .feedback-wrapper {
@@ -1600,6 +1617,12 @@
     z-index: 1050;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .footer.visible {
+    transform: translateY(0);
   }
 
   .footer-content {
@@ -2898,34 +2921,34 @@
       <p class="welcome-description">This dashboard helps everyday sports fans and bettors stay up to date with betting odds for international soccer competitions. Simply select a tournament from the left-hand menu to view odds from major sportsbooks for upcoming and past matches. Use this tool to compare values across platforms and make informed betting or viewing decisions.</p>
 
       <div class="feature-grid">
-        <div class="feature-card feature-blue">
-          <div class="feature-icon">⚽</div>
-          <div class="feature-content">
-            <h3>Tournament Coverage</h3>
-            <p>Access odds for top tournaments like the World Cup, Club World Cup, and Gold Cup.</p>
-          </div>
+      <div class="feature-card feature-blue">
+        <div class="feature-icon">⚽</div>
+        <div class="feature-content">
+          <h3>Tournament Coverage</h3>
+          <p>Access odds for top tournaments like the World Cup, Club World Cup, and Gold Cup.</p>
         </div>
-        <div class="feature-card feature-green">
-          <div class="feature-icon">📊</div>
-          <div class="feature-content">
-            <h3>Live Data</h3>
-            <p>See live odds from multiple major sportsbooks, refreshed daily.</p>
-          </div>
+      </div>
+      <div class="feature-card feature-green">
+        <div class="feature-icon">📊</div>
+        <div class="feature-content">
+          <h3>Live Data</h3>
+          <p>See live odds from multiple major sportsbooks, refreshed daily.</p>
         </div>
-        <div class="feature-card feature-yellow">
-          <div class="feature-icon">📈</div>
-          <div class="feature-content">
-            <h3>Value Comparison</h3>
-            <p>Use this dashboard to find the best odds across platforms and identify market value.</p>
-          </div>
+      </div>
+      <div class="feature-card feature-yellow">
+        <div class="feature-icon">📈</div>
+        <div class="feature-content">
+          <h3>Value Comparison</h3>
+          <p>Use this dashboard to find the best odds across platforms and identify market value.</p>
         </div>
-        <div class="feature-card feature-red">
-          <div class="feature-icon">💬</div>
-          <div class="feature-content">
-            <h3>Feedback</h3>
-            <p>Have thoughts or feedback? Click the "Feedback" button in the top-right corner to let me know!</p>
-          </div>
+      </div>
+      <div class="feature-card feature-red">
+        <div class="feature-icon">💬</div>
+        <div class="feature-content">
+          <h3>Feedback</h3>
+          <p>Have thoughts or feedback? Click the "Feedback" button in the top-right corner to let me know!</p>
         </div>
+      </div>
       </div>
     </div>
   </div>
