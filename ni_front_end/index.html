@@ -1200,6 +1200,7 @@
     .pipeline-diagram {
       margin: 2rem 0;
       padding: 2rem;
+      padding-right: 4rem; /* Extra right padding to prevent cut-off */
       background: linear-gradient(135deg, #f8f9fa, #e9ecef);
       border-radius: 16px;
       overflow-x: auto;
@@ -1308,6 +1309,7 @@
     @media (max-width: 1024px) {
       .pipeline-diagram {
         padding: 1rem;
+        padding-right: 2rem; /* Reduced but still extra right padding on tablets */
       }
       
       .pipeline-steps {
@@ -1352,6 +1354,7 @@
         min-width: auto;
         gap: 1rem;
         padding: 1rem;
+        padding-right: 1rem; /* Normal padding on mobile since it stacks vertically */
       }
       
       .pipeline-step {
