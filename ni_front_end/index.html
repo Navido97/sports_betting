@@ -1590,6 +1590,33 @@
       flex-direction: column;
       align-items: center;
       gap: 1rem;
+      position: relative;
+    }
+
+    .close-footer-btn {
+      position: absolute;
+      top: -0.5rem;
+      right: 0;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .close-footer-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
     }
 
     .contributors-title {
@@ -2458,6 +2485,7 @@
   <!-- Contributors Footer -->
   <footer class="contributors-footer" id="contributorsFooter">
     <div class="contributors-content">
+      <button class="close-footer-btn" onclick="closeFooter()" title="Close">×</button>
       <h3 class="contributors-title">Contributors</h3>
       <div class="contributors-list">
         <div class="contributor">
@@ -3020,6 +3048,12 @@
       content.addEventListener('scroll', checkScroll);
       // Initial check
       checkScroll();
+    }
+
+    // Close footer function
+    function closeFooter() {
+      const footer = document.getElementById('contributorsFooter');
+      footer.classList.remove('visible');
     }
 
     // Prevent menu from closing when clicking inside sidebar
