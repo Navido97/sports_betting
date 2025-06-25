@@ -2935,8 +2935,8 @@
         const scrollHeight = content.scrollHeight;
         const clientHeight = content.clientHeight;
         
-        // Show footer when scrolled near the bottom (within 100px)
-        if (scrollTop + clientHeight >= scrollHeight - 100) {
+        // Show footer only when scrolled completely to the bottom
+        if (scrollTop + clientHeight >= scrollHeight - 5) {
           footer.classList.add('visible');
         } else {
           footer.classList.remove('visible');
