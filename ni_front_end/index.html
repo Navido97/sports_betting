@@ -2617,16 +2617,31 @@
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
 
-    // Google Sheets configuration
-    const SHEET_ID = '1GPRbsdM58pZkQzOAKEoGSI8G1CQuJhzefmXfKBDUaa0';
-    // For public sheets, we can access without API key
-    // If sheet is private, you'll need a proper Google Sheets API key
-    const API_KEY = ''; // Leave empty for public sheets
-    const SHEETS = {
-      worldcup: 'WorldCup_Odds',
-      goldcup: 'Concacaf_Gold_Cup',
-      clubworldcup: 'ClubWorldCup'
-    };
+ // API endpoint configuration (replaces direct Google Sheets access)
+const API_ENDPOINTS = {
+  worldcup: '/api/data/worldcup',
+  goldcup: '/api/data/goldcup',
+  clubworldcup: '/api/data/club'
+};
+
+// Fetch data from Flask API
+async function fetchOddsData(competitionKey) {
+  const endpoint = API_ENDPOINTS[competitionKey];
+  try {
+    const response = await fetch(endpoint);
+    const json = await response.json();
+    if (json.success) {
+      return json.data;
+    } else {
+      console.error("Error fetching data:", json.error);
+      return [];
+    }
+  } catch (error) {
+    console.error("Request failed:", error);
+    return [];
+  }
+}
+
 
     // Cache for data
     let dataCache = {};
