@@ -2690,36 +2690,19 @@ async function fetchOddsData(competitionKey) {
       dataElement.style.display = 'none';
 
       try {
-        let url;
-        if (API_KEY) {
-          // Private sheet with API key
-          url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(sheetName)}?key=${API_KEY}`;
-        } else {
-          // Public sheet - try CSV export first, fallback to JSON
-          url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
-        }
+        let url = `/api/data/${tabId}`; // tabId is 'worldcup', 'goldcup', or 'clubworldcup'
         
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status} - Make sure your Google Sheet is public or provide a valid API key`);
         }
         
-        let data;
-        if (API_KEY) {
-          // JSON response from Sheets API
-          data = await response.json();
-          if (!data.values || data.values.length === 0) {
-            throw new Error('No data found in the spreadsheet');
-          }
-          data = data.values;
-        } else {
-          // CSV response
-          const csvText = await response.text();
-          data = parseCSV(csvText);
-          if (!data || data.length === 0) {
-            throw new Error('No data found in the spreadsheet');
-          }
+        const json = await response.json();
+        if (!json.success || !json.data || json.data.length === 0) {
+          throw new Error('No data returned from server');
         }
+        const data = json.data;
+
 
         // Cache the data
         dataCache[cacheKey] = data;
