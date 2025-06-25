@@ -522,6 +522,29 @@
       padding-right: 2.5rem; /* Extra right padding to prevent cut-off */
     }
 
+    /* Center content for competition tabs to avoid hamburger menu overlap */
+    #worldcup, #goldcup, #clubworldcup {
+      text-align: center;
+      padding-top: 5rem; /* Increased top padding to fully clear hamburger menu */
+    }
+
+    #worldcup h2, #goldcup h2, #clubworldcup h2 {
+      text-align: center;
+    }
+
+    #worldcup p, #goldcup p, #clubworldcup p {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+    }
+
+    /* Center table headers in competition tabs */
+    #worldcup .odds-table th, 
+    #goldcup .odds-table th, 
+    #clubworldcup .odds-table th {
+      text-align: center;
+    }
+
     .tab h2 {
       text-align: center;
       margin-bottom: 1rem;
@@ -2801,13 +2824,19 @@
         });
       }
       
-      // Find which columns contain odds (exclude Team, Commence Time UTC/Kickoff, and last_updated)
-      const excludeColumns = ['Team', 'Commence Time UTC', 'Kickoff CDT', 'last_updated'];
+      // Remove last_updated column completely from headers and data
+      const filteredHeaders = headers.filter(header => 
+        !header.toLowerCase().includes('last_updated') && 
+        !header.toLowerCase().includes('last updated')
+      );
+      
+      // Find which columns contain odds (exclude Team, Commence Time UTC/Kickoff)
+      const excludeColumns = ['Team', 'Commence Time UTC', 'Kickoff CDT'];
       const oddsColumnIndices = [];
       const oddsColumns = [];
       
       // Update headers - change "Commence Time UTC" to "Kickoff CDT"
-      const updatedHeaders = headers.map(header => {
+      const updatedHeaders = filteredHeaders.map(header => {
         if (header.toLowerCase().includes('commence time') && header.toLowerCase().includes('utc')) {
           return 'Kickoff CDT';
         }
@@ -2818,7 +2847,7 @@
         const isExcluded = excludeColumns.some(exclude => 
           header.toLowerCase().includes(exclude.toLowerCase())
         );
-        if (!isExcluded && index > 0 && index < updatedHeaders.length - 1) {
+        if (!isExcluded && index > 0) {
           oddsColumnIndices.push(index);
           oddsColumns.push(header);
         }
@@ -2828,9 +2857,9 @@
       
       let html = '<div class="table-container"><table class="odds-table">';
       
-      // Header - use updated headers
+      // Header - use filtered headers
       html += '<thead><tr>';
-      updatedHeaders.slice(0, -1).forEach(header => {
+      updatedHeaders.forEach(header => {
         if (header === updatedHeaders[0]) {
           html += `<th>${header}</th>`;
         } else {
@@ -2857,14 +2886,15 @@
           
           html += '<tr>';
           
-          // Process each column
-          row.slice(0, -1).forEach((cellValue, colIndex) => {
+          // Process each column - exclude last_updated column
+          const filteredRow = row.slice(0, filteredHeaders.length);
+          filteredRow.forEach((cellValue, colIndex) => {
             if (colIndex === 0) {
               // Team name column
               html += `<td class="team-cell">${cellValue || ''}</td>`;
             } else {
-              // Check if this is a datetime column (using original headers for detection)
-              const originalHeader = headers[colIndex].toLowerCase();
+              // Check if this is a datetime column
+              const originalHeader = filteredHeaders[colIndex].toLowerCase();
               const isDateTimeColumn = originalHeader.includes('commence time') || 
                                      originalHeader.includes('time') ||
                                      originalHeader.includes('date') ||
@@ -2879,7 +2909,7 @@
                 html += `<td class="odds-value">${convertedTime || '-'}</td>`;
               } else if (isOddsColumn) {
                 // Get odds values for comparison (only from odds columns)
-                const oddsValues = oddsColumnIndices.map(idx => row[idx]);
+                const oddsValues = oddsColumnIndices.map(idx => filteredRow[idx]);
                 const numericOdds = oddsValues.map(val => parseFloat(val) || -Infinity);
                 const maxOdds = Math.max(...numericOdds.filter(v => v !== -Infinity));
                 const isBest = parseFloat(cellValue) === maxOdds && parseFloat(cellValue) > 0;
@@ -2898,7 +2928,7 @@
       });
       html += '</tbody></table></div>';
       
-      // Last updated info
+      // Last updated info at the bottom
       html += `<div class="last-updated">Last updated: ${formatDateTime(lastUpdated)}</div>`;
       
       return html;
