@@ -2830,11 +2830,28 @@
       // Remove columns that are mostly empty, contain only dashes, or are at the end with no useful data
       const columnsToRemove = [];
       for (let colIndex = cleanHeaders.length - 1; colIndex >= 0; colIndex--) {
-        const columnValues = cleanRows.map(row => row[colIndex] || '').filter(val => val !== '');
-        const nonEmptyValues = columnValues.filter(val => val !== '-' && val !== '' && val !== null && val !== undefined);
+        const headerName = cleanHeaders[colIndex] || '';
+        const columnValues = cleanRows.map(row => row[colIndex] || '');
         
-        // If column is mostly empty or only contains dashes, mark for removal
-        if (nonEmptyValues.length === 0 || (nonEmptyValues.length < columnValues.length * 0.1)) {
+        // Filter out truly empty values and dashes
+        const nonEmptyNonDashValues = columnValues.filter(val => 
+          val !== '-' && 
+          val !== '' && 
+          val !== null && 
+          val !== undefined && 
+          val.toString().trim() !== ''
+        );
+        
+        // Remove column if:
+        // 1. Header is empty or just whitespace
+        // 2. All values are empty, dashes, or whitespace
+        // 3. Less than 10% of values contain meaningful data
+        const shouldRemove = 
+          headerName.trim() === '' || 
+          nonEmptyNonDashValues.length === 0 || 
+          (nonEmptyNonDashValues.length < columnValues.length * 0.1);
+        
+        if (shouldRemove) {
           columnsToRemove.push(colIndex);
         }
       }
