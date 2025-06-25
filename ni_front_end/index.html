@@ -2820,12 +2820,30 @@
         rows[0][lastUpdatedIndex] : 'Unknown';
       
       // Remove last_updated column from headers
-      const cleanHeaders = headers.filter((header, index) => index !== lastUpdatedIndex);
+      let cleanHeaders = headers.filter((header, index) => index !== lastUpdatedIndex);
       
       // Remove last_updated column from all rows
-      const cleanRows = rows.map(row => 
+      let cleanRows = rows.map(row => 
         row.filter((cell, index) => index !== lastUpdatedIndex)
       );
+      
+      // Remove columns that are mostly empty, contain only dashes, or are at the end with no useful data
+      const columnsToRemove = [];
+      for (let colIndex = cleanHeaders.length - 1; colIndex >= 0; colIndex--) {
+        const columnValues = cleanRows.map(row => row[colIndex] || '').filter(val => val !== '');
+        const nonEmptyValues = columnValues.filter(val => val !== '-' && val !== '' && val !== null && val !== undefined);
+        
+        // If column is mostly empty or only contains dashes, mark for removal
+        if (nonEmptyValues.length === 0 || (nonEmptyValues.length < columnValues.length * 0.1)) {
+          columnsToRemove.push(colIndex);
+        }
+      }
+      
+      // Remove the identified empty columns
+      columnsToRemove.forEach(colIndex => {
+        cleanHeaders = cleanHeaders.filter((header, index) => index !== colIndex);
+        cleanRows = cleanRows.map(row => row.filter((cell, index) => index !== colIndex));
+      });
       
       // Sort rows by commence time (ascending) - find the time column first
       const timeColumnIndex = cleanHeaders.findIndex(header => 
