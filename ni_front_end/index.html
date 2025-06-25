@@ -16,11 +16,15 @@
       background-color: #f4f4f4;
       color: #333;
       height: 100%;
+      /* Fix for mobile viewport issues */
+      height: 100vh;
+      height: 100dvh; /* Dynamic viewport height for modern browsers */
     }
 
     body {
       display: flex;
       height: 100vh;
+      height: 100dvh; /* Dynamic viewport height */
       overflow: hidden;
     }
 
@@ -258,9 +262,12 @@
       padding: 0;
       margin: 0;
       height: 100vh;
+      height: 100dvh; /* Dynamic viewport height */
       overflow-y: auto;
       position: relative;
       padding-top: 60px; /* Account for top menu height */
+      /* Mobile Safari fix */
+      -webkit-overflow-scrolling: touch;
     }
 
     .feedback-wrapper {
@@ -495,6 +502,7 @@
       padding: 2rem;
       height: 100%;
       min-height: calc(100vh - 4rem);
+      min-height: calc(100dvh - 4rem); /* Dynamic viewport height */
       padding-bottom: 4rem; /* Add extra bottom padding */
     }
 
