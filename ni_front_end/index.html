@@ -2809,123 +2809,112 @@
 
     // Create match odds table with separators
     function createMatchTable(headers, rows, tabId) {
-      // Sort rows by commence time (ascending) - find the time column first
-      const timeColumnIndex = headers.findIndex(header => 
-        header.toLowerCase().includes('commence time') || 
-        header.toLowerCase().includes('time') ||
-        header.toLowerCase().includes('kickoff')
-      );
-      
-      if (timeColumnIndex !== -1) {
-        rows.sort((a, b) => {
-          const timeA = new Date(a[timeColumnIndex] || 0);
-          const timeB = new Date(b[timeColumnIndex] || 0);
-          return timeA - timeB;
-        });
-      }
-      
-      // Find which columns contain odds (exclude Team, Commence Time UTC/Kickoff, and last_updated)
-      const excludeColumns = ['Team', 'Commence Time UTC', 'Kickoff CDT', 'last_updated'];
-      const oddsColumnIndices = [];
-      const oddsColumns = [];
-      
-      // Update headers - change "Commence Time UTC" to "Kickoff CDT"
-      const updatedHeaders = headers.map(header => {
-        if (header.toLowerCase().includes('commence time') && header.toLowerCase().includes('utc')) {
-          return 'Kickoff CDT';
-        }
-        return header;
-      });
-      
-      updatedHeaders.forEach((header, index) => {
-        const isExcluded = excludeColumns.some(exclude => 
-          header.toLowerCase().includes(exclude.toLowerCase())
-        );
-        if (!isExcluded && index > 0 && index < updatedHeaders.length - 1) {
-          oddsColumnIndices.push(index);
-          oddsColumns.push(header);
-        }
-      });
-      
-      const lastUpdated = rows.length > 0 ? rows[0][headers.length - 1] : 'Unknown';
-      
-      let html = '<div class="table-container"><table class="odds-table">';
-      
-      // Header - use updated headers
-      html += '<thead><tr>';
-      updatedHeaders.slice(0, -1).forEach(header => {
-        if (header === updatedHeaders[0]) {
-          html += `<th>${header}</th>`;
-        } else {
-          html += `<th class="odds-value">${header}</th>`;
-        }
-      });
-      html += '</tr></thead>';
-      
-      // Body with match separators
-      html += '<tbody>';
-      
-      rows.forEach((row, rowIndex) => {
-        if (row.length >= headers.length - 1) {
-          // Detect match changes for separators
-          const teamName = row[0] || '';
-          
-          // Simple match detection: if team name suggests a new match
-          if (tabId !== 'worldcup' && rowIndex > 0) {
-            const prevRow = rows[rowIndex - 1];
-            if (prevRow && shouldAddSeparator(teamName, prevRow[0], rowIndex)) {
-              html += '<tr><td colspan="100%" class="match-separator"></td></tr>';
-            }
-          }
-          
-          html += '<tr>';
-          
-          // Process each column
-          row.slice(0, -1).forEach((cellValue, colIndex) => {
-            if (colIndex === 0) {
-              // Team name column
-              html += `<td class="team-cell">${cellValue || ''}</td>`;
-            } else {
-              // Check if this is a datetime column (using original headers for detection)
-              const originalHeader = headers[colIndex].toLowerCase();
-              const isDateTimeColumn = originalHeader.includes('commence time') || 
-                                     originalHeader.includes('time') ||
-                                     originalHeader.includes('date') ||
-                                     originalHeader.includes('kickoff');
-              
-              // Check if this column contains odds
-              const isOddsColumn = oddsColumnIndices.includes(colIndex);
-              
-              if (isDateTimeColumn) {
-                // Convert UTC to CDT for datetime columns
-                const convertedTime = convertUTCtoCDT(cellValue);
-                html += `<td class="odds-value">${convertedTime || '-'}</td>`;
-              } else if (isOddsColumn) {
-                // Get odds values for comparison (only from odds columns)
-                const oddsValues = oddsColumnIndices.map(idx => row[idx]);
-                const numericOdds = oddsValues.map(val => parseFloat(val) || -Infinity);
-                const maxOdds = Math.max(...numericOdds.filter(v => v !== -Infinity));
-                const isBest = parseFloat(cellValue) === maxOdds && parseFloat(cellValue) > 0;
-                
-                const className = isBest ? 'odds-value best-odds' : 'odds-value';
-                html += `<td class="${className}">${cellValue || '-'}</td>`;
-              } else {
-                // Non-odds, non-datetime column
-                html += `<td class="odds-value">${cellValue || '-'}</td>`;
-              }
-            }
-          });
-          
-          html += '</tr>';
-        }
-      });
-      html += '</tbody></table></div>';
-      
-      // Last updated info
-      html += `<div class="last-updated">Last updated: ${formatDateTime(lastUpdated)}</div>`;
-      
-      return html;
+  const timeColumnIndex = headers.findIndex(header => 
+    header.toLowerCase().includes('commence time') || 
+    header.toLowerCase().includes('time') ||
+    header.toLowerCase().includes('kickoff')
+  );
+  
+  if (timeColumnIndex !== -1) {
+    rows.sort((a, b) => {
+      const timeA = new Date(a[timeColumnIndex] || 0);
+      const timeB = new Date(b[timeColumnIndex] || 0);
+      return timeA - timeB;
+    });
+  }
+
+  const excludeColumns = ['Team', 'Commence Time UTC', 'Kickoff CDT', 'last_updated'];
+  const oddsColumnIndices = [];
+  const oddsColumns = [];
+
+  const updatedHeaders = headers.map(header => {
+    if (header.toLowerCase().includes('commence time') && header.toLowerCase().includes('utc')) {
+      return 'Kickoff CDT';
     }
+    return header;
+  });
+
+  updatedHeaders.forEach((header, index) => {
+    const isExcluded = excludeColumns.some(exclude => 
+      header.toLowerCase().includes(exclude.toLowerCase())
+    );
+    if (!isExcluded && index > 0 && index < updatedHeaders.length - 1) {
+      oddsColumnIndices.push(index);
+      oddsColumns.push(header);
+    }
+  });
+
+  const lastUpdated = rows.length > 0 ? rows[0][headers.length - 1] : 'Unknown';
+
+  let html = '<div class="table-container"><table class="odds-table">';
+  html += '<thead><tr>';
+  updatedHeaders.slice(0, -1).forEach(header => {
+    if (header === updatedHeaders[0]) {
+      html += `<th>${header}</th>`;
+    } else {
+      html += `<th class="odds-value">${header}</th>`;
+    }
+  });
+  html += '</tr></thead>';
+
+  html += '<tbody>';
+  rows.forEach((row, rowIndex) => {
+    if (row.length >= headers.length - 1) {
+      const teamName = row[0] || '';
+      if (tabId !== 'worldcup' && rowIndex > 0) {
+        const prevRow = rows[rowIndex - 1];
+        if (prevRow && shouldAddSeparator(teamName, prevRow[0], rowIndex)) {
+          html += '<tr><td colspan="100%" class="match-separator"></td></tr>';
+        }
+      }
+
+      html += '<tr>';
+      row.slice(0, -1).forEach((cellValue, colIndex) => {
+        if (colIndex === 0) {
+          html += `<td class="team-cell">${cellValue || ''}</td>`;
+        } else {
+          const originalHeader = headers[colIndex].toLowerCase();
+          const isDateTimeColumn = originalHeader.includes('commence time') || 
+                                 originalHeader.includes('time') ||
+                                 originalHeader.includes('date') ||
+                                 originalHeader.includes('kickoff');
+
+          const isOddsColumn = oddsColumnIndices.includes(colIndex);
+
+          if (isDateTimeColumn) {
+            const convertedTime = convertUTCtoCDT(cellValue);
+            html += `<td class="odds-value">${convertedTime || '-'}</td>`;
+          } else if (isOddsColumn) {
+            const oddsValues = oddsColumnIndices.map(idx => row[idx]);
+            const numericOdds = oddsValues.map(val => parseFloat(val) || -Infinity);
+            const maxOdds = Math.max(...numericOdds.filter(v => v !== -Infinity));
+            const isBest = parseFloat(cellValue) === maxOdds && parseFloat(cellValue) > 0;
+
+            const className = isBest ? 'odds-value best-odds' : 'odds-value';
+            html += `<td class="${className}">${cellValue || '-'}</td>`;
+          } else {
+            html += `<td class="odds-value">${cellValue || '-'}</td>`;
+          }
+        }
+      });
+
+      html += '</tr>';
+    }
+  });
+  html += '</tbody></table></div>';
+
+  if (tabId === 'goldcup') {
+    const goldcupFooter = document.getElementById('goldcup-last-updated');
+    if (goldcupFooter) {
+      goldcupFooter.textContent = `Last updated: ${formatDateTime(lastUpdated)}`;
+    }
+  } else {
+    html += `<div class="last-updated">Last updated: ${formatDateTime(lastUpdated)}</div>`;
+  }
+
+  return html;
+}
+
 
     // Determine if a separator should be added between matches
     function shouldAddSeparator(currentTeam, previousTeam, rowIndex) {
