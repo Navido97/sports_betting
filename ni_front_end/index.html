@@ -2633,4 +2633,121 @@
       
       const errorHTML = `
         <div class="error-message">
-          <h4>
+          <h4>Unable to Load Data</h4>
+          <p>${message}</p>
+          <button class="refresh-button" onclick="loadSheetData('${tabId}')">
+            Try Again
+          </button>
+        </div>
+      `;
+      
+      dataElement.innerHTML = errorHTML;
+      loadingElement.style.display = 'none';
+      dataElement.style.display = 'block';
+    }
+
+    // Submenu toggle functionality
+    function toggleSubmenu(button) {
+      const isActive = button.classList.contains('active');
+
+      // Close all submenus first
+      document.querySelectorAll('.accordion-toggle').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Open this submenu if it wasn't active
+      if (!isActive) {
+        button.classList.add('active');
+      }
+    }
+
+    // Menu toggle functions
+    function openMenu() {
+      isMenuOpen = true;
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      menuToggle.classList.add('active');
+    }
+
+    function closeMenu() {
+      isMenuOpen = false;
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      menuToggle.classList.remove('active');
+    }
+
+    function toggleMenu() {
+      if (isMenuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize page
+      showTab('home');
+
+      // Menu toggle button
+      menuToggle?.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      // Overlay click to close
+      overlay?.addEventListener('click', closeMenu);
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (isMenuOpen) {
+          if (!sidebar.contains(event.target) && 
+              !menuToggle.contains(event.target)) {
+            closeMenu();
+          }
+        }
+      });
+
+      // Dropdown functionality for top menu
+      document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const dropdown = this.parentElement;
+          const isActive = dropdown.classList.contains('active');
+          
+          // Close all dropdowns
+          document.querySelectorAll('.dropdown').forEach(d => {
+            d.classList.remove('active');
+          });
+          
+          // Open this dropdown if it wasn't active
+          if (!isActive) {
+            dropdown.classList.add('active');
+          }
+        });
+      });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function() {
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+          dropdown.classList.remove('active');
+        });
+      });
+
+      // Close dropdowns when selecting an item
+      document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function() {
+          document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.classList.remove('active');
+          });
+        });
+      });
+    });
+
+    // Prevent menu from closing when clicking inside sidebar
+    sidebar?.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  </script>
+</body>
+</html>
