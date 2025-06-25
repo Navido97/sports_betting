@@ -1225,6 +1225,10 @@
       flex-shrink: 0;
     }
 
+    .pipeline-step:last-child {
+      margin-right: 4rem; /* Add space after the last step */
+    }
+
     .step-icons {
       display: flex;
       gap: 0.5rem;
@@ -1324,6 +1328,10 @@
         max-width: 160px;
         min-width: 140px;
       }
+
+      .pipeline-step:last-child {
+        margin-right: 3rem; /* Reduced margin on tablets */
+      }
       
       .step-box {
         padding: 1rem;
@@ -1362,6 +1370,10 @@
       .pipeline-step {
         max-width: 320px;
         min-width: 300px;
+      }
+
+      .pipeline-step:last-child {
+        margin-right: 0; /* No extra margin on mobile since it stacks */
       }
       
       .pipeline-arrow {
