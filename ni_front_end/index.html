@@ -1555,8 +1555,8 @@
       right: 0;
       background: rgba(30, 30, 30, 0.95);
       color: white;
-      padding: 1.5rem;
-      font-size: 0.9rem;
+      padding: 1rem 1.5rem;
+      font-size: 0.85rem;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.4);
       z-index: 1050;
@@ -1572,41 +1572,43 @@
     }
 
     .contributors-content {
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     .contributors-title {
       font-weight: 600;
       color: #ffffff;
-      font-size: 1.1rem;
+      font-size: 1rem;
       text-align: center;
-      margin-bottom: 0.5rem;
+      margin: 0;
     }
 
     .contributors-list {
       display: flex;
-      flex-direction: column;
       gap: 1rem;
       width: 100%;
-      max-width: 500px;
+      justify-content: center;
     }
 
     .contributor {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.75rem;
-      padding: 1.25rem;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
       background: rgba(60, 60, 60, 0.6);
-      border-radius: 12px;
+      border-radius: 8px;
       border: 1px solid rgba(255, 255, 255, 0.15);
       transition: all 0.3s ease;
       backdrop-filter: blur(5px);
+      flex: 1;
+      max-width: 280px;
+      min-width: 200px;
     }
 
     .contributor:hover {
@@ -1619,25 +1621,25 @@
     .contributor-name {
       font-weight: 600;
       color: #ffffff;
-      font-size: 1rem;
+      font-size: 0.9rem;
       text-align: center;
     }
 
     .contributor-links {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.5rem;
       justify-content: center;
     }
 
     .contributor-link {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.3rem;
       color: #cccccc;
       text-decoration: none;
-      font-size: 0.85rem;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+      font-size: 0.75rem;
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
       background: rgba(80, 80, 80, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.1);
       transition: all 0.3s ease;
@@ -1654,8 +1656,6 @@
     }
 
     .github-section {
-      width: 100%;
-      max-width: 300px;
       display: flex;
       justify-content: center;
     }
@@ -1663,18 +1663,17 @@
     .github-link {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       color: #ffffff;
       text-decoration: none;
-      font-size: 0.9rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
+      font-size: 0.8rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
       background: rgba(80, 80, 80, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.15);
       transition: all 0.3s ease;
       font-weight: 600;
       text-align: center;
-      min-width: 180px;
       justify-content: center;
     }
 
@@ -1690,53 +1689,65 @@
       padding-bottom: 20px;
     }
 
+    /* Mobile and tablet adjustments */
     @media (max-width: 768px) {
       .contributors-footer {
-        padding: 1.25rem 1rem;
+        padding: 0.8rem 1rem;
       }
       
       .contributors-content {
-        max-width: 100%;
-        gap: 1.25rem;
+        gap: 0.8rem;
       }
       
       .contributors-list {
-        max-width: 100%;
+        flex-direction: column;
+        gap: 0.8rem;
+        width: 100%;
+        max-width: 300px;
       }
       
       .contributor {
-        padding: 1rem;
+        max-width: none;
+        min-width: auto;
+      }
+      
+      .contributor-name {
+        font-size: 0.85rem;
       }
       
       .contributor-links {
-        gap: 0.5rem;
+        gap: 0.4rem;
       }
       
       .contributor-link {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+        padding: 0.35rem 0.6rem;
       }
       
       .github-link {
-        font-size: 0.85rem;
-        padding: 0.6rem 1.25rem;
-        min-width: 160px;
+        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
       }
     }
 
     @media (max-width: 480px) {
-      .contributors-list {
-        gap: 0.8rem;
+      .contributors-footer {
+        padding: 0.7rem 0.8rem;
+      }
+      
+      .contributors-title {
+        font-size: 0.9rem;
       }
       
       .contributor-links {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.3rem;
         width: 100%;
       }
       
       .contributor-link {
         justify-content: center;
+        width: 100%;
       }
     }
   </style>
