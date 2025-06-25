@@ -207,6 +207,16 @@
       background: rgba(255, 255, 255, 0.1);
     }
 
+    .dropdown-item.disabled {
+      color: #888;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .dropdown-item.disabled:hover {
+      background: transparent;
+    }
+
     .dropdown-icon {
       font-size: 1rem;
       margin-right: 0.75rem;
@@ -385,6 +395,18 @@
       background: rgba(255, 255, 255, 0.1);
       transform: translateX(3px);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .submenu-item.disabled {
+      color: #888;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .submenu-item.disabled:hover {
+      background: rgba(255, 255, 255, 0.03);
+      transform: none;
+      box-shadow: none;
     }
 
     .submenu-icon {
@@ -1566,6 +1588,18 @@
               <span class="dropdown-icon">🌍</span>
               Club World Cup
             </a>
+            <a href="#" class="dropdown-item disabled">
+              <span class="dropdown-icon">🇩🇪</span>
+              Bundesliga
+            </a>
+            <a href="#" class="dropdown-item disabled">
+              <span class="dropdown-icon">🇪🇸</span>
+              La Liga
+            </a>
+            <a href="#" class="dropdown-item disabled">
+              <span class="dropdown-icon">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
+              Premier League
+            </a>
           </div>
         </div>
       </nav>
@@ -1619,6 +1653,18 @@
         <li><a href="#" onclick="showTab('clubworldcup')" class="submenu-item">
           <span class="submenu-icon">🌍</span>
           <span class="submenu-text">Club World Cup</span>
+        </a></li>
+        <li><a href="#" class="submenu-item disabled">
+          <span class="submenu-icon">🇩🇪</span>
+          <span class="submenu-text">Bundesliga</span>
+        </a></li>
+        <li><a href="#" class="submenu-item disabled">
+          <span class="submenu-icon">🇪🇸</span>
+          <span class="submenu-text">La Liga</span>
+        </a></li>
+        <li><a href="#" class="submenu-item disabled">
+          <span class="submenu-icon">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
+          <span class="submenu-text">Premier League</span>
         </a></li>
       </ul>
     </nav>
@@ -2587,121 +2633,4 @@
       
       const errorHTML = `
         <div class="error-message">
-          <h4>Unable to Load Data</h4>
-          <p>${message}</p>
-          <button class="refresh-button" onclick="loadSheetData('${tabId}')">
-            Try Again
-          </button>
-        </div>
-      `;
-      
-      dataElement.innerHTML = errorHTML;
-      loadingElement.style.display = 'none';
-      dataElement.style.display = 'block';
-    }
-
-    // Submenu toggle functionality
-    function toggleSubmenu(button) {
-      const isActive = button.classList.contains('active');
-
-      // Close all submenus first
-      document.querySelectorAll('.accordion-toggle').forEach(btn => {
-        btn.classList.remove('active');
-      });
-
-      // Open this submenu if it wasn't active
-      if (!isActive) {
-        button.classList.add('active');
-      }
-    }
-
-    // Menu toggle functions
-    function openMenu() {
-      isMenuOpen = true;
-      sidebar.classList.add('open');
-      overlay.classList.add('active');
-      menuToggle.classList.add('active');
-    }
-
-    function closeMenu() {
-      isMenuOpen = false;
-      sidebar.classList.remove('open');
-      overlay.classList.remove('active');
-      menuToggle.classList.remove('active');
-    }
-
-    function toggleMenu() {
-      if (isMenuOpen) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    }
-
-    // Event listeners
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initialize page
-      showTab('home');
-
-      // Menu toggle button
-      menuToggle?.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleMenu();
-      });
-
-      // Overlay click to close
-      overlay?.addEventListener('click', closeMenu);
-
-      // Close menu when clicking outside
-      document.addEventListener('click', function(event) {
-        if (isMenuOpen) {
-          if (!sidebar.contains(event.target) && 
-              !menuToggle.contains(event.target)) {
-            closeMenu();
-          }
-        }
-      });
-
-      // Dropdown functionality for top menu
-      document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-        toggle.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const dropdown = this.parentElement;
-          const isActive = dropdown.classList.contains('active');
-          
-          // Close all dropdowns
-          document.querySelectorAll('.dropdown').forEach(d => {
-            d.classList.remove('active');
-          });
-          
-          // Open this dropdown if it wasn't active
-          if (!isActive) {
-            dropdown.classList.add('active');
-          }
-        });
-      });
-
-      // Close dropdowns when clicking outside
-      document.addEventListener('click', function() {
-        document.querySelectorAll('.dropdown').forEach(dropdown => {
-          dropdown.classList.remove('active');
-        });
-      });
-
-      // Close dropdowns when selecting an item
-      document.querySelectorAll('.dropdown-item').forEach(item => {
-        item.addEventListener('click', function() {
-          document.querySelectorAll('.dropdown').forEach(dropdown => {
-            dropdown.classList.remove('active');
-          });
-        });
-      });
-    });
-
-    // Prevent menu from closing when clicking inside sidebar
-    sidebar?.addEventListener('click', function(e) {
-      e.stopPropagation();
-    });
-  </script>
-</body>
-</html>
+          <h4>
