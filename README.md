@@ -40,7 +40,7 @@ python copa_libertadores.py
 
 ## Live Links
 
-- **Website:** https://oddsmaker.duckdns.org
+- **Website:** https://oddsmaker.us
 - **Tableau Dashboards:**
   - [World Cup Winners] https://public.tableau.com/app/profile/navid.istanbullu/viz/WorldCupOdds/Dashboard1
   - [Concacaf Gold Cup] https://public.tableau.com/app/profile/navid.istanbullu/viz/ConcacafGoldCup/Dashboard1
