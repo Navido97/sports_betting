@@ -27,8 +27,8 @@ pip install requests pandas boto3 pytz
 
 **Configuration:** Update API keys and bucket names in Python scripts
 ```python
-API_KEY = "your_odds_api_key"
-BUCKET_NAME = "your_s3_bucket_name"
+API_KEY = "API Key"
+BUCKET_NAME = "S3 Bucket Name"
 ```
 
 **Run Scripts:**
